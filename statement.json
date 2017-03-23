@@ -1,0 +1,127 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Schema for an xAPI Statement",
+    "id":"http://localhost:8080/statements-schema.json",
+
+    "type": "object",
+
+    "required": ["actor"],
+
+    "additionalProperties": false,
+
+    "properties": {
+         "actor": {
+             "allOf": [
+                 { "$ref": "#/definitions/base-actor" }
+             ],
+             "oneOf": [
+                 { "$ref": "#/definitions/agent"},
+                 { "$ref": "#/definitions/group"}
+             ]
+         },
+         "verb" : {"$ref": "#/definitions/verb"},
+         "object": {"type": "object"}
+    },
+
+    "definitions": {
+        "base-actor": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "agent": {
+            "type": "object",
+            "properties": {
+                "objectType": {
+                    "type": "string",
+                    "pattern": "Agent"
+                }
+            },
+            "allOf": [
+                {"$ref":"#/definitions/ifi"}
+            ],
+            "oneOf": [
+                { "required": ["mbox"] },
+                { "required": ["mbox_sha1sum"] },
+                { "required": ["openid"] },
+                { "required": ["account"] }
+            ]
+        },
+        "group": {
+            "type": "object","properties": {
+                "objectType": {
+                    "type": "string",
+                    "pattern": "Group"
+                }
+            },
+            "required": ["objectType"]
+        },
+        "ifi": {
+            "oneOf": [
+                {
+                    "$ref": "#/definitions/mbox"
+                },
+                {
+                    "properties": {
+                        "mbox_sha1sum": {
+                            "type": "string"
+                        }
+                    },
+                    "required": ["mbox_sha1sum"]
+                },
+                {
+                    "properties": {
+                        "openid": {
+                            "type": "string",
+                            "format": "uri"
+                        }
+                    },
+                    "required": ["openid"]
+                },
+                {
+                    "properties": {
+                        "account": {
+                            "type": "object",
+                            "properties": {
+                                "homePage": {
+                                    "type": "string",
+                                    "format": "uri"
+                                },
+                                "name": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [ "homePage", "name" ]
+                        }
+                    },
+                    "required": ["account"]
+                }
+            ]
+        },
+        "mbox": {
+            "properties": {
+                "mbox": {
+                    "type": "string",
+                    "pattern": "mailto:\\S+@\\S+\\.\\S+"
+                }
+            },
+            "required": ["mbox"]
+        },
+        "verb": {
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "format": "uri"
+                },
+                "display": {
+                    "type": "object"
+                }
+            },
+            "required": [ "id" ],
+            "additionalProperties": false
+        }
+    }
+}
