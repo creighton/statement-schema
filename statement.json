@@ -51,7 +51,8 @@
             ]
         },
         "group": {
-            "type": "object","properties": {
+            "type": "object",
+            "properties": {
                 "objectType": {
                     "type": "string",
                     "pattern": "Group"
@@ -61,44 +62,10 @@
         },
         "ifi": {
             "oneOf": [
-                {
-                    "$ref": "#/definitions/mbox"
-                },
-                {
-                    "properties": {
-                        "mbox_sha1sum": {
-                            "type": "string"
-                        }
-                    },
-                    "required": ["mbox_sha1sum"]
-                },
-                {
-                    "properties": {
-                        "openid": {
-                            "type": "string",
-                            "format": "uri"
-                        }
-                    },
-                    "required": ["openid"]
-                },
-                {
-                    "properties": {
-                        "account": {
-                            "type": "object",
-                            "properties": {
-                                "homePage": {
-                                    "type": "string",
-                                    "format": "uri"
-                                },
-                                "name": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [ "homePage", "name" ]
-                        }
-                    },
-                    "required": ["account"]
-                }
+                { "$ref": "#/definitions/mbox" },
+                { "$ref": "#/definitions/mbox_sha1sum" },
+                { "$ref": "#/definitions/openid" },
+                { "$ref": "#/definitions/account" }
             ]
         },
         "mbox": {
@@ -109,6 +76,41 @@
                 }
             },
             "required": ["mbox"]
+        },
+        "mbox_sha1sum": {
+            "properties": {
+                "mbox_sha1sum": {
+                    "type": "string"
+                }
+            },
+            "required": ["mbox_sha1sum"]
+        },
+        "openid": {
+            "properties": {
+                "openid": {
+                    "type": "string",
+                    "format": "uri"
+                }
+            },
+            "required": ["openid"]
+        },
+        "account": {
+            "properties": {
+                "account": {
+                    "type": "object",
+                    "properties": {
+                        "homePage": {
+                            "type": "string",
+                            "format": "uri"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [ "homePage", "name" ]
+                }
+            },
+            "required": ["account"]
         },
         "verb": {
             "properties": {
