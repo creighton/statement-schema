@@ -10,17 +10,37 @@
     "additionalProperties": false,
 
     "properties": {
-         "actor": {
-             "allOf": [
-                 { "$ref": "#/definitions/base-actor" }
-             ],
-             "oneOf": [
-                 { "$ref": "#/definitions/agent"},
-                 { "$ref": "#/definitions/group"}
-             ]
-         },
-         "verb" : {"$ref": "#/definitions/verb"},
-         "object": {"type": "object"}
+        "id": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"
+        },
+        "actor": {
+            "allOf": [
+                { "$ref": "#/definitions/base-actor" }
+            ],
+            "oneOf": [
+                { "$ref": "#/definitions/agent"},
+                { "$ref": "#/definitions/group"}
+            ]
+        },
+        "verb" : {"$ref": "#/definitions/verb"},
+        "object": {"type": "object"},
+        "result": {"type": "object"},
+        "context": {"type": "object"},
+        "timestamp": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "stored": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "authority": {"type": "object"},
+        "version": {
+            "type": "string",
+            "pattern": "^1.0.[0-9]+$"
+        },
+        "attachments": {"type": "array"}
     },
 
     "definitions": {
