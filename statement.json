@@ -25,7 +25,7 @@
         },
         "verb" : {"$ref": "#/definitions/verb"},
         "object": {"type": "object"},
-        "result": {"type": "object"},
+        "result": { "$ref": "#/definitions/result" },
         "context": {"type": "object"},
         "timestamp": {
             "type": "string",
@@ -109,7 +109,7 @@
             "properties": {
                 "openid": {
                     "type": "string",
-                    "format": "uri"
+                    "pattern": "^[\\S]+:\\/\\/?(?!\\/)[\\S]+$"
                 }
             },
             "required": ["openid"]
@@ -121,7 +121,7 @@
                     "properties": {
                         "homePage": {
                             "type": "string",
-                            "format": "uri"
+                            "pattern": "^[\\S]+:\\/\\/?(?!\\/)[\\S]+$"
                         },
                         "name": {
                             "type": "string"
@@ -136,13 +136,50 @@
             "properties": {
                 "id": {
                     "type": "string",
-                    "format": "uri"
+                    "pattern": "^[\\S]+:\\/\\/?(?!\\/)[\\S]+$"
                 },
                 "display": {
                     "type": "object"
                 }
             },
             "required": [ "id" ],
+            "additionalProperties": false
+        },
+        "object": {},
+        "result": {
+            "type": "object",
+            "properties": {
+                "score": { "$ref": "#/definitions/score" },
+                "success": { "type": "boolean" },
+                "completion": { "type": "boolean" },
+                "response": { "type": "string" },
+                "duration": {
+                    "type": "string",
+                    "pattern": "^P(?=\\w*\\d)(?:\\d+Y|Y)?(?:\\d+M|M)?(?:\\d+W|W)?(?:\\d+D|D)?(?:T(?:\\d+H|H)?(?:\\d+M|M)?(?:\\d+(?:\\­.\\d{1,2})?S|S)?)?$"
+                },
+                "extensions": { "$ref": "#/definitions/extensions" }
+            },
+            "additionalProperties": false
+        },
+        "score": {
+            "type": "object",
+            "properties": {
+                "scaled": {
+                    "type": "number",
+                    "minimum": -1,
+                    "maximum": 1
+                },
+                "raw": { "type": "number" },
+                "min": { "type": "number" },
+                "max": { "type": "number" }
+            },
+            "additionalProperties": false
+        },
+        "extensions": {
+            "type": "object",
+            "patternProperties": {
+                "^[\\S]+:\\/\\/?(?!\\/)[\\S]+$": { "type": "string" }
+            },
             "additionalProperties": false
         }
     }
