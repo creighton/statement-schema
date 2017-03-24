@@ -201,7 +201,29 @@
             },
             "additionalProperties": false
         },
-        "contextActivities": {},
-        "statementRef": {}
+        "contextActivities": {
+            "type": "object",
+            "properties": {
+                "parent": { "$ref": "#/definitions/arrayOfActivities" },
+                "grouping": { "$ref": "#/definitions/arrayOfActivities" },
+                "category": { "$ref": "#/definitions/arrayOfActivities" },
+                "other": { "$ref": "#/definitions/arrayOfActivities" }
+            },
+            "additionalProperties": false
+        },
+        "arrayOfActivities": {
+            "type": "array"
+        },
+        "statementRef": {
+            "type": "object",
+            "properties": {
+                "objectType": {
+                    "type": "string",
+                    "pattern": "StatementRef"
+                },
+                "id": { "$ref": "#/definitions/uuid" }
+            },
+            "additionalProperties": false
+        }
     }
 }
