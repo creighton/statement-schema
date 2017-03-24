@@ -7,4 +7,4 @@
 - not validating lang codes
 - group not done, yet
 - object not done, yet
-- interaction activities aren't done
+- interaction activities aren't great

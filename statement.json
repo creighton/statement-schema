@@ -24,12 +24,17 @@
             "type": "string",
             "format": "date-time"
         },
-        "authority": {"type": "object"},
+        "authority": {
+            "oneOf": [
+                { "$ref": "#/definitions/agent" },
+                { "$ref": "#/definitions/group" }
+            ]
+        },
         "version": {
             "type": "string",
             "pattern": "^1.0.[0-9]+$"
         },
-        "attachments": {"type": "array"}
+        "attachments": { "$ref": "#/definitions/attachments" }
     },
 
     "definitions": {
@@ -314,6 +319,27 @@
                 },
                 "id": { "$ref": "#/definitions/uuid" }
             },
+            "additionalProperties": false
+        },
+        "attachments": {
+            "type": "array",
+            "items": { "$ref": "#/definitions/attachment" }
+        },
+        "attachment": {
+            "type": "object",
+            "properties": {
+                "usageType": { "$ref": "#/definitions/iri" },
+                "display": { "$ref": "#/definitions/lang-map" },
+                "description": { "$ref": "#/definitions/lang-map" },
+                "contentType": {
+                    "type": "string",
+                    "pattern": "^[-\\w]+\\/[-\\w]+$"
+                },
+                "length": { "type": "integer" },
+                "sha2": { "type": "string" },
+                "fileUrl": { "$ref": "#/definitions/iri" }
+            },
+            "required": [ "usageType", "display", "contentType", "length", "sha2" ],
             "additionalProperties": false
         }
     }
