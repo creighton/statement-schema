@@ -8,3 +8,4 @@
 - group not done, yet
 - object not done, yet
 - interaction activities aren't great
+- attachment contentType just does a pattern match
