@@ -10,23 +10,12 @@
     "additionalProperties": false,
 
     "properties": {
-        "id": {
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"
-        },
-        "actor": {
-            "allOf": [
-                { "$ref": "#/definitions/base-actor" }
-            ],
-            "oneOf": [
-                { "$ref": "#/definitions/agent"},
-                { "$ref": "#/definitions/group"}
-            ]
-        },
-        "verb" : {"$ref": "#/definitions/verb"},
+        "id": { "$ref": "#/definitions/uuid" },
+        "actor": { "$ref": "#/definitions/actor" },
+        "verb" : { "$ref": "#/definitions/verb" },
         "object": {"type": "object"},
         "result": { "$ref": "#/definitions/result" },
-        "context": {"type": "object"},
+        "context": { "$ref": "#/definitions/context" },
         "timestamp": {
             "type": "string",
             "format": "date-time"
@@ -44,6 +33,19 @@
     },
 
     "definitions": {
+        "uuid": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"
+        },
+        "actor": {
+            "allOf": [
+                { "$ref": "#/definitions/base-actor" }
+            ],
+            "oneOf": [
+                { "$ref": "#/definitions/agent"},
+                { "$ref": "#/definitions/group"}
+            ]
+        },
         "base-actor": {
             "type": "object",
             "properties": {
@@ -181,6 +183,25 @@
                 "^[\\S]+:\\/\\/?(?!\\/)[\\S]+$": { "type": "string" }
             },
             "additionalProperties": false
-        }
+        },
+        "context": {
+            "type": "object",
+            "properties": {
+                "registration": { "$ref": "#/definitions/uuid" },
+                "instructor": { "$ref": "#/definitions/actor" },
+                "team": { "$ref": "#/definitions/group" },
+                "contextActivities": { "$ref": "#/definitions/contextActivities" },
+                "revision": { "type": "string" },
+                "platform": { "type": "string" },
+                "language": {
+                    "type": "string"
+                },
+                "statement": { "$ref": "#/definitions/statementRef" },
+                "extensions": { "$ref": "#/definitions/extensions" }
+            },
+            "additionalProperties": false
+        },
+        "contextActivities": {},
+        "statementRef": {}
     }
 }
