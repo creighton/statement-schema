@@ -13,7 +13,7 @@
         "id": { "$ref": "#/definitions/uuid" },
         "actor": { "$ref": "#/definitions/actor" },
         "verb" : { "$ref": "#/definitions/verb" },
-        "object": {"type": "object"},
+        "object": {"$ref": "#/definitions/object"},
         "result": { "$ref": "#/definitions/result" },
         "context": { "$ref": "#/definitions/context" },
         "timestamp": {
@@ -89,14 +89,50 @@
             ]
         },
         "group": {
+            "oneOf": [
+                { "$ref": "#/definitions/id-group" },
+                { "$ref": "#/definitions/anon-group" }
+            ]
+        },
+        "id-group": {
             "type": "object",
             "properties": {
                 "objectType": {
                     "type": "string",
                     "pattern": "Group"
+                },
+                "member": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/agent" }
                 }
             },
-            "required": ["objectType"]
+            "allOf": [
+                {"$ref":"#/definitions/ifi"}
+            ],
+            "required": [ "objectType" ],
+            "oneOf": [
+                { "required": ["mbox"] },
+                { "required": ["mbox_sha1sum"] },
+                { "required": ["openid"] },
+                { "required": ["account"] }
+            ]
+        },
+        "anon-group": {
+            "type": "object",
+            "properties": {
+                "objectType": {
+                    "type": "string",
+                    "pattern": "Group"
+                },
+                "member": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/agent" }
+                }
+            },
+            "allOf": [
+                {"$ref":"#/definitions/ifi"}
+            ],
+            "required": [ "objectType", "member" ]
         },
         "ifi": {
             "oneOf": [
@@ -152,7 +188,15 @@
             "required": [ "id" ],
             "additionalProperties": false
         },
-        "object": {},
+        "object": {
+            "oneOf": [
+                { "$ref": "#/definitions/activity" },
+                { "$ref": "#/definitions/activity-agent" },
+                { "$ref": "#/definitions/group" },
+                { "$ref": "#/definitions/subStatement" },
+                { "$ref": "#/definitions/statementRef" }
+            ]
+        },
         "activity": {
             "type": "object",
             "properties": {
@@ -165,6 +209,10 @@
             },
             "required": [ "id" ],
             "additionalProperties": false
+        },
+        "activity-agent": {
+            "$ref": "#/definitions/agent",
+            "required": [ "objectType" ]
         },
         "activity-definition": {
             "type": "object",
@@ -221,6 +269,27 @@
                 "description": { "$ref": "#/definitions/lang-map" }
             },
             "required": [ "id" ],
+            "additionalProperties": false
+        },
+        "subStatement": {
+            "type": "object",
+            "properties": {
+                "objectType": {
+                    "type": "string",
+                    "pattern": "SubStatement"
+                },
+                "actor": { "$ref": "#/definitions/actor" },
+                "verb" : { "$ref": "#/definitions/verb" },
+                "object": {"$ref": "#/definitions/object"},
+                "result": { "$ref": "#/definitions/result" },
+                "context": { "$ref": "#/definitions/context" },
+                "timestamp": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "attachments": { "$ref": "#/definitions/attachments" }
+            },
+            "required": [ "objectType", "actor", "verb", "object" ],
             "additionalProperties": false
         },
         "result": {
