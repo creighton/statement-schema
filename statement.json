@@ -33,9 +33,20 @@
     },
 
     "definitions": {
+        "iri": {
+            "type": "string",
+            "pattern": "^[\\S]+:\\/\\/?(?!\\/)[\\S]+$"
+        },
         "uuid": {
             "type": "string",
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"
+        },
+        "lang-map": {
+            "type": "object",
+            "patternProperties": {
+                "^[a-z]{2,3}(?:-[A-Z]{2,3}(?:-[a-zA-Z]{4})?)?$": { "type": "string" }
+            },
+            "additionalProperties": false
         },
         "actor": {
             "allOf": [
@@ -109,10 +120,7 @@
         },
         "openid": {
             "properties": {
-                "openid": {
-                    "type": "string",
-                    "pattern": "^[\\S]+:\\/\\/?(?!\\/)[\\S]+$"
-                }
+                "openid": { "$ref": "#/definitions/iri" }
             },
             "required": ["openid"]
         },
@@ -121,10 +129,7 @@
                 "account": {
                     "type": "object",
                     "properties": {
-                        "homePage": {
-                            "type": "string",
-                            "pattern": "^[\\S]+:\\/\\/?(?!\\/)[\\S]+$"
-                        },
+                        "homePage": { "$ref": "#/definitions/iri" },
                         "name": {
                             "type": "string"
                         }
@@ -132,22 +137,87 @@
                     "required": [ "homePage", "name" ]
                 }
             },
-            "required": ["account"]
+            "required": [ "account" ]
         },
         "verb": {
             "properties": {
-                "id": {
-                    "type": "string",
-                    "pattern": "^[\\S]+:\\/\\/?(?!\\/)[\\S]+$"
-                },
-                "display": {
-                    "type": "object"
-                }
+                "id": { "$ref": "#/definitions/iri" },
+                "display": { "$ref": "#/definitions/lang-map" }
             },
             "required": [ "id" ],
             "additionalProperties": false
         },
         "object": {},
+        "activity": {
+            "type": "object",
+            "properties": {
+                "objectType": {
+                    "type": "string",
+                    "pattern": "Activity"
+                },
+                "id": { "$ref": "#/definitions/iri" },
+                "definition": { "$ref": "#/definitions/activity-definition" }
+            },
+            "required": [ "id" ],
+            "additionalProperties": false
+        },
+        "activity-definition": {
+            "type": "object",
+            "properties": {
+                "name": { "$ref": "#/definitions/lang-map" },
+                "description": { "$ref": "#/definitions/lang-map" },
+                "type": { "$ref": "#/definitions/iri" },
+                "moreInfo": { "$ref": "#/definitions/iri" },
+                "interactionType": {
+                    "enum": [
+                        "true-false",
+                        "choice",
+                        "fill-in",
+                        "long-fill-in",
+                        "matching",
+                        "performance",
+                        "sequencing",
+                        "likert",
+                        "numeric",
+                        "other"
+                    ]
+                },
+                "correctResponsesPattern": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                },
+                "choices": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/interactionComponent" }
+                },
+                "scale": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/interactionComponent" }
+                },
+                "source": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/interactionComponent" }
+                },
+                "target": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/interactionComponent" }
+                },
+                "steps": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/interactionComponent" }
+                }
+            },
+            "additionalProperties": false
+        },
+        "interactionComponent": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "string" },
+                "description": { "$ref": "#/definitions/lang-map" }
+            },
+            "required": [ "id" ],
+            "additionalProperties": false
+        },
         "result": {
             "type": "object",
             "properties": {
@@ -204,15 +274,36 @@
         "contextActivities": {
             "type": "object",
             "properties": {
-                "parent": { "$ref": "#/definitions/arrayOfActivities" },
-                "grouping": { "$ref": "#/definitions/arrayOfActivities" },
-                "category": { "$ref": "#/definitions/arrayOfActivities" },
-                "other": { "$ref": "#/definitions/arrayOfActivities" }
+                "parent": {
+                    "oneOf": [
+                        {"$ref": "#/definitions/arrayOfActivities" },
+                        {"$ref": "#/definitions/activity" }
+                    ]
+                },
+                "grouping": {
+                    "oneOf": [
+                        {"$ref": "#/definitions/arrayOfActivities" },
+                        {"$ref": "#/definitions/activity" }
+                    ]
+                },
+                "category": {
+                    "oneOf": [
+                        {"$ref": "#/definitions/arrayOfActivities" },
+                        {"$ref": "#/definitions/activity" }
+                    ]
+                },
+                "other": {
+                    "oneOf": [
+                        {"$ref": "#/definitions/arrayOfActivities" },
+                        {"$ref": "#/definitions/activity" }
+                    ]
+                }
             },
             "additionalProperties": false
         },
         "arrayOfActivities": {
-            "type": "array"
+            "type": "array",
+            "items": { "$ref": "#/definitions/activity" }
         },
         "statementRef": {
             "type": "object",
