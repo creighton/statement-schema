@@ -7,7 +7,8 @@
 - not validating lang codes
 - group doesn't test member/ifi requirement
 - object not done, yet
-- - group as the object not working
+    - group as the object not working
+    - group as the actor not working
 - interaction activities aren't great
 - attachment contentType just does a pattern match
 - doesn't look for substatements in substatements
