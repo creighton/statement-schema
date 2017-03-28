@@ -1,0 +1,25 @@
+{
+
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Schema for an xAPI Verb Property",
+    "id":"http://localhost:8080/verb-schema.json",
+
+    "type": "object",
+
+    "additionalProperties": false,
+
+    "properties": {
+        "actor": { "$ref": "#/definitions/actor" }
+    },
+
+    "definitions": {
+        "verb": {
+            "properties": {
+                "id": { "$ref": "#/definitions/iri" },
+                "display": { "$ref": "#/definitions/lang-map" }
+            },
+            "required": [ "id" ],
+            "additionalProperties": false
+        }
+    }
+}

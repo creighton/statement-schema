@@ -1,0 +1,70 @@
+{
+
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Schema for an xAPI Actor Property",
+    "id":"http://localhost:8080/actor-schema.json",
+
+    "type": "object",
+
+    "additionalProperties": false,
+
+    "properties": {
+        "actor": { "$ref": "#/definitions/actor" }
+    },
+
+    "definitions": {
+
+        "context": {
+            "type": "object",
+            "properties": {
+                "registration": { "$ref": "#/definitions/uuid" },
+                "instructor": { "$ref": "#/definitions/actor" },
+                "team": { "$ref": "#/definitions/group" },
+                "contextActivities": { "$ref": "#/definitions/contextActivities" },
+                "revision": { "type": "string" },
+                "platform": { "type": "string" },
+                "language": {
+                    "type": "string"
+                },
+                "statement": { "$ref": "#/definitions/statementRef" },
+                "extensions": { "$ref": "#/definitions/extensions" }
+            },
+            "additionalProperties": false
+        },
+        "contextActivities": {
+            "type": "object",
+            "properties": {
+                "parent": {
+                    "oneOf": [
+                        {"$ref": "#/definitions/arrayOfActivities" },
+                        {"$ref": "#/definitions/activity" }
+                    ]
+                },
+                "grouping": {
+                    "oneOf": [
+                        {"$ref": "#/definitions/arrayOfActivities" },
+                        {"$ref": "#/definitions/activity" }
+                    ]
+                },
+                "category": {
+                    "oneOf": [
+                        {"$ref": "#/definitions/arrayOfActivities" },
+                        {"$ref": "#/definitions/activity" }
+                    ]
+                },
+                "other": {
+                    "oneOf": [
+                        {"$ref": "#/definitions/arrayOfActivities" },
+                        {"$ref": "#/definitions/activity" }
+                    ]
+                }
+            },
+            "additionalProperties": false
+        },
+        "arrayOfActivities": {
+            "type": "array",
+            "items": { "$ref": "#/definitions/activity" }
+        },
+
+    }
+}
