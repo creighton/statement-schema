@@ -10,7 +10,7 @@
  */
 
 (   // begin closure
-function(module, es, pff) {
+function validator(module, es, pff, pss) {
 // (module, es) => {    //weird, this line does not work, but the line above does
 const fs = require('fs');
 const args = process.argv;
@@ -19,7 +19,7 @@ console.log('Start validator.js');
 
 // Make sure we have the filename
 let filename;
-console.log(args);
+// console.log(args);
 if (args.length < 3) {
     filename = pff();
 } else {
@@ -28,19 +28,42 @@ if (args.length < 3) {
 console.log(filename);
 
 // Now load and parse that file
-console.log('load and parse begin');
+// console.log('load and parse begin');
 let stmts = [];
-stmts = fs.readFile(filename, 'utf8', (err, data) => {
+fs.readFile(filename, 'utf8', (err, data) => {
     if (err) {
         console.log('bad read of file');
         throw err;
     }
     console.log('read of file successful');
-    stmts = JSON.parse(data);
-    console.log(`Parse of data successful.  We now have ${stmts}`);
-});
-console.log('load and parse end');
+    let result = JSON.parse(data);
+    // Convert to array format
+    if (Array.isArray(result)) {
+        stmts = result;
+    } else {
+        stmts.push(result);
+    }
+    // console.log('load and parse end');
+    // console.log(`Parse of data successful.  We now have ${JSON.stringify(stmts, null, 3)}`);
 
-console.log('I win!!');
-}(module, require('fs'), require('./lib/promptForFile'))
+    // Process these statements
+    console.log('process statments begin');
+    let res = [];
+    for (const stmt of stmts) {
+        console.log(`Look at this: ${stmt}`);
+        pss(stmt, (err, data) => {
+            if (err) throw err;
+            // console.log(data);
+            res.push(data);
+        });
+    }
+    console.log(`Here are your results:\n ${res}`);
+    console.log('process statments end');
+    console.log('I win!!');
+    console.log('Time to start again!');
+    // don't uncomment until you have a way to stop or slow down the loop
+    // validator(module, fs, pff, pss);
+}); // end file read
+
+}(module, require('fs'), require('./lib/promptForFile.js'), require('./lib/processStmt.js'))
 );  // end closure
