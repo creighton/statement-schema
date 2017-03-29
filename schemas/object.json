@@ -9,7 +9,7 @@
     "additionalProperties": false,
 
     "properties": {
-        "actor": { "$ref": "#/definitions/object" }
+        "object": { "$ref": "#/definitions/object" }
     },
 
     "definitions": {

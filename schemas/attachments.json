@@ -1,0 +1,40 @@
+{
+
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Schema for an xAPI Attachmants Property",
+    "id":"http://localhost:8080/attachments-schema.json",
+
+    "type": "object",
+
+    "additionalProperties": false,
+
+    "properties": {
+        "attachments": { "$ref": "#/definitions/attachments" }
+    },
+
+    "definitions": {
+
+        "attachments": {
+            "type": "array",
+            "items": { "$ref": "#/definitions/attachment" }
+        },
+        "attachment": {
+            "type": "object",
+            "properties": {
+                "usageType": { "$ref": "#/definitions/iri" },
+                "display": { "$ref": "#/definitions/lang-map" },
+                "description": { "$ref": "#/definitions/lang-map" },
+                "contentType": {
+                    "type": "string",
+                    "pattern": "^[-\\w]+\\/[-\\w]+$"
+                },
+                "length": { "type": "integer" },
+                "sha2": { "type": "string" },
+                "fileUrl": { "$ref": "#/definitions/iri" }
+            },
+            "required": [ "usageType", "display", "contentType", "length", "sha2" ],
+            "additionalProperties": false
+        }
+
+    }
+}

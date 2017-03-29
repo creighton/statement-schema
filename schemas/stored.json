@@ -1,20 +1,20 @@
 {
 
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "description": "Schema for an xAPI Timestamp Property",
-    "id":"http://localhost:8080/timestamp-schema.json",
+    "description": "Schema for an xAPI Stored Property",
+    "id":"http://localhost:8080/stored-schema.json",
 
     "type": "object",
 
     "additionalProperties": false,
 
     "properties": {
-        "timestamp": { "$ref": "#/definitions/timestamp" }
+        "stored": { "$ref": "#/definitions/stored" }
     },
 
     "definitions": {
 
-        "timestamp": {
+        "stored": {
             "type": "string",
             "format": "date-time"
         }

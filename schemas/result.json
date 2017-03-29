@@ -9,7 +9,7 @@
     "additionalProperties": false,
 
     "properties": {
-        "actor": { "$ref": "#/definitions/result" }
+        "result": { "$ref": "#/definitions/result" }
     },
 
     "definitions": {

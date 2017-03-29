@@ -1,15 +1,15 @@
 {
 
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "description": "Schema for an xAPI Actor Property",
-    "id":"http://localhost:8080/actor-schema.json",
+    "description": "Schema for an xAPI Context Property",
+    "id":"http://localhost:8080/context-schema.json",
 
     "type": "object",
 
     "additionalProperties": false,
 
     "properties": {
-        "actor": { "$ref": "#/definitions/actor" }
+        "context": { "$ref": "#/definitions/context" }
     },
 
     "definitions": {

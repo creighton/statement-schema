@@ -9,7 +9,7 @@
     "additionalProperties": false,
 
     "properties": {
-        "actor": { "$ref": "#/definitions/actor" }
+        "verb": { "$ref": "#/definitions/verb" }
     },
 
     "definitions": {
