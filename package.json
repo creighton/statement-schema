@@ -1,0 +1,27 @@
+{
+  "name": "statement-schema",
+  "version": "0.1.0",
+  "description": "validates xAPI statements using json schemas and some additional code",
+  "main": "validator.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/creighton/statement-schema.git"
+  },
+  "keywords": [
+    "xAPI",
+    "schema",
+    "validator"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/creighton/statement-schema/issues"
+  },
+  "homepage": "https://github.com/creighton/statement-schema#readme",
+  "dependencies": {
+    "ajv": "^4.11.5"
+  }
+}
