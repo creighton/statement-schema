@@ -47,7 +47,7 @@ fs.readFile(filename, 'utf8', (err, data) => {
     // console.log(`Parse of data successful.  We now have ${JSON.stringify(stmts, null, 3)}`);
 
     // Process these statements
-    console.log('process statments begin');
+    console.log('process statements begin');
     let res = [];
     for (const stmt of stmts) {
         console.log(`Look at this: ${stmt}`);

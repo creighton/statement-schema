@@ -139,7 +139,11 @@
                 }
             },
             "required": [ "account" ]
-        }
+        },
+        "iri": {
+            "type": "string",
+            "pattern": "^[\\S]+:\\/\\/?(?!\\/)[\\S]+$"
+        },
     }
 
 }
