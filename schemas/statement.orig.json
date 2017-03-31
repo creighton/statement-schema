@@ -54,27 +54,19 @@
             "additionalProperties": false
         },
         "actor": {
+            "allOf": [
+                { "$ref": "#/definitions/base-actor" }
+            ],
+            "oneOf": [
+                { "$ref": "#/definitions/agent"},
+                { "$ref": "#/definitions/group"}
+            ]
+        },
+        "base-actor": {
             "type": "object",
-            "additionalProperties": false,
             "properties": {
-                "objectType": { "type": "string" },
-                "name": { "type": "string" },
-                "member": { "type": "array" },
-                "mbox": {
-                    "type": "string",
-                    "pattern": "mailto:\\S+@\\S+\\.\\S+"
-                },
-                "mbox_sha1sum": {
+                "name": {
                     "type": "string"
-                },
-                "openid": { "$ref": "#/definitions/iri" },
-                "account": {
-                    "type": "object",
-                    "properties": {
-                        "homePage": { "$ref": "#/definitions/iri" },
-                        "name": { "type": "string" }
-                    },
-                    "required": [ "homePage", "name" ]
                 }
             }
         },
@@ -151,12 +143,42 @@
             ]
         },
         "mbox": {
+            "properties": {
+                "mbox": {
+                    "type": "string",
+                    "pattern": "mailto:\\S+@\\S+\\.\\S+"
+                }
+            },
+            "required": ["mbox"]
         },
         "mbox_sha1sum": {
+            "properties": {
+                "mbox_sha1sum": {
+                    "type": "string"
+                }
+            },
+            "required": ["mbox_sha1sum"]
         },
         "openid": {
+            "properties": {
+                "openid": { "$ref": "#/definitions/iri" }
+            },
+            "required": ["openid"]
         },
         "account": {
+            "properties": {
+                "account": {
+                    "type": "object",
+                    "properties": {
+                        "homePage": { "$ref": "#/definitions/iri" },
+                        "name": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [ "homePage", "name" ]
+                }
+            },
+            "required": [ "account" ]
         },
         "verb": {
             "properties": {
