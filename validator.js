@@ -1,4 +1,8 @@
 /**
+ * Well this is what i've learned - not that async ruins everything, but that
+ * async needs to be accounted for.  At this point I'm going to chase the rabbit
+ * rather than use async series, but that is always an option for later. This
+ * is going to be an adventure.
  * This is the main program for validating xAPI statements from the command
  * line.  It takes a filename as a command line argument as the statement or
  * array of statements to be verified.  It then uses AJV.js as it's schema
@@ -10,9 +14,8 @@
  */
 
 (   // begin closure
-function validator(module, es, pff, pss) {
+function validator(module, pff, getAll, parseFiles) {
 
-    const fs = require('fs');
     const args = process.argv;
 
     console.log('Start validator.js');
@@ -23,61 +26,25 @@ function validator(module, es, pff, pss) {
     if (args.length < 3) {
         pff((err, data) => {
             if (err) throw err;
+            console.log('Thank you please come again.');
             filenames = data;
         });
     } else if (args[2] === '-a') {
-        const getAll = require('./lib/allStmts.js')
         getAll((err, data) => {
             if (err) throw err;
+            console.log('Hello again.');
             filenames = data;
         });
     } else {
         filenames.push(args[2]);
+        parseFiles(filenames, (err, data) => {
+            if (err) throw err;
+            console.log('Welcome back.');
+            filenames = data;
+        })
     }
     console.log('reminder async, this will not have a value until much later', filenames);
+    console.log('Go on to that great beyond where everything will be taken care of');
 
-    // Now load and parse that file
-    // console.log('load and parse begin');
-    // let stmts = [];
-    // for (const name of filenames) {
-    //     fs.readFile(name, 'utf8', (err, data) => {
-    //         if (err) {
-    //             throw err;
-    //             console.log('bad read of file');
-    //         }
-    //         console.log('read of file successful');
-    //         let result = JSON.parse(data);
-    //         if (Array.isArray(result)) {
-    //             for (const stmt of result) {
-    //                 stmts.push(stmt);
-    //             }
-    //         } else {
-    //             stmts.push(result);
-    //         }
-    //     })
-    // }
-        // console.log('load and parse end');
-        // console.log(`Parse of data successful.  We now have ${JSON.stringify(stmts, null, 3)}`);
-
-        // Process these statements
-        // console.log('process statements begin');
-        // let res = [];
-        // for (const stmt of stmts) {
-        //     console.log(`Look at this: ${stmt}`);
-        //     pss(stmt, (err, data) => {
-        //         if (err) throw err;
-        //         // console.log(data);
-        //         res.push(data);
-        //     });
-        // }
-        // console.log(`Here are your results:\n ${res}`);
-        // console.log('process statments end');
-        // console.log('I win!!');
-        // console.log('Time to start again!');
-        // don't uncomment until you have a way to stop or slow down the loop
-        // validator(module, fs, pff, pss);
-    // }); // end file read
-
-
-}(module, require('fs'), require('./lib/promptForFile.js'), require('./lib/processStmt.js'))
+}(module, require('./lib/promptForFile.js'), require('./lib/allStmts.js'), require('./lib/parseFiles.js'))
 );  // end closure
