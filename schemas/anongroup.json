@@ -1,21 +1,19 @@
 {
 
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "description": "Schema for an xAPI Actor Property",
-    "id":"http://localhost:8080/actor-schema.json",
+    "description": "Schema for an xAPI Actor Property Anonymous Group",
+    "id":"http://localhost:8080/anongroup.json",
 
     "type": "object",
 
     "additionalProperties": false,
 
+    "required": ["objectType", "member"],
+
     "properties": {
         "objectType": { "$ref": "#/definitions/objectType" },
         "name": { "$ref": "#/definitions/name" },
-        "member": { "$ref": "#/definitions/member" },
-        "mbox": { "$ref": "#/definitions/mbox" },
-        "mbox_sha1sum": { "$ref": "#/definitions/mbox_sha1sum" },
-        "openid": { "$ref": "#/definitions/openid" },
-        "account": { "$ref": "#/definitions/account" }
+        "member": { "$ref": "#/definitions/member" }
     },
 
     "definitions": {
@@ -25,7 +23,20 @@
         },
         "objectType": { "type": "string" },
         "name": { "type": "string" },
-        "member": { "type": "array" },
+        "member": {
+            "type": "array",
+            "minItems": 1,
+            "items": [
+                {
+                    "oneOf": [
+                        { "$ref": "#/definitions/mbox" },
+                        { "$ref": "#/definitions/mbox_sha1sum" },
+                        { "$ref": "#/definitions/openid" },
+                        { "$ref": "#/definitions/account" }
+                    ]
+                }
+            ]
+        },
         "mbox": {
             "type": "string",
             "pattern": "mailto:\\S+@\\S+\\.\\S+"

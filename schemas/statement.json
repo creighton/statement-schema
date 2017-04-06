@@ -56,6 +56,8 @@
         "actor": {
             "type": "object",
             "additionalProperties": false,
+            "minProperties": 1,
+            "maxProperties": 4,
             "properties": {
                 "objectType": { "type": "string" },
                 "name": { "type": "string" },

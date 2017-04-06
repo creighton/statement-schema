@@ -1,0 +1,28 @@
+{
+    "actor":{
+        "objectType":"Group",
+        "member": [
+            {
+                "account":
+                    {
+                        "homepage": "http://openid.foo.com",
+                        "name": "this is my name"
+                    }
+            },
+            {
+                "mbox": "mailto:tom@foo.com"
+            },
+            {
+                "mbox": "mailto:tom@goo.com"
+            },
+            {
+                "mbox_sha1sum": "thoserandomlettersagain"
+            },
+            {
+                "openid": "http:some.random.site/or/something"
+            }
+        ]
+    },
+    "verb":{"id":"http://tom.com/verb"},
+    "object": {"id":"http://tom.com/obj"}
+}

@@ -1,8 +1,8 @@
 {
 
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "description": "Schema for an xAPI Actor Property",
-    "id":"http://localhost:8080/actor-schema.json",
+    "description": "Schema for an xAPI Actor Property Agent",
+    "id":"http://localhost:8080/agent.json",
 
     "type": "object",
 
@@ -10,13 +10,15 @@
 
     "properties": {
         "objectType": { "$ref": "#/definitions/objectType" },
-        "name": { "$ref": "#/definitions/name" },
-        "member": { "$ref": "#/definitions/member" },
-        "mbox": { "$ref": "#/definitions/mbox" },
-        "mbox_sha1sum": { "$ref": "#/definitions/mbox_sha1sum" },
-        "openid": { "$ref": "#/definitions/openid" },
-        "account": { "$ref": "#/definitions/account" }
+        "name": { "$ref": "#/definitions/name" }
     },
+
+    "oneOf": [
+        { "$ref": "#/definitions/mbox" },
+        { "$ref": "#/definitions/mbox_sha1sum" },
+        { "$ref": "#/definitions/openid" },
+        { "$ref": "#/definitions/account" }
+    ],
 
     "definitions": {
         "iri": {
@@ -25,7 +27,6 @@
         },
         "objectType": { "type": "string" },
         "name": { "type": "string" },
-        "member": { "type": "array" },
         "mbox": {
             "type": "string",
             "pattern": "mailto:\\S+@\\S+\\.\\S+"

@@ -1,8 +1,8 @@
 {
 
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "description": "Schema for an xAPI Actor Property",
-    "id":"http://localhost:8080/actor-schema.json",
+    "description": "Schema for an xAPI Actor Property Identified Group",
+    "id":"http://localhost:8080/idgroup.json",
 
     "type": "object",
 

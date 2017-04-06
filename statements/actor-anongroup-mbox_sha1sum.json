@@ -1,0 +1,8 @@
+{
+    "actor":{
+        "objectType":"Group",
+        "member": [ { "mbox_sha1sum": "astringofrandomlettersthatdontmakeanysense" } ]
+    },
+    "verb":{"id":"http://tom.com/verb"},
+    "object": {"id":"http://tom.com/obj"}
+}

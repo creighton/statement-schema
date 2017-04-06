@@ -1,0 +1,4 @@
+{
+    "actor":{"mbox":"mailto:tom@example.com"},
+    "object": {"id":"http://tom.com/obj"}
+}
