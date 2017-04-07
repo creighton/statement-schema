@@ -28,41 +28,26 @@ module.exports = function (object, cb) {
 
     if (object.objectType === "SubStatement") {
         console.log('This object is an SubStatement');
-        if (v.validate(require('../schemas/object-substatement.json')), object) { return cb(null, 'object - SubStatement validated'); }
+        if (v.validate(require('../test/schemas/object-substatement.json')), object) { return cb(null, 'object - SubStatement validated'); }
         return cb(null, v.errors);
     } else if (object.objectType === "StatementRef") {
         console.log('This object is an StatementRef');
-        if (v.validate(require('../schemas/object-statementref.json')), object) { return cb(null, 'object - StatementRef validated'); }
+        if (v.validate(require('../test/schemas/object-statementref.json')), object) { return cb(null, 'object - StatementRef validated'); }
         return cb(null, v.errors);
     } else if (object.objectType === "Agent") {
         console.log('This object is an Agent');
-        if (v.validate(require('../schemas/object-agent.json')), object) { return cb(null, 'object - Agent validated'); }
+        if (v.validate(require('../test/schemas/object-agent.json')), object) { return cb(null, 'object - Agent validated'); }
         return cb(null, v.errors);
     } else if (object.objectType === "Group") {
         console.log('This object is an Group');
-        if (v.validate(require('../schemas/object-group.json')), object) { return cb(null, 'object - Group validated'); }
+        if (v.validate(require('../test/schemas/object-group.json')), object) { return cb(null, 'object - Group validated'); }
         return cd(null, v.errors);
     } else {    // From here we assume that objectType is either "Activity" or not defined which means the same
         console.log('This object is an Activity');
         // console.log(`Yoyo you have reached the object activity validation center the activity is ${object}`);
-        if (v.validate(require('../schemas/object-activity.json'), object)) { return cb(null, 'object - Activity validated'); }
+        if (v.validate(require('../test/schemas/object-activity.json'), object)) { return cb(null, 'object - Activity validated'); }
         return cb(null, v.errors);
     }
-    // fs.readFile('./schemas/agent.json', 'utf8', (err, schemaStr) => {
-    //     if (err) throw err;
-    //     let schema = JSON.parse(schemaStr);
-    //     let valid = v.validate(schema, actor);
-    //     console.log(valid);
-    //     if (!valid) {
-    //         // console.log(v.err);
-    //         // console.log(`This is the ajv instance:\n${Object.keys(v)}\n${JSON.stringify(v.errors)}\n${v.errorsText}`);
-    //         cb(null, v.errors);
-    //     } else {
-    //         // console.log(`You win!! The statement begins valid:\n${valid}\n all done`);
-    //         cb(null, 'actor - agent validated');
-    //     }
-    // });
-
-    // cb(null, 'object validated');
+    
 }
 );  // end closure

@@ -7,7 +7,7 @@
         console.log('allStmts');
         const fs = require('fs');
         let names, stmts;
-        fs.readdir('./statements', 'utf8', (err, files) => {
+        fs.readdir('./test/statements', 'utf8', (err, files) => {
             if (err) throw err;
             console.log(files);
             const parseFiles = require('./parseFiles.js')

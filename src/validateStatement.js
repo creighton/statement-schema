@@ -22,7 +22,7 @@ module.exports = function (stmt, cb) {
     const V = require('ajv');
     const v = new V();
 
-    fs.readFile('./schemas/statement.json', 'utf8', (err, schemaStr) => {
+    fs.readFile('./test/schemas/statement.json', 'utf8', (err, schemaStr) => {
         if (err) throw err;
         let schema = JSON.parse(schemaStr)
         let valid = v.validate(schema, stmt);
@@ -37,14 +37,6 @@ module.exports = function (stmt, cb) {
             cb(null, 'general statement structure validated');
         }
     });
-
-
-    // let valid = v.validate('../schemas/statement.json', stmt);
-    // So here is my walk through
-    // Pit the actor of the stmt againt the schema - also note this could be in the stmt schema
-    // Get the value of objectType Group = valGroup, else = valAgent
-    // Either way get those results and pass back through the cb
-    // Also double check and make sure there is nothing being missed
 
 }
 );  // end closure

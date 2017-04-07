@@ -6,7 +6,7 @@
     module.exports = function (names, cb) {
         console.log('parseFiles');
         const fs = require('fs');
-        const folder = './statements/';
+        const folder = './test/statements/';
         let stmts = [];
 
         for (const name of names) {

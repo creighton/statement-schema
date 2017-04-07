@@ -28,7 +28,7 @@ module.exports = function (actor, cb) {
         console.log('This actor is a group');
         if (actor.mbox || actor.mbox_sha1sum || actor.openid || actor.account) {
             console.log('This group is an identified group');
-            fs.readFile('./schemas/idgroup.json', 'utf8', (err, schemaStr) => {
+            fs.readFile('./test/schemas/idgroup.json', 'utf8', (err, schemaStr) => {
                 if (err) throw err;
                 let schema = JSON.parse(schemaStr);
                 let valid = v.validate(schema, actor);
@@ -44,7 +44,7 @@ module.exports = function (actor, cb) {
             });
         } else {
             console.log('This group is an anonymous group');
-            fs.readFile('./schemas/anongroup.json', 'utf8', (err, schemaStr) => {
+            fs.readFile('./test/schemas/anongroup.json', 'utf8', (err, schemaStr) => {
                 if (err) throw err;
                 let schema = JSON.parse(schemaStr);
                 let valid = v.validate(schema, actor);
@@ -61,7 +61,7 @@ module.exports = function (actor, cb) {
         }
     } else {
         console.log('This actor is an agent');
-        fs.readFile('./schemas/agent.json', 'utf8', (err, schemaStr) => {
+        fs.readFile('./test/schemas/agent.json', 'utf8', (err, schemaStr) => {
             if (err) throw err;
             let schema = JSON.parse(schemaStr);
             let valid = v.validate(schema, actor);
