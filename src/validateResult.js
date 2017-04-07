@@ -18,6 +18,7 @@
 (   //begin closure
     module.exports = function (result, cb) {
         console.log('validating result', result);
+        console.log(require.resolve('../schemas/result.json'));
         // So here is my walk through
         // Pit the actor of the stmt againt the schema - also note this could be in the stmt schema
         // Get the value of objectType Group = valGroup, else = valAgent

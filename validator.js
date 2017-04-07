@@ -10,11 +10,11 @@
  * the xAPI specification.
  * Schemas are found in `schemas` folder.
  * Example statements are found in `statements` folder.
- * Additional code is found in `lib` folder.
+ * Additional code is found in `src` folder.
  */
 
 (   // begin closure
-function validator(module, pff, getAll, parseFiles) {
+function validator(module, pff, getAll, parseFiles, formatMessage) {
 
     const args = process.argv;
 
@@ -26,25 +26,22 @@ function validator(module, pff, getAll, parseFiles) {
     if (args.length < 3) {
         pff((err, data) => {
             // if (err) throw err;
-            console.log(`Thank you please come again.\n${JSON.stringify(err || data)}`);
-            // filenames = data;
+            console.log(`Thank you please come again.\n${formatMessage(err || data)}`);
         });
     } else if (args[2] === '-a') {
         getAll((err, data) => {
             // if (err) throw err;
-            console.log(`Hello again.\n${JSON.stringify(err || data)}`);
-            // filenames = data;
+            console.log(`Hello again.\n${formatMessage(err || data)}`);
         });
     } else {
         filenames.push(args[2]);
         parseFiles(filenames, (err, data) => {
             // if (err) throw err;
-            console.log(`Welcome back.\n${JSON.stringify(err || data)}`);
-            // filenames = data;
+            console.log(`Welcome back.\n${formatMessage(err || data)}`);
         })
     }
     // console.log('reminder async, this will not have a value until much later', filenames);
     // console.log('Go on to that great beyond where everything will be taken care of');
 
-}(module, require('./lib/promptForFile.js'), require('./lib/allStmts.js'), require('./lib/parseFiles.js'))
+}(module, require('./src/promptForFile.js'), require('./src/allStmts.js'), require('./src/parseFiles.js'), require('./src/formatMessage'))
 );  // end closure

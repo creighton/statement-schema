@@ -26,14 +26,15 @@ module.exports = function (stmt, cb) {
         if (err) throw err;
         let schema = JSON.parse(schemaStr)
         let valid = v.validate(schema, stmt);
-        console.log(valid);
+        // console.log(valid);
         if (!valid) {
             // console.log(v.err);
             // console.log(`This is the ajv instance:\n${Object.keys(v)}\n${JSON.stringify(v.errors)}\n${v.errorsText}`);
-            cb(v.errors);
+            cb(null, v.errors);
         } else {
             // console.log(`You win!! The statement begins valid:\n${valid}\n all done`);
-            cb(null, 'statement validated');
+            // console.log(`This is the ajv instance:\n${Object.keys(v)}\n${JSON.stringify(v.errors)}\n${v.errorsText}`);
+            cb(null, 'general statement structure validated');
         }
     });
 

@@ -32,11 +32,11 @@ module.exports = function (actor, cb) {
                 if (err) throw err;
                 let schema = JSON.parse(schemaStr);
                 let valid = v.validate(schema, actor);
-                console.log(valid);
+                // console.log(valid);
                 if (!valid) {
                     // console.log(v.err);
                     // console.log(`This is the ajv instance:\n${Object.keys(v)}\n${JSON.stringify(v.errors)}\n${v.errorsText}`);
-                    cb(v.errors);
+                    cb(null, v.errors);
                 } else {
                     // console.log(`You win!! The statement begins valid:\n${valid}\n all done`);
                     cb(null, 'actor - identified group validated');
@@ -48,11 +48,11 @@ module.exports = function (actor, cb) {
                 if (err) throw err;
                 let schema = JSON.parse(schemaStr);
                 let valid = v.validate(schema, actor);
-                console.log(valid);
+                // console.log(valid);
                 if (!valid) {
                     // console.log(v.err);
                     // console.log(`This is the ajv instance:\n${Object.keys(v)}\n${JSON.stringify(v.errors)}\n${v.errorsText}`);
-                    cb(v.errors);
+                    cb(null, v.errors);
                 } else {
                     // console.log(`You win!! The statement begins valid:\n${valid}\n all done`);
                     cb(null, 'actor - anonymous group validated');
@@ -65,11 +65,11 @@ module.exports = function (actor, cb) {
             if (err) throw err;
             let schema = JSON.parse(schemaStr);
             let valid = v.validate(schema, actor);
-            console.log(valid);
+            // console.log(valid);
             if (!valid) {
                 // console.log(v.err);
                 // console.log(`This is the ajv instance:\n${Object.keys(v)}\n${JSON.stringify(v.errors)}\n${v.errorsText}`);
-                cb(v.errors);
+                cb(null, v.errors);
             } else {
                 // console.log(`You win!! The statement begins valid:\n${valid}\n all done`);
                 cb(null, 'actor - agent validated');
@@ -77,23 +77,5 @@ module.exports = function (actor, cb) {
         });
     }
 
-
-    // Either way get those results and pass back through the cb
-    // Also double check and make sure there is nothing being missed
-
-
-
-    // fs.readFile('./schemas/actor.json', 'utf8', (err, schemaStr) => {
-    //     if (err) throw err;
-    //     let schema = JSON.parse(schemaStr)
-    //     let valid = v.validate(schema, actor);
-    //     console.log(valid);
-    //     if (!valid) {
-    //         console.log(v.err);
-    //     } else {
-    //         console.log('You win!! The actor is all valid');
-    //     }
-    //     cb(null, 'actor validated');
-    // });
 }
 );  // end closure

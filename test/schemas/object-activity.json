@@ -7,39 +7,18 @@
     "type": "object",
 
     "additionalProperties": false,
-
+    "required": [ "id" ],
     "properties": {
-        "object": { "$ref": "#/definitions/object" }
+        "objectType": {
+            "type": "string",
+            "pattern": "Activity"
+        },
+        "id": { "$ref": "#/definitions/iri" },
+        "definition": { "$ref": "#/definitions/activity-definition" }
     },
 
     "definitions": {
 
-        "object": {
-            "oneOf": [
-                { "$ref": "#/definitions/activity" },
-                { "$ref": "#/definitions/activity-agent" },
-                { "$ref": "#/definitions/group" },
-                { "$ref": "#/definitions/subStatement" },
-                { "$ref": "#/definitions/statementRef" }
-            ]
-        },
-        "activity": {
-            "type": "object",
-            "properties": {
-                "objectType": {
-                    "type": "string",
-                    "pattern": "Activity"
-                },
-                "id": { "$ref": "#/definitions/iri" },
-                "definition": { "$ref": "#/definitions/activity-definition" }
-            },
-            "required": [ "id" ],
-            "additionalProperties": false
-        },
-        "activity-agent": {
-            "$ref": "#/definitions/agent",
-            "required": [ "objectType" ]
-        },
         "activity-definition": {
             "type": "object",
             "properties": {
@@ -116,6 +95,17 @@
                 "attachments": { "$ref": "#/definitions/attachments" }
             },
             "required": [ "objectType", "actor", "verb", "object" ],
+            "additionalProperties": false
+        },
+        "iri": {
+            "type": "string",
+            "pattern": "^[\\S]+:\\/\\/?(?!\\/)[\\S]+$"
+        },
+        "lang-map": {
+            "type": "object",
+            "patternProperties": {
+                "^[a-z]{2,3}(?:-[A-Z]{2,3}(?:-[a-zA-Z]{4})?)?$": { "type": "string" }
+            },
             "additionalProperties": false
         }
 

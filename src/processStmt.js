@@ -13,14 +13,14 @@
             function (cb) {
                 const vStmt = require('./validateStatement.js');
                 vStmt(stmt, (err, data) => {
-                    if (err) {
-                        console.log(`Hey there's an error: ${JSON.stringify(err)}`);
-                        for(const e of err) {
-                            allErrors.push(e)
-                        }
-                        console.log(JSON.stringify(allErrors));
-                    }
-                    console.log(`This is the statement data:\n ${data}\nAnd this is the error message:\n ${allErrors}`);
+                    // if (err) {
+                    //     console.log(`Hey there's an error: ${JSON.stringify(err)}`);
+                    //     for(const e of err) {
+                    //         allErrors.push(e)
+                    //     }
+                    //     console.log(JSON.stringify(allErrors));
+                    // }
+                    // console.log(`This is the statement data:\n ${data}\nAnd this is the error message:\n ${allErrors}`);
                     cb(err, data);
                 });
             },
@@ -28,14 +28,15 @@
             function (cb) {
                 const vActor = require('./validateActor.js');
                 vActor(stmt.actor, (err, data) => {
-                    if (err) {
-                        console.log(`Please be advised there is a problem with your actor:\n${JSON.stringify(err)}`);
-                        for(const e of err) {
-                            allErrors.push(e)
-                        }
-                    }
-                    console.log(`This is the actor data:\n ${data}\nAnd this is now the error message:\n ${allErrors}`);
-                    console.log(data);
+                    // if (err) {
+                    //     console.log(`Please be advised there is a problem with your actor:\n${JSON.stringify(err)}`);
+                    //     for(const e of err) {
+                    //         allErrors.push(e)
+                    //     }
+                    // }
+                    // console.log(`This is the actor data:\n ${JSON.stringify(data)}\nAnd this is now the error message:\n ${allErrors}`);
+                    // console.log(data);
+                    // cb(err, data);
                     cb(err, data);
                 });
             },
@@ -44,13 +45,13 @@
                 console.log("Now time to Object");
                 const vObject = require('./validateObject.js');
                 vObject(stmt.object, (err, data) => {
-                    if (err) {
-                        console.log(`This is the object data:\n ${data}\nAnd this now is the error message:\n ${allErrors}`);
-                        for(const e of err) {
-                            allErrors.push(e)
-                        }
-                    }
-                    console.log(data);
+                    // if (err) {
+                    //     // console.log(`This is the object data:\n ${data}\nAnd this now is the error message:\n ${allErrors}`);
+                    //     for(const e of err) {
+                    //         allErrors.push(e)
+                    //     }
+                    // }
+                    // console.log(data);
                     cb(err, data);
                 });
             },
@@ -61,8 +62,8 @@
                     console.log('there is a statement result property');
                     const vResult = require('./validateResult.js');
                     vResult(stmt.result, (err, data) => {
-                        console.log(`This is the result data:\n ${data}\nAnd this is now the error message:\n ${allErrors}`);
-                        console.log(data);
+                        // console.log(`This is the result data:\n ${data}\nAnd this is now the error message:\n ${allErrors}`);
+                        // console.log(data);
                         if (err) {
                             for(const e of err) {
                                 allErrors.push(e)
@@ -75,16 +76,18 @@
                 }
             },
         ], function (err, results) {
+            // console.log(`What is the value of allErrors:\n${allErrors}\n.vs results\n${results}`);
+            // console.log(`allErrors is ${typeof allErrors}\nresults is ${typeof results}`);
             // Walkthrough of how to go about
             // do we need more for result - call validateResult
             // do we need more for context - call validateContext
             // do we need more for attachments - call validateAttachments
             // do we need anything else??
-            if (err) {
-                console.log(`Hmmm, what is happening here:\n${err}`);
-            } else {
-                console.log('statement is fully validated\n', results);
-            }
+            // if (err) {
+            //     console.log(`Hmmm, what is happening here:\n${err}`);
+            // } else {
+            //     console.log('statement is fully validated\n', results);
+            // }
             cb(err, results);
         });
     }
