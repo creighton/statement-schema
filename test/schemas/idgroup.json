@@ -6,24 +6,27 @@
 
     "type": "object",
 
-    "additionalProperties": false,
-
     "properties": {
         "objectType": { "$ref": "#/definitions/objectType" },
         "name": { "$ref": "#/definitions/name" },
-        "member": { "$ref": "#/definitions/member" },
-        "mbox": { "$ref": "#/definitions/mbox" },
-        "mbox_sha1sum": { "$ref": "#/definitions/mbox_sha1sum" },
-        "openid": { "$ref": "#/definitions/openid" },
-        "account": { "$ref": "#/definitions/account" }
+        "member": { "$ref": "#/definitions/member" }
     },
+
+    "required": ["objectType"],
+
+    "oneOf": [
+        { "required": ["mbox"] },
+        { "required": ["mbox_sha1sum"] },
+        { "required": ["openid"] },
+        { "required": ["account"] }
+    ],
 
     "definitions": {
         "iri": {
             "type": "string",
             "pattern": "^[\\S]+:\\/\\/?(?!\\/)[\\S]+$"
         },
-        "objectType": { "type": "string" },
+        "objectType": { "type": "string", "enum": ["Group"] },
         "name": { "type": "string" },
         "member": { "type": "array" },
         "mbox": {

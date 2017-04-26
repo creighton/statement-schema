@@ -21,7 +21,7 @@
             "type": "string",
             "pattern": "^[\\S]+:\\/\\/?(?!\\/)[\\S]+$"
         },
-        "objectType": { "type": "string" },
+        "objectType": { "type": "string", "enum": ["Group"] },
         "name": { "type": "string" },
         "member": {
             "type": "array",
@@ -29,10 +29,10 @@
             "items": [
                 {
                     "oneOf": [
-                        { "$ref": "#/definitions/mbox" },
-                        { "$ref": "#/definitions/mbox_sha1sum" },
-                        { "$ref": "#/definitions/openid" },
-                        { "$ref": "#/definitions/account" }
+                        { "required": ["mbox"] },
+                        { "required": ["mbox_sha1sum"] },
+                        { "required": ["openid"] },
+                        { "required": ["account"] }
                     ]
                 }
             ]
