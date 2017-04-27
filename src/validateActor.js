@@ -36,10 +36,10 @@ module.exports = function (actor, cb) {
                 if (!valid) {
                     // console.log(v.err);
                     // console.log(`This is the ajv instance:\n${Object.keys(v)}\n${JSON.stringify(v.errors)}\n${v.errorsText}`);
-                    cb(null, 'actor - ' + v.errorsText());
+                    cb(null, 'actor Identified Group - ' + v.errorsText());
                 } else {
                     // console.log(`You win!! The statement begins valid:\n${valid}\n all done`);
-                    cb(null, 'actor - identified group validated');
+                    cb(null, 'actor Identified Group - validated');
                 }
             });
         } else {
@@ -52,10 +52,10 @@ module.exports = function (actor, cb) {
                 if (!valid) {
                     // console.log(v.err);
                     // console.log(`This is the ajv instance:\n${Object.keys(v)}\n${JSON.stringify(v.errors)}\n${v.errorsText}`);
-                    cb(null, 'actor - ' + v.errorsText());
+                    cb(null, 'actor Anonymous Group - ' + v.errorsText());
                 } else {
                     // console.log(`You win!! The statement begins valid:\n${valid}\n all done`);
-                    cb(null, 'actor - anonymous group validated');
+                    cb(null, 'actor Anonymous Group - validated');
                 }
             });
         }
@@ -69,10 +69,10 @@ module.exports = function (actor, cb) {
             if (!valid) {
                 // console.log(v.err);
                 // console.log(`This is the ajv instance:\n${Object.keys(v)}\n${JSON.stringify(v.errors)}\n${v.errorsText}`);
-                cb(null, 'actor - ' + v.errorsText());
+                cb(null, 'actor Agent - ' + v.errorsText());
             } else {
                 // console.log(`You win!! The statement begins valid:\n${valid}\n all done`);
-                cb(null, 'actor - agent validated');
+                cb(null, 'actor Agent - validated');
             }
         });
     }

@@ -6,6 +6,10 @@
         "member": [
             {
                 "objectType":"Agent",
+                "mbox": "mailto:mot@tom.com"
+            },
+            {
+                "objectType":"Agent",
                 "mbox": "mailto:tom@tom.com"
             }
         ]

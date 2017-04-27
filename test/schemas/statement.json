@@ -166,13 +166,8 @@
             "additionalProperties": false
         },
         "object": {
-            "oneOf": [
-                { "$ref": "#/definitions/activity" },
-                { "$ref": "#/definitions/activity-agent" },
-                { "$ref": "#/definitions/group" },
-                { "$ref": "#/definitions/subStatement" },
-                { "$ref": "#/definitions/statementRef" }
-            ]
+            "type": "object",
+            "minProperties": 1
         },
         "activity": {
             "type": "object",

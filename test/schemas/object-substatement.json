@@ -2,7 +2,7 @@
 
     "$schema": "http://json-schema.org/draft-04/schema#",
     "description": "Schema for an xAPI Object Property",
-    "id":"http://localhost:8080/object-schema.json",
+    "id":"http://localhost:8080/object-substatement-schema.json",
 
     "type": "object",
 

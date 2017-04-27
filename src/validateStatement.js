@@ -21,7 +21,7 @@ module.exports = function (stmt, cb) {
     const fs = require('fs');
     const V = require('ajv');
     const v = new V({"format":"full"});
-console.log('looky here', v.options);
+// console.log('looky here', v.options);
     fs.readFile('./test/schemas/statement.json', 'utf8', (err, schemaStr) => {
         if (err) throw err;
         let schema = JSON.parse(schemaStr)
@@ -30,11 +30,11 @@ console.log('looky here', v.options);
         if (!valid) {
             // console.log(v.err);
             // console.log(`This is the ajv instance:\n${Object.keys(v)}\n${JSON.stringify(v.errors)}\n${v.errorsText()}`);
-            cb(null, v.errorsText());
+            cb(null, 'statement - ' + v.errorsText());
         } else {
             // console.log(`You win!! The statement begins valid:\n${valid}\n all done`);
             // console.log(`This is the ajv instance:\n${Object.keys(v)}\n${JSON.stringify(v.errors)}\n${v.errorsText}`);
-            cb(null, 'general statement structure validated');
+            cb(null, 'statement - general structure validated');
         }
     });
 
