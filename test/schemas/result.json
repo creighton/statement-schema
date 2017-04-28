@@ -9,26 +9,19 @@
     "additionalProperties": false,
 
     "properties": {
-        "result": { "$ref": "#/definitions/result" }
+        "score": { "$ref": "#/definitions/score" },
+        "success": { "type": "boolean" },
+        "completion": { "type": "boolean" },
+        "response": { "type": "string" },
+        "duration": {
+            "type": "string",
+            "pattern": "^P(?=\\w*\\d)(?:\\d+Y|Y)?(?:\\d+M|M)?(?:\\d+W|W)?(?:\\d+D|D)?(?:T(?:\\d+H|H)?(?:\\d+M|M)?(?:\\d+(?:\\­.\\d{1,2})?S|S)?)?$"
+        },
+        "extensions": { "$ref": "#/definitions/extensions" }
     },
 
     "definitions": {
 
-        "result": {
-            "type": "object",
-            "properties": {
-                "score": { "$ref": "#/definitions/score" },
-                "success": { "type": "boolean" },
-                "completion": { "type": "boolean" },
-                "response": { "type": "string" },
-                "duration": {
-                    "type": "string",
-                    "pattern": "^P(?=\\w*\\d)(?:\\d+Y|Y)?(?:\\d+M|M)?(?:\\d+W|W)?(?:\\d+D|D)?(?:T(?:\\d+H|H)?(?:\\d+M|M)?(?:\\d+(?:\\­.\\d{1,2})?S|S)?)?$"
-                },
-                "extensions": { "$ref": "#/definitions/extensions" }
-            },
-            "additionalProperties": false
-        },
         "score": {
             "type": "object",
             "properties": {

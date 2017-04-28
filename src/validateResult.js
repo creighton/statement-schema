@@ -18,12 +18,19 @@
 (   //begin closure
     module.exports = function (result, cb) {
         console.log('validating result', result);
-        console.log(require.resolve('../test/schemas/result.json'));
-        // So here is my walk through
-        // Pit the actor of the stmt againt the schema - also note this could be in the stmt schema
-        // Get the value of objectType Group = valGroup, else = valAgent
-        // Either way get those results and pass back through the cb
-        // Also double check and make sure there is nothing being missed
-        cb(null, 'result validated');
+        const V = require('ajv');
+        const v = new V();
+        if (v.validate(require('../test/schemas/result.json'), result)) {
+            if (result.score && result.score.raw) {
+                if (result.score.max && result.score.raw > result.score.max) {
+                    return cb(null, `result - no good raw (${result.score.raw}) is larger than max (${result.score.max})`)
+                }
+                if (result.score.min && result.score.raw < result.score.min) {
+                    return cb(null, `result - no good raw (${result.score.raw}) is larger than min (${result.score.min})`)
+                }
+            }
+            return cb(null, 'result - validated')
+        }
+        cb(null, 'result - ' + v.errorsText());
     }
 );  // end closure
