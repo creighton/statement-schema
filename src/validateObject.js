@@ -28,8 +28,32 @@ module.exports = function (object, cb) {
 
     if (object.objectType === "SubStatement") {
         console.log('This object is a SubStatement');
-        if (v.validate(require('../test/schemas/object-substatement.json'), object)) { return cb(null, 'object SubStatement - validated'); }
-        return cb(null, 'object SubStatement - ' + v.errorsText());
+        if (!(object.actor && object.verb && object.object)) {
+            console.log('Not Enough');
+            return cb(null, 'object SubStatement - does not contain an actor, verb and object');
+        }
+        if (object.object.objectType === 'SubStatement') {
+            console.log('Not Again');
+            return cb(null, 'object SubStatement - a substatement MUST NOT contain a substatement of its own');
+        }
+        if (object.id || object.stored || object.version || object.authority) {
+            console.log('Too Much');
+            return cb(null, 'object SubStatement - a substatement MUST NOT have the "id", "stored", "version" or "authority" properties');
+        }
+        //We got this far, now clone the substatement minus the objectType property, and process it
+        console.log('We are going to process the substatement');
+        var subs = {};
+        for (key in object) {
+            if (key !== "ObjectType") {
+                subs[key] = object[key];
+            }
+        }
+        const processStmt = require('./processStmt');
+        processStmt(subs, function (err, res) {
+            console.log(`Go fig  ${typeof res}`);
+            if (err) throw err;
+            return cb(null, 'object SubStatement - \n' + res)
+        });
     } else if (object.objectType === "StatementRef") {
         console.log('This object is a StatementRef');
         if (v.validate(require('../test/schemas/object-statementref.json'), object))

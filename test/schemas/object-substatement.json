@@ -6,18 +6,21 @@
 
     "type": "object",
 
-    "additionalProperties": false,
-    "required": [ "id" ],
     "properties": {
         "objectType": {
             "type": "string",
             "pattern": "Activity"
         },
-        "id": { "$ref": "#/definitions/iri" },
-        "definition": { "$ref": "#/definitions/activity-definition" }
+        "actor": { "$ref": "#/definitions/actor" },
+        "verb": { "$ref": "#/definitions/verb" },
+        "object": { "$ref": "/definitions/object" }
     },
 
     "definitions": {
+
+        "actor": {},
+        "verb": {},
+        "object": {},
 
         "activity-definition": {
             "type": "object",
