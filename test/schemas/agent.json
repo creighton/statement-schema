@@ -6,18 +6,16 @@
 
     "type": "object",
 
-    "additionalProperties": false,
-
     "properties": {
         "objectType": { "$ref": "#/definitions/objectType" },
         "name": { "$ref": "#/definitions/name" }
     },
 
     "oneOf": [
-        { "$ref": "#/definitions/mbox" },
-        { "$ref": "#/definitions/mbox_sha1sum" },
-        { "$ref": "#/definitions/openid" },
-        { "$ref": "#/definitions/account" }
+        { "required": ["mbox"] },
+        { "required": ["mbox_sha1sum"] },
+        { "required": ["openid"] },
+        { "required": ["account"] }
     ],
 
     "definitions": {

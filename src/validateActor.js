@@ -25,9 +25,9 @@ module.exports = function (actor, cb) {
     // Pit the actor of the stmt againt the schema - also note this could be in the stmt schema
     // Get the value of objectType Group = valGroup, else = valAgent
     if (actor.objectType === "Group") {
-        console.log('This actor is a group');
+        // console.log('This actor is a group');
         if (actor.mbox || actor.mbox_sha1sum || actor.openid || actor.account) {
-            console.log('This group is an identified group');
+            // console.log('This group is an identified group');
             fs.readFile('./test/schemas/idgroup.json', 'utf8', (err, schemaStr) => {
                 if (err) throw err;
                 let schema = JSON.parse(schemaStr);
@@ -36,14 +36,14 @@ module.exports = function (actor, cb) {
                 if (!valid) {
                     // console.log(v.err);
                     // console.log(`This is the ajv instance:\n${Object.keys(v)}\n${JSON.stringify(v.errors)}\n${v.errorsText}`);
-                    cb(null, v.errors);
+                    cb(null, 'actor Identified Group - ' + v.errorsText());
                 } else {
                     // console.log(`You win!! The statement begins valid:\n${valid}\n all done`);
-                    cb(null, 'actor - identified group validated');
+                    cb(null, 'actor Identified Group - validated');
                 }
             });
         } else {
-            console.log('This group is an anonymous group');
+            // console.log('This group is an anonymous group');
             fs.readFile('./test/schemas/anongroup.json', 'utf8', (err, schemaStr) => {
                 if (err) throw err;
                 let schema = JSON.parse(schemaStr);
@@ -52,15 +52,15 @@ module.exports = function (actor, cb) {
                 if (!valid) {
                     // console.log(v.err);
                     // console.log(`This is the ajv instance:\n${Object.keys(v)}\n${JSON.stringify(v.errors)}\n${v.errorsText}`);
-                    cb(null, v.errors);
+                    cb(null, 'actor Anonymous Group - ' + v.errorsText());
                 } else {
                     // console.log(`You win!! The statement begins valid:\n${valid}\n all done`);
-                    cb(null, 'actor - anonymous group validated');
+                    cb(null, 'actor Anonymous Group - validated');
                 }
             });
         }
     } else {
-        console.log('This actor is an agent');
+        // console.log('This actor is an agent');
         fs.readFile('./test/schemas/agent.json', 'utf8', (err, schemaStr) => {
             if (err) throw err;
             let schema = JSON.parse(schemaStr);
@@ -69,10 +69,10 @@ module.exports = function (actor, cb) {
             if (!valid) {
                 // console.log(v.err);
                 // console.log(`This is the ajv instance:\n${Object.keys(v)}\n${JSON.stringify(v.errors)}\n${v.errorsText}`);
-                cb(null, v.errors);
+                cb(null, 'actor Agent - ' + v.errorsText());
             } else {
                 // console.log(`You win!! The statement begins valid:\n${valid}\n all done`);
-                cb(null, 'actor - agent validated');
+                cb(null, 'actor Agent - validated');
             }
         });
     }

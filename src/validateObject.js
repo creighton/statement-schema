@@ -17,7 +17,7 @@
 
 (   //begin closure
 module.exports = function (object, cb) {
-    console.log('validating object', object);
+    console.log('validating object:', object);
     const V = require('ajv');
     const v = new V();
     // So here is my walk through
@@ -27,27 +27,59 @@ module.exports = function (object, cb) {
     // Also double check and make sure there is nothing being missed
 
     if (object.objectType === "SubStatement") {
-        console.log('This object is an SubStatement');
-        if (v.validate(require('../test/schemas/object-substatement.json')), object) { return cb(null, 'object - SubStatement validated'); }
-        return cb(null, v.errors);
+        console.log('This object is a SubStatement');
+        if (!(object.actor && object.verb && object.object)) {
+            console.log('Not Enough');
+            return cb(null, 'object SubStatement - does not contain an actor, verb and object');
+        }
+        if (object.object.objectType === 'SubStatement') {
+            console.log('Not Again');
+            return cb(null, 'object SubStatement - a substatement MUST NOT contain a substatement of its own');
+        }
+        if (object.id || object.stored || object.version || object.authority) {
+            console.log('Too Much');
+            return cb(null, 'object SubStatement - a substatement MUST NOT have the "id", "stored", "version" or "authority" properties');
+        }
+        //We got this far, now clone the substatement minus the objectType property, and process it
+        console.log('We are going to process the substatement');
+        var subs = {};
+        for (key in object) {
+            if (key !== "ObjectType") {
+                subs[key] = object[key];
+            }
+        }
+        const processStmt = require('./processStmt');
+        processStmt(subs, function (err, res) {
+            console.log(`Go fig  ${typeof res}`);
+            if (err) throw err;
+            return cb(null, 'object SubStatement - \n' + res)
+        });
     } else if (object.objectType === "StatementRef") {
-        console.log('This object is an StatementRef');
-        if (v.validate(require('../test/schemas/object-statementref.json')), object) { return cb(null, 'object - StatementRef validated'); }
-        return cb(null, v.errors);
+        console.log('This object is a StatementRef');
+        if (v.validate(require('../test/schemas/object-statementref.json'), object))
+        { return cb(null, 'object StatementRef - validated'); }
+        return cb(null, 'object StatementRef - ' + v.errorsText());
     } else if (object.objectType === "Agent") {
         console.log('This object is an Agent');
-        if (v.validate(require('../test/schemas/object-agent.json')), object) { return cb(null, 'object - Agent validated'); }
-        return cb(null, v.errors);
+        if (v.validate(require('../test/schemas/agent.json'), object)) { return cb(null, 'object Agent - validated'); }
+        return cb(null, 'object Agent - ' + v.errorsText());
     } else if (object.objectType === "Group") {
-        console.log('This object is an Group');
-        if (v.validate(require('../test/schemas/object-group.json')), object) { return cb(null, 'object - Group validated'); }
-        return cd(null, v.errors);
+        console.log('This object is a Group');
+        if (object.mbox || object.mbox_sha1sum || object.openid || object.account) {
+            console.log('This group is identified');
+            if (v.validate(require('../test/schemas/idgroup.json'), object)) { return cb(null, 'object Identified Group - validated'); }
+            return cb(null, 'object Identified Group - ' + v.errorsText());
+        } else {
+            console.log('This group is anonymous');
+            if(v.validate(require('../test/schemas/anongroup.json'), object)) { return cb(null, 'object Anonymous Group - validated'); }
+            return cb(null, 'object Anonymous Group - ' + v.errorsText());
+        }
     } else {    // From here we assume that objectType is either "Activity" or not defined which means the same
         console.log('This object is an Activity');
         // console.log(`Yoyo you have reached the object activity validation center the activity is ${object}`);
-        if (v.validate(require('../test/schemas/object-activity.json'), object)) { return cb(null, 'object - Activity validated'); }
-        return cb(null, v.errors);
+        if (v.validate(require('../test/schemas/object-activity.json'), object)) { return cb(null, 'object Activity - validated'); }
+        return cb(null, 'object Activity - ' + v.errorsText());
     }
-    
+
 }
 );  // end closure

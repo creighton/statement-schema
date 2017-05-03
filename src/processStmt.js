@@ -63,16 +63,16 @@
                     const vResult = require('./validateResult.js');
                     vResult(stmt.result, (err, data) => {
                         // console.log(`This is the result data:\n ${data}\nAnd this is now the error message:\n ${allErrors}`);
-                        // console.log(data);
-                        if (err) {
-                            for(const e of err) {
-                                allErrors.push(e)
-                            }
-                        }
-                        cb(err);
+                        console.log('Data goes here: ', data);
+                        // if (err) {
+                        //     for(const e of err) {
+                        //         allErrors.push(e)
+                        //     }
+                        // }
+                        cb(err, data);
                     });
                 } else {
-                    cb();
+                    cb(null, 'result - not used');
                 }
             },
         ], function (err, results) {
