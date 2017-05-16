@@ -25,14 +25,11 @@
             "format": "date-time"
         },
         "authority": {
-            "oneOf": [
-                { "$ref": "#/definitions/agent" },
-                { "$ref": "#/definitions/group" }
-            ]
+
         },
         "version": {
             "type": "string",
-            "pattern": "^1.0.[0-9]+$"
+            "pattern": "^1\\.0\\.\\d+$"
         },
         "attachments": { "$ref": "#/definitions/attachments" }
     },
@@ -69,7 +66,7 @@
                 "mbox_sha1sum": {
                     "type": "string"
                 },
-                "openid": { "$ref": "#/definitions/iri" },
+                "openid": { "format": "uri" },
                 "account": {
                     "type": "object",
                     "properties": {
@@ -169,13 +166,8 @@
             "additionalProperties": false
         },
         "object": {
-            "oneOf": [
-                { "$ref": "#/definitions/activity" },
-                { "$ref": "#/definitions/activity-agent" },
-                { "$ref": "#/definitions/group" },
-                { "$ref": "#/definitions/subStatement" },
-                { "$ref": "#/definitions/statementRef" }
-            ]
+            "type": "object",
+            "minProperties": 1
         },
         "activity": {
             "type": "object",
