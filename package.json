@@ -22,6 +22,8 @@
   },
   "homepage": "https://github.com/creighton/statement-schema#readme",
   "dependencies": {
-    "ajv": "^4.11.5"
+    "ajv": "^4.11.5",
+    "async": "^2.4.0",
+    "glob": "^7.1.1"
   }
 }

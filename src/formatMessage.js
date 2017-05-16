@@ -15,7 +15,7 @@
                 }
             }
         }
-        return str;
+        return str + '\n\n';
 
 
 

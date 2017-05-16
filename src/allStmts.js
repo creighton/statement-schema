@@ -3,16 +3,19 @@
  */
 
 (   // begin closure
-    module.exports = function (cb) {
-        console.log('allStmts');
-        const fs = require('fs');
-        let names, stmts;
-        fs.readdir('./test/statements', 'utf8', (err, files) => {
-            if (err) throw err;
-            console.log(files);
-            const parseFiles = require('./parseFiles.js')
-            parseFiles(files, cb);
-
+    // Tom's Stuff
+    module.exports = function getAll (cb) {
+        const glob = require('glob');
+        const path = require('path');
+        const parseFiles = require('./parseFiles.js');
+        var stmts = [];
+        let count = 0;
+        glob.sync('./test/statements/**/*.json').forEach((file) => {
+            count += 1;
+            stmts.push(file);
         });
+        console.log(stmts);
+        parseFiles(stmts, cb);
     }
+
 );  // end closure
