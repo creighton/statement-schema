@@ -1,0 +1,10 @@
+{
+
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Schema for an xAPI Identifier Property",
+    "id":"http://localhost:8080/id.json",
+
+    "type": "string",
+    "pattern": "^[\"'{]?[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}[\"'}]?$"
+
+}

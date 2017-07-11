@@ -9,17 +9,17 @@
     "additionalProperties": false,
 
     "properties": {
-        "verb": { "$ref": "#/definitions/verb" }
-    },
-
-    "definitions": {
-        "verb": {
-            "properties": {
-                "id": { "$ref": "#/definitions/iri" },
-                "display": { "$ref": "#/definitions/lang-map" }
+        "id": {
+            "type": "string",
+            "pattern": "^[\\S]+:\\/\\/?(?!\\/)[\\S]+$"
+        },
+        "display": {
+            "type": "object",
+            "patternProperties": {
+                "^[a-z]{2,3}(?:-[A-Z]{2,3}(?:-[a-zA-Z]{4})?)?$": { "type": "string" }
             },
-            "required": [ "id" ],
             "additionalProperties": false
         }
-    }
+    },
+    "required": [ "id" ]
 }

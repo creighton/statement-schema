@@ -16,16 +16,24 @@
  */
 
 (   //begin closure
-module.exports = function (actor, cb) {
-    console.log(`validating actor: \n${JSON.stringify(actor)}`);
+module.exports = function (context, cb) {
+    console.log(`validating context: \n${JSON.stringify(context)}`);
     // So here is my walk through
     const fs = require('fs');
     const V = require('ajv');
     const v = new V();
 
     let str = __dirname;
-    str = str.replace('src', 'test/schemas/');
+    str = str.replace('src', 'test/schemas/context');
 
+    let valid = v.validate(require(str), context);
+    console.log(valid);
+    if (!valid) {
+        cb(null, 'context errors - ' + v.errorsText());
+    } else {
+        cb(null, 'context - validated');
+    }
+/*
     // Pit the actor of the stmt againt the schema - also note this could be in the stmt schema
     // Get the value of objectType Group = valGroup, else = valAgent
     if (actor.objectType === "Group") {
@@ -80,6 +88,6 @@ module.exports = function (actor, cb) {
             }
         });
     }
-
+*/
 }
 );  // end closure

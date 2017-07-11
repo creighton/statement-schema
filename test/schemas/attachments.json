@@ -9,7 +9,7 @@
     "additionalProperties": false,
 
     "properties": {
-        "attachments": { "$ref": "#/definitions/attachments" }
+        "attachments": { "type": "array" }
     },
 
     "definitions": {

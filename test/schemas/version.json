@@ -17,7 +17,7 @@
         "version": {
             "type": "string",
             "pattern": "^1.0.[0-9]+$"
-        },
+        }
 
     }
 }

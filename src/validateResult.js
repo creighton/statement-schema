@@ -20,7 +20,11 @@
         console.log('validating result', result);
         const V = require('ajv');
         const v = new V();
-        if (v.validate(require('../test/schemas/result.json'), result)) {
+
+        let str = __dirname;
+        str = str.replace('src', 'test/schemas/result.json');
+
+        if (v.validate(require(str), result)) {
             if (result.score && result.score.raw) {
                 if (result.score.max && result.score.raw > result.score.max) {
                     return cb(null, `result - no good raw (${result.score.raw}) is larger than max (${result.score.max})`)

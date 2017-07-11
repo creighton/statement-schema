@@ -22,10 +22,15 @@ module.exports = function (stmt, cb) {
     const V = require('ajv');
     const v = new V({"format":"full"});
 // console.log('looky here', v.options);
-    fs.readFile('./test/schemas/statement.json', 'utf8', (err, schemaStr) => {
-        if (err) throw err;
-        let schema = JSON.parse(schemaStr)
-        let valid = v.validate(schema, stmt);
+let str = __dirname;
+str = str.replace('src', 'test/schemas/statement.json');
+// console.log(`This is what i'm talking about ${__dirname}\nand better yet\t\t\t ${str}`);
+//     fs.readFile(str, 'utf8', (err, schemaStr) => {
+//     // fs.readFile('./test/schemas/statement.json', 'utf8', (err, schemaStr) => {
+//         if (err) throw err;
+//         let schema = JSON.parse(schemaStr);
+//         console.log(schema, '\n', require(str));
+        let valid = v.validate(require(str), stmt);
         // console.log(valid);
         if (!valid) {
             // console.log(v.err);
@@ -36,7 +41,7 @@ module.exports = function (stmt, cb) {
             // console.log(`This is the ajv instance:\n${Object.keys(v)}\n${JSON.stringify(v.errors)}\n${v.errorsText}`);
             cb(null, 'statement - general structure validated');
         }
-    });
+    // });
 
 }
 );  // end closure

@@ -12,14 +12,14 @@
 - not validating lang codes
 - interaction activities aren't great
 - attachment contentType just does a pattern match
-- authority and other group/agent 
+- authority and other group/agent
 
 From the command line this lets you specify a file which contains an xapi statement.  The following commands are valid from the command line:
 
 ```
 > node validator.js
 ```
-This command runs with a default file for the xapi statement. Useful for testing that validator is installed and working correctly.
+This command prompts the user on the command line for the filename for the xapi statement. Useful for testing that validator is installed and working correctly.
 
 ```
 > node validator.js minimal.json

@@ -9,7 +9,7 @@
     "additionalProperties": false,
 
     "properties": {
-        "authority": { "$ref": "#/definitions/authority" }
+        "authority": { "type": "object" }
     },
 
     "definitions": {
@@ -19,7 +19,7 @@
                 { "$ref": "#/definitions/agent" },
                 { "$ref": "#/definitions/group" }
             ]
-        },
+        }
 
     }
 }
