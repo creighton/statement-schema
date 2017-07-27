@@ -16,19 +16,10 @@
         "object": { "type": "object" },
         "result": { "type": "object"},
         "context": { "type": "object" },
-        "timestamp": {
-            "type": "string",
-            "format": "date-time"
-        },
-        "stored": {
-            "type": "string",
-            "format": "date-time"
-        },
+        "timestamp": { "type": "string" },
+        "stored": { "type": "string" },
         "authority": { "type": "object" },
-        "version": {
-            "type": "string",
-            "pattern": "^1\\.0\\.\\d+$"
-        },
+        "version": { "type": "string" },
         "attachments": { "type": "array" }
     }
 }

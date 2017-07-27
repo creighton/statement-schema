@@ -1,8 +1,5 @@
 /**
- * The actor schema has difficulty with distinguishing between agents, and id'd
- * groups since both can use the same keys.  This code will assist in validating
- * by comparing the values of those properties and applying rules which the
- * schema cannot.
+ * The authority schema
  *
  * I'm thinking maybe have a good base schema that checks that only keys of
  *  objectType, name, ifi, and member exist, then read the value of objectType
@@ -24,14 +21,27 @@ module.exports = function (authority, cb) {
     const v = new V();
 
     let str = __dirname;
-    str = str.replace('src', 'test/schemas/authority');
 
-    let valid = v.validate(require(str), authority);
-    console.log(valid);
-    if (!valid) {
-        cb(null, 'authority errors - ' + v.errorsText());
+    if (authority.objectType && authority.objectType === "Agent") {
+        str = str.replace('src', 'test/schemas/agent');
+        let valid = v.validate(require(str), authority);
+        console.log(valid);
+        if (!valid) {
+            cb(null, 'authority errors - ' + v.errorsText());
+        } else {
+            cb(null, 'authority - validated');
+        }
+    } else if (authority.objectType && authority.objectType === "Group") {
+        str = str.replace('src', 'test/schemas/idgroup');
+        let valid = v.validate(require(str), authority);
+        console.log(valid);
+        if (!valid) {
+            cb(null, 'authority errors - ' + v.errorsText());
+        } else {
+            cb(null, 'authority - validated');
+        }
     } else {
-        cb(null, 'authority - validated');
+        cb(null, 'authority errors - your authority has no or an invalid objectType');
     }
 /*
     // Pit the actor of the stmt againt the schema - also note this could be in the stmt schema

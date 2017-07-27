@@ -30,7 +30,7 @@
                     return cb(null, `result - no good raw (${result.score.raw}) is larger than max (${result.score.max})`)
                 }
                 if (result.score.min && result.score.raw < result.score.min) {
-                    return cb(null, `result - no good raw (${result.score.raw}) is larger than min (${result.score.min})`)
+                    return cb(null, `result - no good raw (${result.score.raw}) is smaller than min (${result.score.min})`)
                 }
             }
             return cb(null, 'result - validated')
