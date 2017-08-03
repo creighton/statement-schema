@@ -5,7 +5,7 @@
     "object": {"id":"http://tom.com/obj"},
     "context": {
         "registration": "bc5ca8ec-b130-4d8e-a092-3af748cf7a54",
-        "instructor": {"openid": "http://tom.com/tom"},
+        "instructor": { "objectType": "Agent", "openid": "www.google.com" },
         "team": {"account":{"homePage":"http://andy.com/ang","name":"ang"}, "objectType":"Group"},
         "revision":"4",
         "platform":"yep",
@@ -23,34 +23,5 @@
         "extensions": {
             "http://hi.com": "hello"
         }
-    },
-    "result": {
-        "score": {
-            "scaled": 0.45,
-            "raw": 45,
-            "min": 0,
-            "max": 100
-        },
-        "success": true,
-        "completion": false,
-        "response": "done",
-        "duration": "P1YT6H45M15S",
-        "extensions": {
-            "http://tom.com/ext": "my extension"
-        }
-    },
-    "timestamp": "2013-02-24T16:45:32.101Z",
-    "stored": "2017-01-01T22:33:44.555Z",
-    "version": "1.0.933",
-    "authority": {"mbox":"mailto:tom@example.com", "name":"andy", "objectType":"Agent"},
-    "attachments": [
-        {
-            "usageType": "http://adlnet.gov/expapi/attachments/signature",
-            "display": { "en-US": "Signature" },
-            "description": { "en-US": "A test signature" },
-            "contentType": "application/octet-stream",
-            "length": 4235,
-            "sha2": "672fa5fa658017f1b72d65036f13379c6ab05d4ab3b6664908d8acf0b6a0c634"
-        }
-    ]
+    }
 }

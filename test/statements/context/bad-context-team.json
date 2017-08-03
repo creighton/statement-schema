@@ -1,0 +1,27 @@
+{
+    "id":"f5070c3a-cd39-4dc3-8dd2-4ad3b511c407",
+    "actor":{"mbox":"mailto:tom@example.com", "name":"andy", "objectType":"Agent"},
+    "verb":{"id":"http://tom.com/verb", "display":{"en":"hi"}},
+    "object": {"id":"http://tom.com/obj"},
+    "context": {
+        "registration": "bc5ca8ec-b130-4d8e-a092-3af748cf7a54",
+        "instructor": {"openid": "http://tom.com/tom"},
+        "team": {"account":{"homePage":"http://andy.com/ang","name":"ang"}, "objectType":"Blue"},
+        "revision":"4",
+        "platform":"yep",
+        "language":"en",
+        "statement": {
+            "objectType":"StatementRef",
+            "id":"8f87ccde-bb56-4c2e-ab83-44982ef22df0"
+        },
+        "contextActivities": {
+            "parent": [{"id":"http://parent.com/parent"},{"id":"http://parent.com/parent2"}],
+            "grouping": [{"id":"http://grouping.com/activity"}],
+            "category": [{"id":"http://category.com/activity"}],
+            "other": [{"id":"http://other.com/activity"}]
+        },
+        "extensions": {
+            "http://hi.com": "hello"
+        }
+    }
+}
