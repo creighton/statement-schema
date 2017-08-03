@@ -23,18 +23,18 @@ module.exports = function (stored, cb) {
     if (typeof stored === 'string') {
         let ts = new Date(stored);
         if (!isNaN(ts) && (ts.toISOString() === stored.toUpperCase())) {
-            msg += '\n\tstored - validated.'
+            msg += '\n\tstored - validated'
             if (!milliCheck(ts)) {
-                msg += '\n\t WARNING: The value of milliseconds was equal to zero. Please ensure recording of times and preserving of precision to milliseconds.'
+                msg += '\n\t WARNING: The value of milliseconds was equal to zero. Please ensure recording of times and preserving of precision to milliseconds'
             }
         } else {
-            msg += `\n\tstored errors - data is not a valid ISO8601 date-time format.`;
+            msg += `\n\tstored errors - data is not a valid ISO8601 date-time format`;
             if (!JSON.stringify(ts)) {
                 msg += `\n\t${ts.toISOString()} was expected\n\t${stored} was actual`;
             }
         }
     } else {
-        msg += 'stored errors - data is not a string.';
+        msg += 'stored errors - data is not a string';
     }
     cb(null, msg);
 

@@ -23,16 +23,18 @@ module.exports = function (version, cb) {
     const V = require('ajv');
     const v = new V();
 
+    let msg = 'WARNING: Version property to be set by LRS, not LRP.  If version property is set by LRP it must be "1.0.0".  The patch version can be determined by the "X-Experience-API-Version header."'
     let str = __dirname;
     str = str.replace('src', 'test/schemas/version');
 
     let valid = v.validate(require(str), version);
     console.log(valid);
     if (!valid) {
-        cb(null, 'version errors - ' + v.errorsText());
+        msg += '\n\tversion errors - ' + v.errorsText();
     } else {
-        cb(null, 'version - validated');
+        msg += '\n\tversion - validated';
     }
+    cb(null, msg);
 /*
     // Pit the actor of the stmt againt the schema - also note this could be in the stmt schema
     // Get the value of objectType Group = valGroup, else = valAgent

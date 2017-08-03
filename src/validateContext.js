@@ -23,71 +23,57 @@ module.exports = function (context, cb) {
     const V = require('ajv');
     const v = new V();
 
+    let msg = '';
     let str = __dirname;
-    str = str.replace('src', 'test/schemas/context');
+    str = str.replace('src', 'test/schemas/');
 
-    let valid = v.validate(require(str), context);
+    let valid = v.validate(require(str + 'context'), context);
     console.log(valid);
     if (!valid) {
-        cb(null, 'context errors - ' + v.errorsText());
+        msg += 'context errors - ' + v.errorsText();
     } else {
-        cb(null, 'context - validated');
+        msg += 'context - validated';
     }
-/*
-    // Pit the actor of the stmt againt the schema - also note this could be in the stmt schema
-    // Get the value of objectType Group = valGroup, else = valAgent
-    if (actor.objectType === "Group") {
-        // console.log('This actor is a group');
-        if (actor.mbox || actor.mbox_sha1sum || actor.openid || actor.account) {
-            // console.log('This group is an identified group');
-            fs.readFile(str + 'idgroup.json', 'utf8', (err, schemaStr) => {
-                if (err) throw err;
-                let schema = JSON.parse(schemaStr);
-                let valid = v.validate(schema, actor);
-                // console.log(valid);
-                if (!valid) {
-                    // console.log(v.err);
-                    // console.log(`This is the ajv instance:\n${Object.keys(v)}\n${JSON.stringify(v.errors)}\n${v.errorsText}`);
-                    cb(null, 'actor Identified Group - ' + v.errorsText());
-                } else {
-                    // console.log(`You win!! The statement begins valid:\n${valid}\n all done`);
-                    cb(null, 'actor Identified Group - validated');
-                }
-            });
-        } else {
-            // console.log('This group is an anonymous group');
-            fs.readFile(str + 'anongroup.json', 'utf8', (err, schemaStr) => {
-                if (err) throw err;
-                let schema = JSON.parse(schemaStr);
-                let valid = v.validate(schema, actor);
-                // console.log(valid);
-                if (!valid) {
-                    // console.log(v.err);
-                    // console.log(`This is the ajv instance:\n${Object.keys(v)}\n${JSON.stringify(v.errors)}\n${v.errorsText}`);
-                    cb(null, 'actor Anonymous Group - ' + v.errorsText());
-                } else {
-                    // console.log(`You win!! The statement begins valid:\n${valid}\n all done`);
-                    cb(null, 'actor Anonymous Group - validated');
-                }
-            });
-        }
-    } else {
-        // console.log('This actor is an agent');
-        fs.readFile(str + 'agent.json', 'utf8', (err, schemaStr) => {
-            if (err) throw err;
-            let schema = JSON.parse(schemaStr);
-            let valid = v.validate(schema, actor);
-            // console.log(valid);
-            if (!valid) {
-                // console.log(v.err);
-                // console.log(`This is the ajv instance:\n${Object.keys(v)}\n${JSON.stringify(v.errors)}\n${v.errorsText}`);
-                cb(null, 'actor Agent - ' + v.errorsText());
-            } else {
-                // console.log(`You win!! The statement begins valid:\n${valid}\n all done`);
-                cb(null, 'actor Agent - validated');
+    // additional testing for intructor and team because of agent/group difficulties
+    if (context.instructor) {
+        let instrPath = str;
+        if (context.instructor.objectType === 'Group') {
+            // verifiy identified group
+            if (context.instructor.mbox || context.instructor.mbox_sha1sum || context.instructor.openid || context.instructor.account) {
+                instrPath += 'idgroup';
+                msg += '\n\t\tinstructor Identified Group - '
+            } else {    // verify anonymous group
+                instrPath += 'anongroup';
+                msg += '\n\t\tinstructor Anonymous Group - '
             }
-        });
+        } else {    // verify agent
+            instrPath += 'agent';
+            msg += '\n\t\tinstructor Agent - '
+        }
+        let okay = v.validate(require(instrPath), context.instructor);
+        if (!okay) {
+            msg += v.errorsText();
+        } else {
+            msg += 'validated';
+        }
     }
-*/
+    if (context.team) {
+        let teamPath = str;
+        if (context.team.mbox || context.team.mbox_sha1sum || context.team.openid || context.team.account) {
+            teamPath += 'idgroup';
+            msg += '\n\t\tteam Identified Group - '
+        } else {
+            teamPath += 'anongroup';
+            msg += '\n\t\tteam Anonymous Group - '
+        }
+        let check = v.validate(require(teamPath), context.team);
+        if (!check) {
+            msg += v.errorsText();
+        } else {
+            msg += 'validated';
+        }
+    }
+
+    cb(null, msg);
 }
 );  // end closure

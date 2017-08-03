@@ -48,15 +48,16 @@ module.exports = function (object, cb) {
         console.log('We are going to process the substatement');
         var subs = {};
         for (key in object) {
-            if (key !== "ObjectType") {
+            if (key !== "objectType") {
                 subs[key] = object[key];
             }
         }
+        console.log(subs);
         const processStmt = require('./processStmt');
         processStmt(subs, function (err, res) {
             console.log(`Go fig  ${typeof res}`);
             if (err) throw err;
-            return cb(null, 'object SubStatement - \n' + res)
+            return cb(null, 'object SubStatement - \n\t' + res)
         });
     } else if (object.objectType === "StatementRef") {
         console.log('This object is a StatementRef');

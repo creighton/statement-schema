@@ -21,33 +21,20 @@ module.exports = function (timestamp, cb) {
     if (typeof timestamp === 'string') {
         let ts = new Date(timestamp);
         if (!isNaN(ts) && (ts.toISOString() === timestamp.toUpperCase())) {
-            msg += 'timestamp - validated.'
+            msg += 'timestamp - validated'
             if (!milliCheck(ts)) {
-                msg += '\n\t WARNING: The value of milliseconds was equal to zero. Please ensure recording of dates and preserving of precision to milliseconds.'
+                msg += '\n\t WARNING: The value of milliseconds was equal to zero. Please ensure recording of dates and preserving of precision to milliseconds'
             }
         } else {
-            msg += `timestamp errors - data is not a valid ISO8601 date-time format.`;
+            msg += `timestamp errors - data is not a valid ISO8601 date-time format`;
             if (!JSON.stringify(ts)) {
                 msg += `\n\t${ts.toISOString()} was expected\n\t${stored} was actual`;
             }
         }
     } else {
-        msg += 'timestamp errors - data is not a string.';
+        msg += 'timestamp errors - data is not a string';
     }
     cb(null, msg);
-
-/*
-    let str = __dirname;
-    str = str.replace('src', 'test/schemas/timestamp');
-
-    let valid = v.validate(require(str), timestamp);
-    console.log(valid);
-    if (!valid) {
-        cb(null, 'timestamp errors - ' + v.errorsText());
-    } else {
-        cb(null, 'timestamp - validated');
-    }
-*/
 
 }
 );  // end closure

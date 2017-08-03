@@ -150,18 +150,6 @@
                 }
             },
         ], function (err, results) {
-            // console.log(`What is the value of allErrors:\n${allErrors}\n.vs results\n${results}`);
-            // console.log(`allErrors is ${typeof allErrors}\nresults is ${typeof results}`);
-            // Walkthrough of how to go about
-            // do we need more for result - call validateResult
-            // do we need more for context - call validateContext
-            // do we need more for attachments - call validateAttachments
-            // do we need anything else??
-            // if (err) {
-            //     console.log(`Hmmm, what is happening here:\n${err}`);
-            // } else {
-            //     console.log('statement is fully validated\n', results);
-            // }
             cb(err, results);
         });
     }
