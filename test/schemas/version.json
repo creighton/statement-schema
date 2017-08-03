@@ -5,7 +5,7 @@
     "id":"http://localhost:8080/version-schema.json",
 
     "type": "string",
-    "pattern": "^1.0.[0-9]+$",
+    "pattern": "^1\\.0\\.[0-9]+$",
 
     "additionalProperties": false
 
