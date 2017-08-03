@@ -8,7 +8,16 @@ these are still valid concerns to be investigated and improved:
 - interaction activities aren't great
 - attachment contentType just does a pattern match
 
-From the command line this lets you specify a file which contains an xapi statement.  The following commands are valid from the command line:
+From the command line this lets you specify a file which contains an xapi statement.  
+
+To download and install:
+```
+> git clone https://github.com/<username - likely creighton or cr8onski>/statement-schema.git
+> cd statement-schema
+> npm install
+```
+
+The following commands are valid from the command line:
 
 ```
 > node validator.js
