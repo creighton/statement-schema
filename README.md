@@ -74,7 +74,7 @@ actor(stmt.actor, (err, data) => {
 function (cb) {
     const minimal = require('./test/statements/minimal');
     for(const propname of Object.keys(minimal)) {
-        checkProperty(minimal[propname], propname, cb);
+        chkProp(minimal[propname], propname, cb);
     }
     cb();
 }

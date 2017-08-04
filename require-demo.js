@@ -5,8 +5,7 @@
 const async = require('async');
 const stmt = require('./test/statements/gots-it-all.json');
 
-function checkProperty (prop, propname, cb) {
-    console.log(`begin check property - ${propname}`);
+function checkProperty (prop, propname) {
     let fn;
     switch (propname) {
         case 'id':
@@ -47,128 +46,123 @@ function checkProperty (prop, propname, cb) {
             break;
         default:
             console.log(`This property does not belong in an xAPI statment, nor is it a statement.  Validation is over.`);
-            // cb();
     }
     if (fn) {
         fn(prop, (err, data) => {
-            console.log(`${propname} Only:\nError: ${err}\nData: ${data}`);
+            console.log(`${propname} Only:\nError: ${err}\nData: ${data}\n`);
         });
     }
-    console.log(`end check property - ${propname}`);
-    // cb();
 }
 
-function chkProp (prop, propname, cb) {
-    console.log(`begin check property - ${propname}`);
+function chkProp (prop, propname) {
     try {
         temp = propname.substring(0, 1).toUpperCase() + propname.substring(1).toLowerCase();
         console.log(temp);
         const fn = (require(`./src/validate${temp}`));
         fn(prop, (err, data) => {
-            console.log(`${propname} Only:\nError: ${err}\nData: ${data}`);
+            console.log(`${propname} Only:\nError: ${err}\nData: ${data}\n`);
         });
     } catch (e) {
         console.log(`Error: ${e}`);
     }
-    console.log(`end check property - ${propname}`);
 }
 
 async.series([
-    // function (cb) {
-    //     const val = require('./src/processStmt.js');
-    //     val(stmt, (err, data) => {
-    //         console.log(`Error: ${err}\nData: ${data}`);
-    //         cb();
-    //     });
-    // },
-    // function (cb) {
-    //     const act = require('./src/validateActor');
-    //     act(stmt.actor, (err, data) => {
-    //         console.log(`\nActor Only:\nError: ${err}\nData: ${data}`);
-    //         cb();
-    //     });
-    // },
-    // function (cb) {
-    //     const verb = require('./src/validateVerb');
-    //     verb(stmt.verb, (err, data) => {
-    //         console.log(`\nVerb Only:\nError: ${err}\nData: ${data}`);
-    //         cb();
-    //     });
-    // },
-    // function (cb) {
-    //     const obj = require('./src/validateObject');
-    //     obj(stmt.object, (err, data) => {
-    //         console.log(`\nObject Only:\nError: ${err}\nData: ${data}`);
-    //         cb();
-    //     });
-    // },
-    // function (cb) {
-    //     const result = require('./src/validateResult');
-    //     result(stmt.result, (err, data) => {
-    //         console.log(`\nResult Only:\nError: ${err}\nData: ${data}`);
-    //         cb();
-    //     });
-    // },
-    // function (cb) {
-    //     const con = require('./src/validateContext');
-    //     con(stmt.context, (err, data) => {
-    //         console.log(`\nContext Only:\nError: ${err}\nData: ${data}`);
-    //         cb();
-    //     });
-    // },
-    // function (cb) {
-    //     const time = require('./src/validateTimestamp');
-    //     time(stmt.timestamp, (err, data) => {
-    //         console.log(`\nTimestamp Only:\nError: ${err}\nData: ${data}`);
-    //         cb();
-    //     });
-    // },
-    // function (cb) {
-    //     const stor = require('./src/validateStored');
-    //     stor(stmt.stored, (err, data) => {
-    //         console.log(`Stored Only:\nError: ${err}\nData: ${data}`);
-    //         cb();
-    //     });
-    // },
-    // function (cb) {
-    //     const auth = require('./src/validateAuthority');
-    //     auth(stmt.authority, (err, data) => {
-    //         console.log(`Authority Only:\nError: ${err}\nData: ${data}`);
-    //         cb();
-    //     });
-    // },
-    // function (cb) {
-    //     const version = require('./src/validateVersion');
-    //     version(stmt.version, (err, data) => {
-    //         console.log(`Version Only:\nError: ${err}\nData: ${data}`);
-    //         cb();
-    //     });
-    // },
-    // function (cb) {
-    //     const attch = require('./src/validateAttachments');
-    //     attch(stmt.attachments, (err, data) => {
-    //         console.log(`Attachments Only:\nError: ${err}\nData: ${data}`);
-    //         cb();
-    //     })
-    // },
-    // function (cb) {
-    //     const statement = require('./src/validateStatement');
-    //     statement(stmt, (err, data) => {
-    //         console.log(`Statement Only:\nError: ${err}\nData: ${data}`);
-    //         cb();
-    //     });
-    // },
+    function (cb) {
+        const val = require('./src/processStmt.js');
+        val(stmt, (err, data) => {
+            console.log(`Error: ${err}\nData: ${data}`);
+            cb();
+        });
+    },
+    function (cb) {
+        const act = require('./src/validateActor');
+        act(stmt.actor, (err, data) => {
+            console.log(`\nActor Only:\nError: ${err}\nData: ${data}`);
+            cb();
+        });
+    },
+    function (cb) {
+        const verb = require('./src/validateVerb');
+        verb(stmt.verb, (err, data) => {
+            console.log(`\nVerb Only:\nError: ${err}\nData: ${data}`);
+            cb();
+        });
+    },
+    function (cb) {
+        const obj = require('./src/validateObject');
+        obj(stmt.object, (err, data) => {
+            console.log(`\nObject Only:\nError: ${err}\nData: ${data}`);
+            cb();
+        });
+    },
+    function (cb) {
+        const result = require('./src/validateResult');
+        result(stmt.result, (err, data) => {
+            console.log(`\nResult Only:\nError: ${err}\nData: ${data}`);
+            cb();
+        });
+    },
+    function (cb) {
+        const con = require('./src/validateContext');
+        con(stmt.context, (err, data) => {
+            console.log(`\nContext Only:\nError: ${err}\nData: ${data}`);
+            cb();
+        });
+    },
+    function (cb) {
+        const time = require('./src/validateTimestamp');
+        time(stmt.timestamp, (err, data) => {
+            console.log(`\nTimestamp Only:\nError: ${err}\nData: ${data}`);
+            cb();
+        });
+    },
+    function (cb) {
+        const stor = require('./src/validateStored');
+        stor(stmt.stored, (err, data) => {
+            console.log(`Stored Only:\nError: ${err}\nData: ${data}`);
+            cb();
+        });
+    },
+    function (cb) {
+        const auth = require('./src/validateAuthority');
+        auth(stmt.authority, (err, data) => {
+            console.log(`Authority Only:\nError: ${err}\nData: ${data}`);
+            cb();
+        });
+    },
+    function (cb) {
+        const version = require('./src/validateVersion');
+        version(stmt.version, (err, data) => {
+            console.log(`Version Only:\nError: ${err}\nData: ${data}`);
+            cb();
+        });
+    },
+    function (cb) {
+        const attch = require('./src/validateAttachments');
+        attch(stmt.attachments, (err, data) => {
+            console.log(`Attachments Only:\nError: ${err}\nData: ${data}`);
+            cb();
+        })
+    },
+    function (cb) {
+        const statement = require('./src/validateStatement');
+        statement(stmt, (err, data) => {
+            console.log(`Statement Only:\nError: ${err}\nData: ${data}`);
+            cb();
+        });
+    },
     function (cb) {
         const minimal = require('./test/statements/minimal');
         for (const propname of Object.keys(minimal)) {
-            checkProperty(minimal[propname], propname, cb);
+            checkProperty(minimal[propname], propname);
         }
         cb();
     },
     function (cb) {
         const bm = require('./test/statements/various');
         for (const propname of Object.keys(bm)) {
-            chkProp(bm[propname], propname, cb);
+            chkProp(bm[propname], propname);
         }
         cb();
     }

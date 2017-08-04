@@ -4,7 +4,7 @@
 
 (   // begin closure
     module.exports = function (cb) {
-        console.log('promptForFile');
+        // console.log('promptForFile');
         const parseFiles = require('./parseFiles.js');
 
 
@@ -15,10 +15,7 @@
           output: process.stdout
         });
 
-        rl.question('Enter path and filename: ', (answer) => {
-          // TODO: Log the answer in a database
-          console.log(`Thank you for your valuable feedback: ${typeof answer}`);
-console.log(answer);
+        rl.question('Enter filename: ', (answer) => {
           rl.close();
           parseFiles([answer] || ['various.json'], cb);
         });

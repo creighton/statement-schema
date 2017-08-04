@@ -6,7 +6,7 @@
 
 (   //begin closure
 module.exports = function (id, cb) {
-    console.log(`validating id: \n${JSON.stringify(id)}`);
+    // console.log(`validating id: \n${JSON.stringify(id)}`);
 
     const fs = require('fs');
     const V = require('ajv');

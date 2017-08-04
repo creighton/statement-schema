@@ -1,5 +1,5 @@
 /**
- *
+ * This function uses glob to gather all the example statement stored in the /test/statements folder and process them against the validator.
  */
 
 (   // begin closure
@@ -14,7 +14,7 @@
             count += 1;
             stmts.push(file);
         });
-        console.log(stmts);
+        // console.log(stmts);
         parseFiles(stmts, cb);
     }
 
