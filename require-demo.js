@@ -58,6 +58,21 @@ function checkProperty (prop, propname, cb) {
     // cb();
 }
 
+function chkProp (prop, propname, cb) {
+    console.log(`begin check property - ${propname}`);
+    try {
+        temp = propname.substring(0, 1).toUpperCase() + propname.substring(1).toLowerCase();
+        console.log(temp);
+        const fn = (require(`./src/validate${temp}`));
+        fn(prop, (err, data) => {
+            console.log(`${propname} Only:\nError: ${err}\nData: ${data}`);
+        });
+    } catch (e) {
+        console.log(`Error: ${e}`);
+    }
+    console.log(`end check property - ${propname}`);
+}
+
 async.series([
     // function (cb) {
     //     const val = require('./src/processStmt.js');
@@ -144,9 +159,16 @@ async.series([
     //     });
     // },
     function (cb) {
-        const minimal = require('./test/statements/gots-it-all');
-        for(const propname of Object.keys(minimal)) {
+        const minimal = require('./test/statements/minimal');
+        for (const propname of Object.keys(minimal)) {
             checkProperty(minimal[propname], propname, cb);
+        }
+        cb();
+    },
+    function (cb) {
+        const bm = require('./test/statements/various');
+        for (const propname of Object.keys(bm)) {
+            chkProp(bm[propname], propname, cb);
         }
         cb();
     }
