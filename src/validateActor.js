@@ -32,53 +32,26 @@ module.exports = function (actor, cb) {
         // console.log('This actor is a group');
         if (actor.mbox || actor.mbox_sha1sum || actor.openid || actor.account) {
             // console.log('This group is an identified group');
-            fs.readFile(str + 'idgroup.json', 'utf8', (err, schemaStr) => {
-                if (err) throw err;
-                let schema = JSON.parse(schemaStr);
-                let valid = v.validate(schema, actor);
-                // console.log(valid);
-                if (!valid) {
-                    // console.log(v.err);
-                    // console.log(`This is the ajv instance:\n${Object.keys(v)}\n${JSON.stringify(v.errors)}\n${v.errorsText}`);
-                    cb(null, 'actor Identified Group - ' + v.errorsText());
-                } else {
-                    // console.log(`You win!! The statement begins valid:\n${valid}\n all done`);
-                    cb(null, 'actor Identified Group - validated');
-                }
-            });
+            if (v.validate(require(str + 'idgroup'), actor)) {
+                cb(null, 'actor Identified Group - validated');
+            } else {
+                cb(null, 'actor Identified Group - ' + v.errorsText());
+            }
         } else {
             // console.log('This group is an anonymous group');
-            fs.readFile(str + 'anongroup.json', 'utf8', (err, schemaStr) => {
-                if (err) throw err;
-                let schema = JSON.parse(schemaStr);
-                let valid = v.validate(schema, actor);
-                // console.log(valid);
-                if (!valid) {
-                    // console.log(v.err);
-                    // console.log(`This is the ajv instance:\n${Object.keys(v)}\n${JSON.stringify(v.errors)}\n${v.errorsText}`);
-                    cb(null, 'actor Anonymous Group - ' + v.errorsText());
-                } else {
-                    // console.log(`You win!! The statement begins valid:\n${valid}\n all done`);
-                    cb(null, 'actor Anonymous Group - validated');
-                }
-            });
+            if (v.validate(require(str + 'anongroup.json'), actor)) {
+                cb(null, 'actor Anonymous Group - validated');
+            } else {
+                cb(null, 'actor Anonymous Group - ' + v.errorsText());
+            }
         }
     } else {
         // console.log('This actor is an agent');
-        fs.readFile(str + 'agent.json', 'utf8', (err, schemaStr) => {
-            if (err) throw err;
-            let schema = JSON.parse(schemaStr);
-            let valid = v.validate(schema, actor);
-            // console.log(valid);
-            if (!valid) {
-                // console.log(v.err);
-                // console.log(`This is the ajv instance:\n${Object.keys(v)}\n${JSON.stringify(v.errors)}\n${v.errorsText}`);
-                cb(null, 'actor Agent - ' + v.errorsText());
-            } else {
-                // console.log(`You win!! The statement begins valid:\n${valid}\n all done`);
-                cb(null, 'actor Agent - validated');
-            }
-        });
+        if (v.validate(require(str + 'agent'), actor)) {
+            cb(null, 'actor Agent - validated');
+        } else {
+            cb(null, 'actor Agent - ' + v.errorsText());
+        }
     }
 
 }
