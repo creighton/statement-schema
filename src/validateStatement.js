@@ -17,31 +17,19 @@
 
 (   //begin closure
 module.exports = function (stmt, cb) {
-    console.log('validating statement');
+    // console.log('validating statement');
     const fs = require('fs');
     const V = require('ajv');
     const v = new V({"format":"full"});
-// console.log('looky here', v.options);
-let str = __dirname;
-str = str.replace('src', 'test/schemas/statement.json');
-// console.log(`This is what i'm talking about ${__dirname}\nand better yet\t\t\t ${str}`);
-//     fs.readFile(str, 'utf8', (err, schemaStr) => {
-//     // fs.readFile('./test/schemas/statement.json', 'utf8', (err, schemaStr) => {
-//         if (err) throw err;
-//         let schema = JSON.parse(schemaStr);
-//         console.log(schema, '\n', require(str));
-        let valid = v.validate(require(str), stmt);
-        // console.log(valid);
-        if (!valid) {
-            // console.log(v.err);
-            // console.log(`This is the ajv instance:\n${Object.keys(v)}\n${JSON.stringify(v.errors)}\n${v.errorsText()}`);
-            cb(null, 'statement - ' + v.errorsText());
-        } else {
-            // console.log(`You win!! The statement begins valid:\n${valid}\n all done`);
-            // console.log(`This is the ajv instance:\n${Object.keys(v)}\n${JSON.stringify(v.errors)}\n${v.errorsText}`);
-            cb(null, 'statement - general structure validated');
-        }
-    // });
 
+    let str = __dirname;
+    str = str.replace('src', 'test/schemas/statement.json');
+
+    let valid = v.validate(require(str), stmt);
+    if (!valid) {
+        cb(null, 'statement - ' + v.errorsText());
+    } else {
+        cb(null, 'statement - general structure validated');
+    }
 }
 );  // end closure

@@ -10,7 +10,7 @@
 
 (   //begin closure
 module.exports = function (stored, cb) {
-    console.log(`validating stored: \n${JSON.stringify(stored)}`);
+    // console.log(`validating stored: \n${JSON.stringify(stored)}`);
 
     const fs = require('fs');
     const milliCheck = require('./milliCheck');
@@ -37,18 +37,5 @@ module.exports = function (stored, cb) {
         msg += 'stored errors - data is not a string';
     }
     cb(null, msg);
-
-/*  json schema even with date-time format is less precise than using new Date(timestamp) and expecting either null or a valid time object
-    let str = __dirname;
-    str = str.replace('src', 'test/schemas/timestamp');
-
-    let valid = v.validate(require(str), stored);
-    if (!valid) {
-        msg += 'stored errors - ' + v.errorsText();
-    } else {
-        msg += 'stored - validated';
-    }
-*/
-
 }
 );  // end closure

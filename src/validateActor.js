@@ -17,7 +17,7 @@
 
 (   //begin closure
 module.exports = function (actor, cb) {
-    console.log(`validating actor: \n${JSON.stringify(actor)}`);
+    // console.log(`validating actor: \n${JSON.stringify(actor)}`);
     // So here is my walk through
     const fs = require('fs');
     const V = require('ajv');

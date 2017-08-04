@@ -17,7 +17,7 @@
 
 (   //begin closure
     module.exports = function (result, cb) {
-        console.log('validating result', result);
+        // console.log('validating result', result);
         const V = require('ajv');
         const v = new V();
 

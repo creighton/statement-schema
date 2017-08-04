@@ -17,7 +17,7 @@
 
 (   //begin closure
 module.exports = function (verb, cb) {
-    console.log(`validating verb: \n${JSON.stringify(verb)}`);
+    // console.log(`validating verb: \n${JSON.stringify(verb)}`);
     // So here is my walk through
     const fs = require('fs');
     const V = require('ajv');
@@ -27,67 +27,11 @@ module.exports = function (verb, cb) {
     str = str.replace('src', 'test/schemas/verb');
 
     let valid = v.validate(require(str), verb);
-    console.log(valid);
+
     if (!valid) {
         cb(null, 'verb errors - ' + v.errorsText());
     } else {
         cb(null, 'verb - validated');
     }
-/*
-    // Pit the actor of the stmt againt the schema - also note this could be in the stmt schema
-    // Get the value of objectType Group = valGroup, else = valAgent
-    if (actor.objectType === "Group") {
-        // console.log('This actor is a group');
-        if (actor.mbox || actor.mbox_sha1sum || actor.openid || actor.account) {
-            // console.log('This group is an identified group');
-            fs.readFile(str + 'idgroup.json', 'utf8', (err, schemaStr) => {
-                if (err) throw err;
-                let schema = JSON.parse(schemaStr);
-                let valid = v.validate(schema, actor);
-                // console.log(valid);
-                if (!valid) {
-                    // console.log(v.err);
-                    // console.log(`This is the ajv instance:\n${Object.keys(v)}\n${JSON.stringify(v.errors)}\n${v.errorsText}`);
-                    cb(null, 'actor Identified Group - ' + v.errorsText());
-                } else {
-                    // console.log(`You win!! The statement begins valid:\n${valid}\n all done`);
-                    cb(null, 'actor Identified Group - validated');
-                }
-            });
-        } else {
-            // console.log('This group is an anonymous group');
-            fs.readFile(str + 'anongroup.json', 'utf8', (err, schemaStr) => {
-                if (err) throw err;
-                let schema = JSON.parse(schemaStr);
-                let valid = v.validate(schema, actor);
-                // console.log(valid);
-                if (!valid) {
-                    // console.log(v.err);
-                    // console.log(`This is the ajv instance:\n${Object.keys(v)}\n${JSON.stringify(v.errors)}\n${v.errorsText}`);
-                    cb(null, 'actor Anonymous Group - ' + v.errorsText());
-                } else {
-                    // console.log(`You win!! The statement begins valid:\n${valid}\n all done`);
-                    cb(null, 'actor Anonymous Group - validated');
-                }
-            });
-        }
-    } else {
-        // console.log('This actor is an agent');
-        fs.readFile(str + 'agent.json', 'utf8', (err, schemaStr) => {
-            if (err) throw err;
-            let schema = JSON.parse(schemaStr);
-            let valid = v.validate(schema, actor);
-            // console.log(valid);
-            if (!valid) {
-                // console.log(v.err);
-                // console.log(`This is the ajv instance:\n${Object.keys(v)}\n${JSON.stringify(v.errors)}\n${v.errorsText}`);
-                cb(null, 'actor Agent - ' + v.errorsText());
-            } else {
-                // console.log(`You win!! The statement begins valid:\n${valid}\n all done`);
-                cb(null, 'actor Agent - validated');
-            }
-        });
-    }
-*/
 }
 );  // end closure

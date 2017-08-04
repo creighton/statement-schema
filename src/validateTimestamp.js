@@ -9,7 +9,7 @@
 
 (   //begin closure
 module.exports = function (timestamp, cb) {
-    console.log(`validating timestamp: \n${JSON.stringify(timestamp)}`);
+    // console.log(`validating timestamp: \n${JSON.stringify(timestamp)}`);
     // So here is my walk through
     const fs = require('fs');
     const milliCheck = require('./milliCheck');

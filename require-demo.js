@@ -145,8 +145,6 @@ async.series([
     // },
     function (cb) {
         const minimal = require('./test/statements/gots-it-all');
-        // const k = Object.keys(minimal);
-        // k.for
         for(const propname of Object.keys(minimal)) {
             checkProperty(minimal[propname], propname, cb);
         }
