@@ -24,20 +24,20 @@ function validator(module, pff, getAll, parseFiles, formatMessage) {
     let filenames = [];
     // console.log(args);
     if (args.length < 3) {
-        pff((err, data) => {
+        pff((err, data, filename) => {
             // if (err) throw err;
-            console.log(`\n\nThank you please come again.\n${formatMessage(err || data)}`);
+            console.log(`\n\nThank you please come again.\n${formatMessage(err || data, filename)}`);
         });
     } else if (args[2] === '-a') {
-        getAll((err, data) => {
+        getAll((err, data, filename) => {
             // if (err) throw err;
-            console.log(`\n\nHello again.\n${formatMessage(err || data)}`);
+            console.log(`\n\nHello again.\n${formatMessage(err || data, filename)}`);
         });
     } else {
         filenames.push(args[2]);
-        parseFiles(filenames, (err, data) => {
+        parseFiles(filenames, (err, data, filename) => {
             // if (err) throw err;
-            console.log(`\n\nWelcome back.\n${formatMessage(err || data)}`);
+            console.log(`\n\nWelcome back.\n${formatMessage(err || data, filename)}`);
         })
     }
     // console.log('reminder async, this will not have a value until much later', filenames);

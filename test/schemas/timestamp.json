@@ -4,7 +4,6 @@
     "description": "Schema for an xAPI Timestamp Property or a Stored Property",
     "id":"http://localhost:8080/timestamp-schema.json",
 
-    "type": "string",
-    "format": "date-time"
+    "type": "string"
 
 }
