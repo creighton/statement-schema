@@ -1,0 +1,20 @@
+{
+    "actor": {
+        "objectType": "Group",
+        "account": {
+            "homepage": "http://tom.com/foo",
+            "name": "Thomases"
+        },
+        "name": "mailto:tom@tom.com",
+        "member": [
+            { "mbox": "mailto:tom@tom.com" },
+            {
+                "objectType": "Group",
+                "name": "Chess Club",
+                "mbox": "chess.club@example.com"
+            }
+        ]
+    },
+    "verb": { "id":"http://tom.com/verb" },
+    "object": { "id":"http://tom.com/obj" }
+}

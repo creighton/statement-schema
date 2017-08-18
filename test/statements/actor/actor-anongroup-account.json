@@ -1,15 +1,15 @@
 {
-    "actor":{
-        "objectType":"Group",
+    "actor": {
+        "objectType": "Group",
         "member": [
             { "account":
                 {
                     "homepage": "http://openid.foo.com",
                     "name": "this is my name"
-                } 
+                }
             }
         ]
     },
-    "verb":{"id":"http://tom.com/verb"},
+    "verb": {"id":"http://tom.com/verb"},
     "object": {"id":"http://tom.com/obj"}
 }

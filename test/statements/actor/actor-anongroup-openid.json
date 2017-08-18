@@ -1,8 +1,8 @@
 {
-    "actor":{
-        "objectType":"Group",
+    "actor": {
+        "objectType": "Group",
         "member": [ { "openid": "http://openid.foo.com" } ]
     },
-    "verb":{"id":"http://tom.com/verb"},
+    "verb": {"id":"http://tom.com/verb"},
     "object": {"id":"http://tom.com/obj"}
 }

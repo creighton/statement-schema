@@ -6,7 +6,7 @@
         "score": {
             "scaled": 0.45,
             "raw": 45,
-            "min": 70,
+            "min": 0,
             "max": 100
         },
         "success": true,
