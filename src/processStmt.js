@@ -3,8 +3,8 @@
  */
 
 (   // begin closure
-    module.exports = function (stmt, cb) {
-        console.log('processStmt');
+    module.exports = function (stmt, filename, cb) {
+        // console.log('processStmt', filename, typeof stmt, typeof cb);
         const async = require('async');
         let allErrors = [];
 
@@ -58,7 +58,6 @@
                     // console.log('there is a statement result property');
                     const vResult = require('./validateResult.js');
                     vResult(stmt.result, (err, data) => {
-                        // console.log('Data goes here: ', data);
                         cb(err, data);
                     });
                 } else {
@@ -72,7 +71,6 @@
                     // console.log('there is a statement context property');
                     const vContext = require('./validateContext.js');
                     vContext(stmt.context, (err, data) => {
-                        // console.log('Data goes here: ', data);
                         cb(err, data);
                     });
                 } else {
@@ -86,7 +84,6 @@
                     // console.log('there is a statement timestamp property');
                     const vTimestamp = require('./validateTimestamp.js');
                     vTimestamp(stmt.timestamp, (err, data) => {
-                        // console.log('Data goes here: ', data);
                         cb(err, data);
                     });
                 } else {
@@ -100,11 +97,10 @@
                     // console.log('there is a statement stored property');
                     const vStored = require('./validateStored.js');
                     vStored(stmt.stored, (err, data) => {
-                        // console.log('Data goes here: ', data);
                         cb(err, data);
                     });
                 } else {
-                    cb(null, 'result - not used');
+                    cb(null, 'stored - not used');
                 }
             },
             // next check for more in authority - call validateAuthority
@@ -114,7 +110,6 @@
                     // console.log('there is a statement authority property');
                     const vAuthority = require('./validateAuthority.js');
                     vAuthority(stmt.authority, (err, data) => {
-                        // console.log('Data goes here: ', data);
                         cb(err, data);
                     });
                 } else {
@@ -128,7 +123,6 @@
                     // console.log('there is a statement verison property');
                     const vVersion = require('./validateVersion.js');
                     vVersion(stmt.version, (err, data) => {
-                        // console.log('Data goes here: ', data);
                         cb(err, data);
                     });
                 } else {
@@ -142,7 +136,6 @@
                     // console.log('there is a statement attachments property');
                     const vAttachments = require('./validateAttachments.js');
                     vAttachments(stmt.attachments, (err, data) => {
-                        // console.log('Data goes here: ', data);
                         cb(err, data);
                     });
                 } else {
@@ -150,7 +143,8 @@
                 }
             },
         ], function (err, results) {
-            cb(err, results);
+            // console.log(filename);
+            cb(err, results, filename);
         });
     }
 );  // end closure

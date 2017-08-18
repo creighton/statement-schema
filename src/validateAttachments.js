@@ -5,7 +5,7 @@
 
 (   //begin closure
 module.exports = function (attachments, cb) {
-    console.log(`validating attachments: \n${JSON.stringify(attachments)}`);
+    // console.log(`validating attachments: \n${JSON.stringify(attachments)}`);
     // So here is my walk through
     const fs = require('fs');
     const V = require('ajv');
@@ -15,7 +15,7 @@ module.exports = function (attachments, cb) {
     str = str.replace('src', 'test/schemas/attachments');
 
     let valid = v.validate(require(str), attachments);
-    console.log(valid);
+
     if (!valid) {
         cb(null, 'attachments errors - ' + v.errorsText());
     } else {

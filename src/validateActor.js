@@ -23,6 +23,7 @@ module.exports = function (actor, cb) {
     const V = require('ajv');
     const v = new V();
 
+    let msg = '';
     let str = __dirname;
     str = str.replace('src', 'test/schemas/');
 
@@ -33,26 +34,37 @@ module.exports = function (actor, cb) {
         if (actor.mbox || actor.mbox_sha1sum || actor.openid || actor.account) {
             // console.log('This group is an identified group');
             if (v.validate(require(str + 'idgroup'), actor)) {
-                cb(null, 'actor Identified Group - validated');
+                msg += 'actor Identified Group - validated';
             } else {
-                cb(null, 'actor Identified Group - ' + v.errorsText());
+                msg += 'actor Identified Group - ' + v.errorsText();
             }
         } else {
             // console.log('This group is an anonymous group');
             if (v.validate(require(str + 'anongroup.json'), actor)) {
-                cb(null, 'actor Anonymous Group - validated');
+                msg += 'actor Anonymous Group - validated';
             } else {
-                cb(null, 'actor Anonymous Group - ' + v.errorsText());
+                msg += 'actor Anonymous Group - ' + v.errorsText();
+            }
+        }
+        // items in a member array must validate as agents
+        if (actor.member) {
+            for (let act of actor.member) {
+                if (v.validate(require(str + 'agent'), act)) {
+                    msg += `\n\t\tgroup member - all members are valid agents\n${JSON.stringify(act)}`;
+                }
+                else {
+                    msg += `\n\t\tgroup member - one or more members is not a valid agent\n${v.errorsText()}`;
+                }
             }
         }
     } else {
         // console.log('This actor is an agent');
         if (v.validate(require(str + 'agent'), actor)) {
-            cb(null, 'actor Agent - validated');
+            msg += 'actor Agent - validated';
         } else {
-            cb(null, 'actor Agent - ' + v.errorsText());
+            msg += 'actor Agent - ' + v.errorsText();
         }
     }
-
+    cb(null, msg);
 }
 );  // end closure

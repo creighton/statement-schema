@@ -8,7 +8,6 @@
 module.exports = function (id, cb) {
     // console.log(`validating id: \n${JSON.stringify(id)}`);
 
-    const fs = require('fs');
     const V = require('ajv');
     const v = new V();
 
