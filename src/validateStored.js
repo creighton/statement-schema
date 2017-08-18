@@ -3,8 +3,7 @@
  * the LRS receives a statement.  LRPs are not to set the stored property.  LRSs
  * though are still to check the stored property and accept the statement and
  * overwirte the stored property, to allow for exchange of data between LRSs.
- * The Stored property timestamp is to be in ISO 8601 format and maintain a
- * minimum precision to milliseconds.
+ * The Stored property timestamp is to be in ISO 8601 format.
  *
  */
 
@@ -12,30 +11,27 @@
 module.exports = function (stored, cb) {
     // console.log(`validating stored: \n${JSON.stringify(stored)}`);
 
-    const fs = require('fs');
-    const milliCheck = require('./milliCheck');
     const V = require('ajv');
     const v = new V();
+    const mo = require('moment');
     let msg = 'WARNING: Stored property is to be set by LRS, not LRP.';
 
+    let str = __dirname;
+    str = str.replace('src', 'test/schemas/timestamp');
 
-// note casting to date still leaves some imprecision - ie 2017-02-31 gets cast to 2017-03-03 rather than invalid
-    if (typeof stored === 'string') {
-        let ts = new Date(stored);
-        if (!isNaN(ts) && (ts.toISOString() === stored.toUpperCase())) {
-            msg += '\n\tstored - validated'
-            if (!milliCheck(ts)) {
-                msg += '\n\t WARNING: The value of milliseconds was equal to zero. Please ensure recording of times and preserving of precision to milliseconds'
-            }
+    let valid = v.validate(require(str), stored);
+
+    if (valid) {
+        let m = mo(stored.toUpperCase(), mo.ISO_8601, true);
+        if (m.isValid()) {
+            msg += '\n\tstored - validated';
         } else {
-            msg += `\n\tstored errors - data is not a valid ISO8601 date-time format`;
-            if (!JSON.stringify(ts)) {
-                msg += `\n\t${ts.toISOString()} was expected\n\t${stored} was actual`;
-            }
+            msg += `\n\tstored errors - not formatted according to ISO 8601`;
         }
     } else {
-        msg += 'stored errors - data is not a string';
+        msg += `\n\tstored errors - ${v.errorsText()}`;
     }
+
     cb(null, msg);
 }
 );  // end closure
