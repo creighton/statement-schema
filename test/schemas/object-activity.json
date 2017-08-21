@@ -63,6 +63,13 @@
                 "steps": {
                     "type": "array",
                     "items": { "$ref": "#/definitions/interactionComponent" }
+                },
+                "extensions": {
+                    "type": "object",
+                    "patternProperties": {
+                        "^[\\S]+:\\/\\/?(?!\\/)[\\S]+$": { "oneOf": [ {"type": "string"}, {"type":"number"}, {"type":"object"}, {"type":"array"}, {"type":"boolean"} ] }
+                    },
+                    "additionalProperties": false
                 }
             },
             "additionalProperties": false

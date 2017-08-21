@@ -34,6 +34,17 @@ module.exports = function (context, cb) {
                 instrPath += 'anongroup';
                 msg += '\n\t\tinstructor Anonymous Group - '
             }
+            // items in a member array must validate as agents
+            if (context.instructor.member) {
+                for (let act of context.instructor.member) {
+                    if (v.validate(require(str + 'agent'), act)) {
+                        msg += `\n\t\tgroup member ${act.name} - is a valid agent`;
+                    }
+                    else {
+                        msg += `\n\t\tgroup member ${JSON.stringify(act)} - is not a valid agent\n\t\t${v.errorsText()}`;
+                    }
+                }
+            }
         } else {    // verify agent
             instrPath += 'agent';
             msg += '\n\t\tinstructor Agent - '
@@ -53,6 +64,17 @@ module.exports = function (context, cb) {
         } else {
             teamPath += 'anongroup';
             msg += '\n\t\tteam Anonymous Group - '
+        }
+        // items in a member array must validate as agents
+        if (context.team.member) {
+            for (let act of context.team.member) {
+                if (v.validate(require(str + 'agent'), act)) {
+                    msg += `\n\t\tgroup member ${act.name} - is a valid agent`;
+                }
+                else {
+                    msg += `\n\t\tgroup member ${JSON.stringify(act)} - is not a valid agent\n\t\t${v.errorsText()}`;
+                }
+            }
         }
         let check = v.validate(require(teamPath), context.team);
         if (!check) {

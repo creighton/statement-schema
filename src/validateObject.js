@@ -15,6 +15,7 @@ module.exports = function (object, cb) {
     const V = require('ajv');
     const v = new V();
 
+    let msg = '';
     let str = __dirname;
     str = str.replace('src', 'test/schemas/');
 
@@ -66,14 +67,31 @@ module.exports = function (object, cb) {
         // console.log('This object is a Group');
         if (object.mbox || object.mbox_sha1sum || object.openid || object.account) {
             // console.log('This group is identified');
-            if (v.validate(require(str + 'idgroup.json'), object)) { return cb(null, 'object Identified Group - validated'); }
-            return cb(null, 'object Identified Group - ' + v.errorsText());
+            if (v.validate(require(str + 'idgroup.json'), object)) {
+                msg += 'object Identified Group - validated';
+            } else {
+                msg += 'object Identified Group - ' + v.errorsText();
+            }
         } else {
             // console.log('This group is anonymous');
-            if(v.validate(require(str + 'anongroup.json'), object)) { return cb(null, 'object Anonymous Group - validated'); }
-            return cb(null, 'object Anonymous Group - ' + v.errorsText());
+            if(v.validate(require(str + 'anongroup.json'), object)) {
+                msg += 'object Anonymous Group - validated';
+            } else {
+                msg += 'object Anonymous Group - ' + v.errorsText();
+            }
         }
-
+        // items in a member array must validate as agents
+        if (object.member) {
+            for (let act of object.member) {
+                if (v.validate(require(str + 'agent'), act)) {
+                    msg += `\n\t\tgroup member ${act.name} - is a valid agent`;
+                }
+                else {
+                    msg += `\n\t\tgroup member ${JSON.stringify(act)} - is not a valid agent\n\t\t${v.errorsText()}`;
+                }
+            }
+        }
+        return cb(null, msg)
     } else {    // From here we assume that objectType is either "Activity" or not defined which means the same
         // console.log('This object is an Activity');
         if (v.validate(require(str + 'object-activity.json'), object)) { return cb(null, 'object Activity - validated'); }

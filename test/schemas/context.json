@@ -164,7 +164,7 @@
         "extensions": {
             "type": "object",
             "patternProperties": {
-                "^[\\S]+:\\/\\/?(?!\\/)[\\S]+$": { "type": "string" }
+                "^[\\S]+:\\/\\/?(?!\\/)[\\S]+$": { "oneOf": [ {"type": "string"}, {"type":"number"}, {"type":"object"}, {"type":"array"}, {"type":"boolean"} ] }
             },
             "additionalProperties": false
         }
