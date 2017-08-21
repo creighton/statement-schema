@@ -25,6 +25,9 @@ module.exports = function (authority, cb) {
         }
         // items in a member array must validate as agents
         if (authority.member) {
+            if (authority.member.length !== 2) {
+                msg += '\n\t\tauthority errors - when authority is a group it must contain exactly 2 members'
+            }
             for (let act of authority.member) {
                 if (v.validate(require(str + 'agent'), act)) {
                     msg += `\n\t\tgroup member ${act.name} - is a valid agent`;
