@@ -5,7 +5,7 @@
             {
                 "account":
                     {
-                        "homepage": "http://openid.foo.com",
+                        "homePage": "http://foo.com/account",
                         "name": "this is my name"
                     }
             },
@@ -19,7 +19,7 @@
                 "mbox_sha1sum": "ABCDEFabcdef1234567890"
             },
             {
-                "openid": "http:some.random.site/or/something"
+                "openid": "http:/some.random.site/or/something"
             }
         ]
     },

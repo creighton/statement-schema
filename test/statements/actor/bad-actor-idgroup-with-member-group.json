@@ -2,7 +2,7 @@
     "actor": {
         "objectType": "Group",
         "account": {
-            "homepage": "http://tom.com/foo",
+            "homePage": "http://tom.com/foo",
             "name": "Thomases"
         },
         "name": "mailto:tom@tom.com",

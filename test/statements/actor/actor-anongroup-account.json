@@ -4,7 +4,7 @@
         "member": [
             { "account":
                 {
-                    "homepage": "http://openid.foo.com",
+                    "homePage": "http://account.foo.com",
                     "name": "this is my name"
                 }
             }
