@@ -24,7 +24,18 @@
             "http://hi.com": "hello"
         }
     },
-    "authority": {"mbox":"mailto:tom@example.com", "name":"andy", "objectType":"Group"},
+    "authority": {
+    	"objectType" : "Group",
+    	"member": [
+    		{
+    			"account": {
+    				"homePage":"http://example.com/xAPI/OAuth/Token",
+    				"name":"oauth_consumer_x75db"
+    			}
+    		},
+    		{ "mbox":"mailto:bob@example.com" }
+    	]
+    },
     "attachments": [
         {
             "usageType": "http://adlnet.gov/expapi/attachments/signature",
