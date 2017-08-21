@@ -47,7 +47,7 @@ module.exports = function (object, cb) {
         const processStmt = require('./processStmt');
         processStmt(subs, 'processing substatment', function (err, res) {
             if (err) throw err;
-            return cb(null, 'object SubStatement - \n\t' + res)
+            return cb(null, 'object SubStatement - \n\t\t' + res)
         });
 
     } else if (object.objectType === "StatementRef") {

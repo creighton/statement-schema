@@ -1,24 +1,12 @@
 {
-
     "$schema": "http://json-schema.org/draft-04/schema#",
     "description": "Schema for an xAPI Actor Property Identified Group",
-    "id":"http://localhost:8080/idgroup.json",
+    "id": "http://localhost:8080/idgroup.json",
 
     "type": "object",
-
-    "properties": {
-        "objectType": { "$ref": "#/definitions/objectType" },
-        "name": { "$ref": "#/definitions/name" },
-        "member": { "$ref": "#/definitions/member" }
-    },
-
-    "required": ["objectType"],
-
-    "oneOf": [
-        { "required": ["mbox"] },
-        { "required": ["mbox_sha1sum"] },
-        { "required": ["openid"] },
-        { "required": ["account"] }
+    "allOf": [
+        { "$ref": "#/definitions/base-id-group" },
+        { "$ref": "#/definitions/ifis" }
     ],
 
     "definitions": {
@@ -26,25 +14,65 @@
             "type": "string",
             "pattern": "^[\\S]+:\\/\\/?(?!\\/)[\\S]+$"
         },
-        "objectType": { "type": "string", "enum": ["Group"] },
-        "name": { "type": "string" },
-        "member": { "type": "array" },
-        "mbox": {
-            "type": "string",
-            "pattern": "mailto:\\S+@\\S+\\.\\S+"
-        },
-        "mbox_sha1sum": {
-            "type": "string"
-        },
-        "openid": { "$ref": "#/definitions/iri" },
-        "account": {
+        "base-id-group": {
             "type": "object",
             "properties": {
-                "homePage": { "$ref": "#/definitions/iri" },
-                "name": { "type": "string" }
+                "objectType": { "$ref": "#/definitions/objectType" },
+                "name": { "$ref": "#/definitions/name" },
+            "member": { "$ref": "#/definitions/member" }
             },
-            "required": [ "homePage", "name" ]
+            "required": [ "objectType" ]
+        },
+        "ifis": {
+            "oneOf": [
+                { "$ref": "#/definitions/mbox" },
+                { "$ref": "#/definitions/mbox_sha1sum" },
+                { "$ref": "#/definitions/openid" },
+                { "$ref": "#/definitions/account" }
+            ]
+        },
+        "objectType": {
+            "type": "string",
+            "enum": [ "Group" ]
+        },
+        "name": { "type": "string" },
+        "member": { "type": "array", "minItems": 1 },
+        "mbox": {
+            "properties": {
+                "mbox": {
+                    "type": "string",
+                    "pattern": "^mailto:\\S+@\\S+\\.\\S+$"
+                }
+            },
+            "required": [ "mbox" ]
+        },
+        "mbox_sha1sum": {
+            "properties": {
+                "mbox_sha1sum": {
+                    "type": "string",
+                    "pattern": "^[0-9a-fA-F]{20,40}$"
+                }
+            },
+            "required": ["mbox_sha1sum"]
+        },
+        "openid": {
+            "properties": {
+                "openid": { "$ref": "#/definitions/iri" }
+            },
+            "required": [ "openid" ]
+        },
+        "account": {
+            "properties": {
+                "account": {
+                    "type": "object",
+                    "properties": {
+                        "homePage": { "$ref": "#/definitions/iri" },
+                        "name": { "type": "string" }
+                    },
+                    "required": [ "homePage", "name" ]
+                }
+            },
+            "required": [ "account" ]
         }
     }
-
 }

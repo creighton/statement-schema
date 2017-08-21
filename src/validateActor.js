@@ -50,10 +50,10 @@ module.exports = function (actor, cb) {
         if (actor.member) {
             for (let act of actor.member) {
                 if (v.validate(require(str + 'agent'), act)) {
-                    msg += `\n\t\tgroup member - all members are valid agents\n${JSON.stringify(act)}`;
+                    msg += `\n\t\tgroup member ${act.name} - is a valid agent\n${JSON.stringify(act)}`;
                 }
                 else {
-                    msg += `\n\t\tgroup member - one or more members is not a valid agent\n${v.errorsText()}`;
+                    msg += `\n\t\tgroup member ${act.name} - is not a valid agent\n${v.errorsText()}`;
                 }
             }
         }

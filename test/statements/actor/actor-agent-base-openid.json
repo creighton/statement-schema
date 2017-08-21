@@ -1,6 +1,6 @@
 {
     "actor": {
-        "openid": "http//:foo.tom.com"
+        "openid": "http://foo.tom.com"
     },
     "verb": {"id":"http://tom.com/verb"},
     "object": {"id":"http://tom.com/obj"}

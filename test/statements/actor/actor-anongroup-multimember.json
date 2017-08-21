@@ -16,7 +16,7 @@
                 "mbox": "mailto:tom@goo.com"
             },
             {
-                "mbox_sha1sum": "thoserandomlettersagain"
+                "mbox_sha1sum": "ABCDEFabcdef1234567890"
             },
             {
                 "openid": "http:some.random.site/or/something"
