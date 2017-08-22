@@ -1,0 +1,7 @@
+{
+    "actor": {
+        "mbox_sha1sum": "ZZZ0258963147ABCDEFabcdef1234567891234567"
+    },
+    "verb": {"id":"http://tom.com/verb"},
+    "object": {"id":"http://tom.com/obj"}
+}
