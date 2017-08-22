@@ -1,0 +1,8 @@
+{
+    "actor": {
+        "objectType": "Group",
+        "openid": "http://tom.com/foo"
+    },
+    "verb": {"id":"http://tom.com/verb"},
+    "object": {"id":"http://tom.com/obj"}
+}
