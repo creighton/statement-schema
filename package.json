@@ -12,6 +12,8 @@
   },
   "keywords": [
     "xAPI",
+    "JSON",
+    "json-schema",
     "schema",
     "validator"
   ],
