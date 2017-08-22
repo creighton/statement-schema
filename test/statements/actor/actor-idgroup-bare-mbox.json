@@ -1,7 +1,7 @@
 {
     "actor": {
         "objectType": "Group",
-        "mbox": "mailto:tom@tom.com",
+        "mbox": "mailto:tom@tom.com"
     },
     "verb": {"id":"http://tom.com/verb"},
     "object": {"id":"http://tom.com/obj"}
