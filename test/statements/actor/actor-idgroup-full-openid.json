@@ -1,5 +1,6 @@
 {
     "actor": {
+    	"name": "tom",
         "objectType": "Group",
         "openid": "http://tom.com/foo",
         "member": [ { "mbox": "mailto:tom@tom.com" } ]

@@ -1,0 +1,8 @@
+{
+    "actor": {
+        "name": "tom",
+		"openid": "http://foo.tom.com"
+    },
+    "verb": {"id":"http://tom.com/verb"},
+    "object": {"id":"http://tom.com/obj"}
+}

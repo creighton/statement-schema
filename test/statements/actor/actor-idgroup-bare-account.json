@@ -1,0 +1,11 @@
+{
+    "actor": {
+        "objectType": "Group",
+        "account": {
+            "homePage": "http://tom.com",
+            "name": "Ferdinand"
+        }
+    },
+    "verb": {"id":"http://tom.com/verb"},
+    "object": {"id":"http://tom.com/obj"}
+}
