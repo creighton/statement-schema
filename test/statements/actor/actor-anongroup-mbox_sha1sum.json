@@ -1,7 +1,7 @@
 {
     "actor": {
         "objectType": "Group",
-        "member": [ { "mbox_sha1sum": "abcdef0123456789ABCDEF" } ]
+        "member": [ { "mbox_sha1sum": "abcdef0123456789ABCDEF123456789987654321" } ]
     },
     "verb": {"id":"http://tom.com/verb"},
     "object": {"id":"http://tom.com/obj"}

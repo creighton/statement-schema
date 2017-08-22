@@ -14,7 +14,7 @@
  */
 
 (   // begin closure
-function validator(module, pff, getAll, parseFiles, formatMessage) {
+function validator(module, pff, getAll, getFolder, parseFiles, formatMessage) {
 
     const args = process.argv;
 
@@ -33,6 +33,11 @@ function validator(module, pff, getAll, parseFiles, formatMessage) {
             // if (err) throw err;
             console.log(`\n\nHello again.\n${formatMessage(err || data, filename)}`);
         });
+    } else if (args[2] === '-f') {
+        getFolder(args[3], (err, data, filename) => {
+            let names = `${filename} in ${args[3]}`;
+            console.log(`\n\nCiao!\n${formatMessage(err || data, names)}`);
+        });
     } else {
         filenames.push(args[2]);
         parseFiles(filenames, (err, data, filename) => {
@@ -43,5 +48,5 @@ function validator(module, pff, getAll, parseFiles, formatMessage) {
     // console.log('reminder async, this will not have a value until much later', filenames);
     // console.log('Go on to that great beyond where everything will be taken care of');
 
-}(module, require('./src/promptForFile.js'), require('./src/allStmts.js'), require('./src/parseFiles.js'), require('./src/formatMessage'))
+}(module, require('./src/promptForFile.js'), require('./src/allStmts.js'), require('./src/getFolder.js'), require('./src/parseFiles.js'), require('./src/formatMessage'))
 );  // end closure

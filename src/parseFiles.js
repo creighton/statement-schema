@@ -19,13 +19,7 @@
                 // console.log(name, obj.name);
                 // console.log(`${names.length} files parsed and ready`);
                 processStmt(require(path.resolve(file)), obj.name, cb);
-                //stmts.push(require(path.resolve(file)));
             });
-            //const processStmt = require('./processStmt');
-            // for (const stmt of stmts) {
-                // console.log(name, obj.name);
-                // processStmt(stmts[stmts.length -1], obj.name, cb);
-            // }
         }
     }
 );  // end closure
