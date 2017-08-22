@@ -34,6 +34,11 @@ Specify any filename in the statements folder to use as the xapi statement to va
 ```
 This command will read all files in the statements folder and validate them all.
 
+```
+> node validator.js -f result
+```
+Specify a folder name in `./test/statements/` to validate all statements in the specified folder.
+
 To use from another node.js program:
 *Note*: the `require-demo.js` script has many of these examples.
 - to load a statement as a json object:

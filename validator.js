@@ -18,7 +18,7 @@ function validator(module, pff, getAll, getFolder, parseFiles, formatMessage) {
 
     const args = process.argv;
 
-    console.log('Start validator.js\n\n\n');
+    console.log('\nStart validator.js\n\n\n');
 
     // Make sure we have the filename
     let filenames = [];
