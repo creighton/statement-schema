@@ -1,0 +1,10 @@
+{
+    "actor": {
+    	"name": "tom",
+        "objectType": "Group",
+        "mbox": "mailto:tom1@tom.com",
+        "member": [ { "mbox": "mailto:tom@tom.com" } ]
+    },
+    "verb": {"id":"http://tom.com/verb"},
+    "object": {"id":"http://tom.com/obj"}
+}
