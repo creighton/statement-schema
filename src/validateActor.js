@@ -36,14 +36,14 @@ module.exports = function (actor, cb) {
             if (v.validate(require(str + 'idgroup'), actor)) {
                 msg += 'actor Identified Group - validated';
             } else {
-                msg += 'actor Identified Group - ' + v.errorsText();
+                msg += 'actor Identified Group error- ' + v.errorsText();
             }
         } else {
             // console.log('This group is an anonymous group');
             if (v.validate(require(str + 'anongroup.json'), actor)) {
                 msg += 'actor Anonymous Group - validated';
             } else {
-                msg += 'actor Anonymous Group - ' + v.errorsText();
+                msg += 'actor Anonymous Group error - ' + v.errorsText();
             }
         }
         // items in a member array must validate as agents
@@ -53,7 +53,7 @@ module.exports = function (actor, cb) {
                     msg += `\n\t\tgroup member ${act.name} - is a valid agent`;
                 }
                 else {
-                    msg += `\n\t\tgroup member ${JSON.stringify(act)} - is not a valid agent\n\t\t${v.errorsText()}`;
+                    msg += `\n\t\tgroup member ${JSON.stringify(act)} error - is not a valid agent\n\t\t${v.errorsText()}`;
                 }
             }
         }
@@ -62,7 +62,7 @@ module.exports = function (actor, cb) {
         if (v.validate(require(str + 'agent'), actor)) {
             msg += 'actor Agent - validated';
         } else {
-            msg += 'actor Agent - ' + v.errorsText();
+            msg += 'actor Agent error - ' + v.errorsText();
         }
     }
     cb(null, msg);

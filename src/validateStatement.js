@@ -16,7 +16,7 @@ module.exports = function (stmt, cb) {
 
     let valid = v.validate(require(str), stmt);
     if (!valid) {
-        cb(null, 'statement - ' + v.errorsText());
+        cb(null, 'statement error - ' + v.errorsText());
     } else {
         cb(null, 'statement - general structure validated');
     }

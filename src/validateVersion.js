@@ -18,7 +18,7 @@ module.exports = function (version, cb) {
     let valid = v.validate(require(str), version);
 
     if (!valid) {
-        msg += '\n\tversion errors - ' + v.errorsText();
+        msg += '\n\tversion error - ' + v.errorsText();
     } else {
         msg += '\n\tversion - validated';
     }

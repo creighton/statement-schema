@@ -25,10 +25,10 @@ module.exports = function (timestamp, cb) {
         if (m.isValid()) {
             msg += 'timestamp - validated';
         } else  {
-            msg += `timestamp errors - not formatted accoring to ISO 8601`;
+            msg += `timestamp error - not formatted accoring to ISO 8601`;
         }
     } else {
-        msg += `timestamp errors - ${v.errorsText()}`;
+        msg += `timestamp error - ${v.errorsText()}`;
     }
 
     cb(null, msg);

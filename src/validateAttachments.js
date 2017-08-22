@@ -17,7 +17,7 @@ module.exports = function (attachments, cb) {
     let valid = v.validate(require(str), attachments);
 
     if (!valid) {
-        cb(null, 'attachments errors - ' + v.errorsText());
+        cb(null, 'attachments error - ' + v.errorsText());
     } else {
         cb(null, 'attachments - validated');
     }

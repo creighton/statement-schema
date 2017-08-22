@@ -26,10 +26,10 @@ module.exports = function (stored, cb) {
         if (m.isValid()) {
             msg += '\n\tstored - validated';
         } else {
-            msg += `\n\tstored errors - not formatted according to ISO 8601`;
+            msg += `\n\tstored error - not formatted according to ISO 8601`;
         }
     } else {
-        msg += `\n\tstored errors - ${v.errorsText()}`;
+        msg += `\n\tstored error - ${v.errorsText()}`;
     }
 
     cb(null, msg);

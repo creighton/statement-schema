@@ -25,17 +25,17 @@ module.exports = function (object, cb) {
         // must have and actor verb and object
         if (!(object.actor && object.verb && object.object)) {
             // console.log('Not Enough');
-            return cb(null, 'object SubStatement - does not contain an actor, verb and object');
+            return cb(null, 'object SubStatement error - does not contain an actor, verb and object');
         }
         // can not contain a substatement of its own
         if (object.object.objectType === 'SubStatement') {
             // console.log('Not Again');
-            return cb(null, 'object SubStatement - a substatement MUST NOT contain a substatement of its own');
+            return cb(null, 'object SubStatement error - a substatement MUST NOT contain a substatement of its own');
         }
         // check for forbidden substatement properties
         if (object.id || object.stored || object.version || object.authority) {
             // console.log('Too Much');
-            return cb(null, 'object SubStatement - a substatement MUST NOT have the "id", "stored", "version" or "authority" properties');
+            return cb(null, 'object SubStatement error - a substatement MUST NOT have the "id", "stored", "version" or "authority" properties');
         }
         //We got this far, now clone the substatement minus the objectType property, and process it
         var subs = {};
@@ -55,13 +55,13 @@ module.exports = function (object, cb) {
         // console.log('This object is a StatementRef');
         if (v.validate(require(str + 'object-statementref.json'), object))
         { return cb(null, 'object StatementRef - validated'); }
-        return cb(null, 'object StatementRef - ' + v.errorsText());
+        return cb(null, 'object StatementRef error - ' + v.errorsText());
 
         // in an object an agent must have an objectType of Agent
     } else if (object.objectType === "Agent") {
         // console.log('This object is an Agent');
         if (v.validate(require(str + 'agent.json'), object)) { return cb(null, 'object Agent - validated'); }
-        return cb(null, 'object Agent - ' + v.errorsText());
+        return cb(null, 'object Agent error - ' + v.errorsText());
 
     } else if (object.objectType === "Group") {
         // console.log('This object is a Group');
@@ -70,14 +70,14 @@ module.exports = function (object, cb) {
             if (v.validate(require(str + 'idgroup.json'), object)) {
                 msg += 'object Identified Group - validated';
             } else {
-                msg += 'object Identified Group - ' + v.errorsText();
+                msg += 'object Identified Group error - ' + v.errorsText();
             }
         } else {
             // console.log('This group is anonymous');
             if(v.validate(require(str + 'anongroup.json'), object)) {
                 msg += 'object Anonymous Group - validated';
             } else {
-                msg += 'object Anonymous Group - ' + v.errorsText();
+                msg += 'object Anonymous Group error - ' + v.errorsText();
             }
         }
         // items in a member array must validate as agents
@@ -87,7 +87,7 @@ module.exports = function (object, cb) {
                     msg += `\n\t\tgroup member ${act.name} - is a valid agent`;
                 }
                 else {
-                    msg += `\n\t\tgroup member ${JSON.stringify(act)} - is not a valid agent\n\t\t${v.errorsText()}`;
+                    msg += `\n\t\tgroup member ${JSON.stringify(act)} error - is not a valid agent\n\t\t${v.errorsText()}`;
                 }
             }
         }
@@ -95,7 +95,7 @@ module.exports = function (object, cb) {
     } else {    // From here we assume that objectType is either "Activity" or not defined which means the same
         // console.log('This object is an Activity');
         if (v.validate(require(str + 'object-activity.json'), object)) { return cb(null, 'object Activity - validated'); }
-        return cb(null, 'object Activity - ' + v.errorsText());
+        return cb(null, 'object Activity error - ' + v.errorsText());
     }
 
 }

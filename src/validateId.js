@@ -16,7 +16,7 @@ module.exports = function (id, cb) {
 
     let valid = v.validate(require(str), id);
     if (!valid) {
-        cb(null, 'id errors - ' + v.errorsText());
+        cb(null, 'id error - ' + v.errorsText());
     } else {
         cb(null, 'id - validated');
     }

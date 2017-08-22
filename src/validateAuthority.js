@@ -19,21 +19,21 @@ module.exports = function (authority, cb) {
         let valid = v.validate(require(str + 'anongroup'), authority);
 
         if (!valid) {
-            msg += '\n\tauthority errors - ' + v.errorsText();
+            msg += '\n\tauthority error - ' + v.errorsText();
         } else {
             msg += '\n\tauthority Anonymous Group - validated';
         }
         // items in a member array must validate as agents
         if (authority.member) {
             if (authority.member.length !== 2) {
-                msg += '\n\t\tauthority errors - when authority is a group it must contain exactly 2 members'
+                msg += '\n\t\tauthority error - when authority is a group it must contain exactly 2 members'
             }
             for (let act of authority.member) {
                 if (v.validate(require(str + 'agent'), act)) {
                     msg += `\n\t\tgroup member ${act.name} - is a valid agent`;
                 }
                 else {
-                    msg += `\n\t\tgroup member ${JSON.stringify(act)} - is not a valid agent\n\t\t${v.errorsText()}`;
+                    msg += `\n\t\tgroup member ${JSON.stringify(act)} error - is not a valid agent\n\t\t${v.errorsText()}`;
                 }
             }
         }

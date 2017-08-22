@@ -32,13 +32,19 @@ function validator(module, pff, getAll, getFolder, parseFiles, formatMessage) {
     // console.log(args, args.length, verbose);
     if (args.length < 3) {
         pff((err, data, filename) => {
-            // if (err) throw err;
-            console.log(`\n\nThank you please come again.\n${formatMessage(err || data, filename)}`);
+            if (verbose) {
+                console.log(`\n\nThank you please come  again.\n${formatMessage(err || data, filename)}`);
+            } else {
+                console.log(`${filename}: ${data.join().includes('error') ? 'fail' : 'pass'}\n`);
+            }
         });
     } else if (args[2] === '-a') {
         getAll((err, data, filename) => {
-            // if (err) throw err;
-            console.log(`\n\nHello again.\n${formatMessage(err || data, filename)}`);
+            if (verbose) {
+                console.log(`\n\nHello again.\n${formatMessage(err || data, filename)}`);
+            } else {
+                console.log(`${filename}: ${data.join().includes('error') ? 'fail' : 'pass'}\n`);
+            }
         });
     } else if (args[2] === '-f') {
         getFolder(args[3], (err, data, filename) => {
@@ -46,14 +52,17 @@ function validator(module, pff, getAll, getFolder, parseFiles, formatMessage) {
             if (verbose) {
                 console.log(`\n\nCiao!\n${formatMessage(err || data, names)}`);
             } else {
-                console.log(`\n${filename}: ${data.includes('error') ? 'fail' : 'pass'}\n`);
+                console.log(`${filename}: ${data.join().includes('error') ? 'fail' : 'pass'}\n`);
             }
         });
     } else {
         filenames.push(args[2]);
         parseFiles(filenames, (err, data, filename) => {
-            // if (err) throw err;
-            console.log(`\n\nWelcome back.\n${formatMessage(err || data, filename)}`);
+            if (verbose) {
+                console.log(`\n\nWelcome back.\n${formatMessage(err || data, filename)}`);
+            } else {
+                console.log(`${filename}: ${data.join().includes('error') ? 'fail' : 'pass'}\n`);
+            }
         })
     }
 

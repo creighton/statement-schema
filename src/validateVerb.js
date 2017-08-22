@@ -17,7 +17,7 @@ module.exports = function (verb, cb) {
     let valid = v.validate(require(str), verb);
 
     if (!valid) {
-        cb(null, 'verb errors - ' + v.errorsText());
+        cb(null, 'verb error - ' + v.errorsText());
     } else {
         cb(null, 'verb - validated');
     }
