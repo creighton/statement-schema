@@ -22,7 +22,14 @@ function validator(module, pff, getAll, getFolder, parseFiles, formatMessage) {
 
     // Make sure we have the filename
     let filenames = [];
-    // console.log(args);
+    // Set the default
+    let verbose = false;
+    for (arg in args) {
+        if (args[arg] === '-v') {
+            verbose = true;
+        }
+    }
+    // console.log(args, args.length, verbose);
     if (args.length < 3) {
         pff((err, data, filename) => {
             // if (err) throw err;
@@ -36,7 +43,11 @@ function validator(module, pff, getAll, getFolder, parseFiles, formatMessage) {
     } else if (args[2] === '-f') {
         getFolder(args[3], (err, data, filename) => {
             let names = `${filename} in ${args[3]}`;
-            console.log(`\n\nCiao!\n${formatMessage(err || data, names)}`);
+            if (verbose) {
+                console.log(`\n\nCiao!\n${formatMessage(err || data, names)}`);
+            } else {
+                console.log(`\n${filename}: ${data.includes('error') ? 'fail' : 'pass'}\n`);
+            }
         });
     } else {
         filenames.push(args[2]);
@@ -45,8 +56,6 @@ function validator(module, pff, getAll, getFolder, parseFiles, formatMessage) {
             console.log(`\n\nWelcome back.\n${formatMessage(err || data, filename)}`);
         })
     }
-    // console.log('reminder async, this will not have a value until much later', filenames);
-    // console.log('Go on to that great beyond where everything will be taken care of');
 
 }(module, require('./src/promptForFile.js'), require('./src/allStmts.js'), require('./src/getFolder.js'), require('./src/parseFiles.js'), require('./src/formatMessage'))
 );  // end closure
