@@ -6,7 +6,7 @@
     "context": {
         "registration": "bc5ca8ec-b130-4d8e-a092-3af748cf7a54",
         "instructor": {"openid": "http://tom.com/tom"},
-        "team": {"account":{"homePage":"http://andy.com/ang","name":"ang"}, "objectType":"Blue"},
+        "team": {"account":{"homePage":"http://andy.com/ang","name":"ang"}, "objectType":"Group"},
         "revision":"4",
         "platform":"yep",
         "language":"en",
@@ -15,10 +15,10 @@
             "id":"8f87ccde-bb56-4c2e-ab83-44982ef22df0"
         },
         "contextActivities": {
-            "parent": [{"id":"http://parent.com/parent"},{"id":"http://parent.com/parent2"}],
-            "grouping": [{"id":"http://grouping.com/activity"}],
-            "category": [{"id":"http://category.com/activity"}],
-            "other": [{"id":"http://other.com/activity"}]
+            "parent": {"id":"http://parent.com/parent"},
+            "grouping": {"id":"http://grouping.com/activity"},
+            "category": {"id":"http://category.com/activity"},
+            "other": {"id":"http://other.com/activity"}
         },
         "extensions": {
             "http://hi.com": "hello"
