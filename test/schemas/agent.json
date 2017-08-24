@@ -14,7 +14,7 @@
     "definitions": {
         "iri": {
             "type": "string",
-            "pattern": "^[\\S]+:\\/\\/?(?!\\/)[\\S]+$"
+            "pattern": "^[\\S]+:\\/?\\/?(?!\\/)[\\S]+$"
         },
         "base-agent": {
             "type": "object",

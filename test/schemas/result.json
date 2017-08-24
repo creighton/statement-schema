@@ -15,7 +15,7 @@
         "response": { "type": "string" },
         "duration": {
             "type": "string",
-            "pattern": "^P(?=\\w*\\d)(?:\\d+Y|Y)?(?:\\d+M|M)?(?:\\d+W|W)?(?:\\d+D|D)?(?:T(?:\\d+H|H)?(?:\\d+M|M)?(?:\\d+(?:\\­.\\d{1,2})?S|S)?)?$"
+            "pattern": "^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$"
         },
         "extensions": { "$ref": "#/definitions/extensions" }
     },
@@ -39,7 +39,7 @@
         "extensions": {
             "type": "object",
             "patternProperties": {
-                "^[\\S]+:\\/\\/?(?!\\/)[\\S]+$": { "oneOf": [ {"type": "string"}, {"type":"number"}, {"type":"object"}, {"type":"array"}, {"type":"boolean"} ] }
+                "^[\\S]+:\\/?\\/?(?!\\/)[\\S]+$": { "oneOf": [ {"type": "string"}, {"type":"number"}, {"type":"object"}, {"type":"array"}, {"type":"boolean"} ] }
             },
             "additionalProperties": false
         }

@@ -11,7 +11,7 @@
     "properties": {
         "id": {
             "type": "string",
-            "pattern": "^[\\S]+:\\/\\/?(?!\\/)[\\S]+$"
+            "pattern": "^[\\S]+:\\/?\\/?(?!\\/)[\\S]+$"
         },
         "display": {
             "type": "object",

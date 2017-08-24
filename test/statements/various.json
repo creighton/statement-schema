@@ -1,5 +1,5 @@
 {
-    "id":"f5070c3a-cd39-4dc3-8dd2-4ad3b511c407",
+    "id":"cc8937ed-3151-1659-b377-38ed4fc96c90",
     "actor":{"mbox":"mailto:tom@example.com", "name":"andy", "objectType":"Agent"},
     "verb":{"id":"http://tom.com/verb", "display":{"en":"hi"}},
     "object": {"id":"fox://tomcom/obj"},

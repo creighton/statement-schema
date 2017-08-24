@@ -61,7 +61,7 @@
         },
         "uuid": {
             "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
         },
 
         "actor": { "type": "object" },
@@ -125,7 +125,8 @@
                 "steps": {
                     "type": "array",
                     "items": { "$ref": "#/definitions/interactionComponent" }
-                }
+                },
+                "extensions": { "$ref": "#/definitions/extensions" }
             },
             "additionalProperties": false
         },
@@ -140,7 +141,7 @@
         },
         "iri": {
             "type": "string",
-            "pattern": "^[\\S]+:\\/\\/?(?!\\/)[\\S]+$"
+            "pattern": "^[\\S]+:\\/?\\/?(?!\\/)[\\S]+$"
         },
         "lang-map": {
             "type": "object",
@@ -164,7 +165,7 @@
         "extensions": {
             "type": "object",
             "patternProperties": {
-                "^[\\S]+:\\/\\/?(?!\\/)[\\S]+$": { "oneOf": [ {"type": "string"}, {"type":"number"}, {"type":"object"}, {"type":"array"}, {"type":"boolean"} ] }
+                "^[\\S]+:\\/?\\/?(?!\\/)[\\S]+$": { "oneOf": [ {"type": "string"}, {"type":"number"}, {"type":"object"}, {"type":"array"}, {"type":"boolean"} ] }
             },
             "additionalProperties": false
         }
