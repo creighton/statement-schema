@@ -4,7 +4,7 @@
  */
 
 (   //begin closure
-module.exports = function (context, cb) {
+module.exports = function (context, objectObjectType, cb) {
     // console.log(`validating context: \n${JSON.stringify(context)}`);
     // So here is my walk through
     const fs = require('fs');
@@ -18,9 +18,19 @@ module.exports = function (context, cb) {
     let valid = v.validate(require(str + 'context'), context);
 
     if (!valid) {
-        msg += 'context errors - ' + v.errorsText();
+        msg += 'context error - ' + v.errorsText();
     } else {
         msg += 'context - validated';
+    }
+    // Additional testing for revision and platform which requires the object's object type to be an activity
+    // Are revision or platform being used, if so is object objectType an activity - okay; otherwise error
+    // console.log(`\n${}\t${}\t${}\t${}\n`);
+    if (context.revision || context.platform) {
+        if (!objectObjectType || objectObjectType === 'Activity') {
+            msg += `\n\t\trevision and platform - validated`;
+        } else {
+            msg += `\n\t\trevision and platform error - must only be used if the statement's object is an activity`;
+        }
     }
     // additional testing for intructor and team because of agent/group difficulties
     if (context.instructor) {

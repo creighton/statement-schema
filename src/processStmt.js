@@ -70,7 +70,7 @@
                 if (stmt.context) {
                     // console.log('there is a statement context property');
                     const vContext = require('./validateContext.js');
-                    vContext(stmt.context, (err, data) => {
+                    vContext(stmt.context, stmt.object.objectType, (err, data) => {
                         cb(err, data);
                     });
                 } else {

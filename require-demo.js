@@ -5,7 +5,7 @@
 const async = require('async');
 const stmt = require('./test/statements/gots-it-all.json');
 
-function checkProperty (prop, propname) {
+function checkProperty (prop, propname, objectObjectType) {
     let fn;
     switch (propname) {
         case 'id':
@@ -24,7 +24,9 @@ function checkProperty (prop, propname) {
             fn = require('./src/validateResult');
             break;
         case 'context':
-            fn = require('./src/validateContext');
+            require('./src/validateContext')(prop, objectObjectType, (err, data) => {
+                console.log(`${propname} Only:\nError: ${err}\nData: ${data}\n`);
+            });
             break;
         case 'timestamp':
             fn = require('./src/validateTimestamp');
@@ -48,20 +50,26 @@ function checkProperty (prop, propname) {
             console.log(`This property does not belong in an xAPI statment, nor is it a statement.  Validation is over.`);
     }
     if (fn) {
-        fn(prop, propname, (err, data) => {
+        fn(prop, (err, data) => {
             console.log(`${propname} Only:\nError: ${err}\nData: ${data}\n`);
         });
     }
 }
 
-function chkProp (prop, propname) {
+function chkProp (prop, propname, objectObjectType) {
     try {
         temp = propname.substring(0, 1).toUpperCase() + propname.substring(1).toLowerCase();
         console.log(temp);
         const fn = (require(`./src/validate${temp}`));
-        fn(prop, propname, (err, data) => {
-            console.log(`${propname} Only:\nError: ${err}\nData: ${data}\n`);
-        });
+        if (propname === 'context') {
+            fn(prop, objectObjectType, (err, data) => {
+                console.log(`${propname} Only:\nError: ${err}\nData: ${data}\n`);
+            });
+        } else {
+            fn(prop, (err, data) => {
+                console.log(`${propname} Only:\nError: ${err}\nData: ${data}\n`);
+            });
+        }
     } catch (e) {
         console.log(`Error: ${e}`);
     }
@@ -70,99 +78,99 @@ function chkProp (prop, propname) {
 async.series([
     function (cb) {
         const val = require('./src/processStmt.js');
-        val(stmt, './test/statements/gots-it-all.json', (err, data) => {
-            console.log(`Error: ${err}\nData: ${data}`);
+        val(stmt, './test/statements/gots-it-all.json', (err, data, filename) => {
+            console.log(`Error: ${err}\nData: ${data.join('\n\t')}  ${Array.isArray(data)}\n${filename}`);
             cb();
         });
     },
     function (cb) {
         const act = require('./src/validateActor');
-        act(stmt.actor, './test/statements/gots-it-all.json', (err, data) => {
+        act(stmt.actor, (err, data) => {
             console.log(`\nActor Only:\nError: ${err}\nData: ${data}`);
             cb();
         });
     },
     function (cb) {
         const verb = require('./src/validateVerb');
-        verb(stmt.verb, './test/statements/gots-it-all.json', (err, data) => {
+        verb(stmt.verb, (err, data) => {
             console.log(`\nVerb Only:\nError: ${err}\nData: ${data}`);
             cb();
         });
     },
     function (cb) {
         const obj = require('./src/validateObject');
-        obj(stmt.object, './test/statements/gots-it-all.json', (err, data) => {
+        obj(stmt.object, (err, data) => {
             console.log(`\nObject Only:\nError: ${err}\nData: ${data}`);
             cb();
         });
     },
     function (cb) {
         const result = require('./src/validateResult');
-        result(stmt.result, './test/statements/gots-it-all.json', (err, data) => {
+        result(stmt.result, (err, data) => {
             console.log(`\nResult Only:\nError: ${err}\nData: ${data}`);
             cb();
         });
     },
     function (cb) {
         const con = require('./src/validateContext');
-        con(stmt.context, './test/statements/gots-it-all.json', (err, data) => {
+        con(stmt.context, stmt.object.objectType, (err, data) => {
             console.log(`\nContext Only:\nError: ${err}\nData: ${data}`);
             cb();
         });
     },
     function (cb) {
         const time = require('./src/validateTimestamp');
-        time(stmt.timestamp, propname, (err, data) => {
+        time(stmt.timestamp, (err, data) => {
             console.log(`\nTimestamp Only:\nError: ${err}\nData: ${data}`);
             cb();
         });
     },
     function (cb) {
         const stor = require('./src/validateStored');
-        stor(stmt.stored, './test/statements/gots-it-all.json', (err, data) => {
-            console.log(`Stored Only:\nError: ${err}\nData: ${data}`);
+        stor(stmt.stored, (err, data) => {
+            console.log(`\nStored Only:\nError: ${err}\nData: ${data}`);
             cb();
         });
     },
     function (cb) {
         const auth = require('./src/validateAuthority');
-        auth(stmt.authority, './test/statements/gots-it-all.json', (err, data) => {
-            console.log(`Authority Only:\nError: ${err}\nData: ${data}`);
+        auth(stmt.authority, (err, data) => {
+            console.log(`\nAuthority Only:\nError: ${err}\nData: ${data}`);
             cb();
         });
     },
     function (cb) {
         const version = require('./src/validateVersion');
-        version(stmt.version, './test/statements/gots-it-all.json', (err, data) => {
-            console.log(`Version Only:\nError: ${err}\nData: ${data}`);
+        version(stmt.version, (err, data) => {
+            console.log(`\nVersion Only:\nError: ${err}\nData: ${data}`);
             cb();
         });
     },
     function (cb) {
         const attch = require('./src/validateAttachments');
-        attch(stmt.attachments, './test/statements/gots-it-all.json', (err, data) => {
-            console.log(`Attachments Only:\nError: ${err}\nData: ${data}`);
+        attch(stmt.attachments, (err, data) => {
+            console.log(`\nAttachments Only:\nError: ${err}\nData: ${data}`);
             cb();
         })
     },
     function (cb) {
         const statement = require('./src/validateStatement');
-        statement(stmt, './test/statements/gots-it-all.json', (err, data) => {
-            console.log(`Statement Only:\nError: ${err}\nData: ${data}`);
+        statement(stmt, (err, data) => {
+            console.log(`\nStatement Only:\nError: ${err}\nData: ${data}\n`);
             cb();
         });
     },
     function (cb) {
-        const minimal = require('./test/statements/minimal');
+        const minimal = require('./test/statements/appA-long-example');
         for (const propname of Object.keys(minimal)) {
-            checkProperty(minimal[propname], propname);
+            checkProperty(minimal[propname], propname, minimal.object.objectType);
         }
         cb();
     },
     function (cb) {
-        const bm = require('./test/statements/various');
+        const bm = require('./test/statements/appA-long-example');
         for (const propname of Object.keys(bm)) {
-            chkProp(bm[propname], propname);
+            chkProp(bm[propname], propname, bm.object.objectType);
         }
         cb();
     }

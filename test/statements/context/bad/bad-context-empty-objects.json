@@ -5,9 +5,12 @@
     "object": {"id":"http://tom.com/obj"},
     "context": {
         "registration": "bc5ca8ec-b130-4d8e-a092-3af748cf7a54",
+        "instructor": {},
+        "team": {},
         "revision":"4",
         "platform":"yep",
         "language":"en",
+        "statement": {},
         "contextActivities": {},
         "extensions": {}
     }
