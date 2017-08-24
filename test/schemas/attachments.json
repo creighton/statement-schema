@@ -34,7 +34,7 @@
         },
         "iri": {
             "type": "string",
-            "pattern": "^[\\S]+:\\/?\\/?(?!\\/)[\\S]+$"
+            "pattern": "^[\\S]+:\\/?\\/?(?!\\/)[\\S]*$"
         },
         "lang-map": {
             "type": "object",

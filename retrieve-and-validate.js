@@ -45,7 +45,7 @@ request.get(opts, (res) => {
             // result[0] += 'error'
             console.log(`${filename}\t${err?'errors in the request':(result.join().includes('error'))?'\n'+result.join('\n\t'):'Pass'}\n\n`);
             if (result.join().includes('error')) {
-                fs.writeFile('./temp/'+filename+'.log', result.join('\n\t') + '\n\n\n' + JSON.stringify(stmt, null, 4), (err) => {
+                fs.writeFile('./log/'+filename+'.log', result.join('\n\t') + '\n\n\n' + JSON.stringify(stmt, null, 4), (err) => {
                     if (err) throw err;
                     console.log('File '+filename+' saved');
                 });

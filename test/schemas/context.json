@@ -141,7 +141,7 @@
         },
         "iri": {
             "type": "string",
-            "pattern": "^[\\S]+:\\/?\\/?(?!\\/)[\\S]+$"
+            "pattern": "^[\\S]+:\\/?\\/?(?!\\/)[\\S]*$"
         },
         "lang-map": {
             "type": "object",
@@ -165,7 +165,7 @@
         "extensions": {
             "type": "object",
             "patternProperties": {
-                "^[\\S]+:\\/?\\/?(?!\\/)[\\S]+$": { "oneOf": [ {"type": "string"}, {"type":"number"}, {"type":"object"}, {"type":"array"}, {"type":"boolean"} ] }
+                "^[\\S]+:\\/?\\/?(?!\\/)[\\S]*$": { "oneOf": [ {"type": "string"}, {"type":"number"}, {"type":"object"}, {"type":"array"}, {"type":"boolean"} ] }
             },
             "additionalProperties": false
         }

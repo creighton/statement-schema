@@ -14,7 +14,7 @@
     "definitions": {
         "iri": {
             "type": "string",
-            "pattern": "^[\\S]+:\\/?\\/?(?!\\/)[\\S]+$"
+            "pattern": "^[\\S]+:\\/?\\/?(?!\\/)[\\S]*$"
         },
         "base-agent": {
             "type": "object",
@@ -22,7 +22,14 @@
             "properties": {
                 "objectType": { "$ref": "#/definitions/objectType" },
                 "name": { "$ref": "#/definitions/name" }
-            }
+            },
+            "patternProperties": {
+                "^mbox$": { "type": "string" },
+                "^mbox_sha1sum$": { "type": "string" },
+                "^openid": { "type": "string" },
+                "^account$": { "type": "object" }
+            },
+            "additionalProperties": false
         },
         "ifis": {
             "oneOf": [
