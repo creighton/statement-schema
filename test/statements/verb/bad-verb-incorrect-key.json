@@ -1,0 +1,11 @@
+{
+    "actor":{
+        "mbox": "mailto:tom@tom.com"
+    },
+    "verb":{
+    	"id":"http://tom.com/verb",
+    	"incorrect": "key",
+		"display" : {"en-US" : "verb"}
+    },
+    "object": {"id":"http://tom.com/objective"}
+}

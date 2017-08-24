@@ -1,0 +1,7 @@
+{
+    "actor":{
+        "mbox": "mailto:tom@tom.com"
+    },
+    "verb": "not valid",
+    "object": {"id":"http://tom.com/objective"}
+}
