@@ -1,12 +1,6 @@
 {
+    "id": false,
     "actor":{"mbox":"mailto:tom@example.com", "name":"andy", "objectType":"Agent"},
     "verb":{"id":"http://tom.com/verb", "display":{"en":"hi"}},
     "object": {"id":"http://tom.com/obj"},
-    "authority": {
-    	"objectType" : "Agent",
-		"account": {
-			"homePage":"http://example.com/xAPI/OAuth/Token",
-		    "name":"oauth_consumer_x75db"
-    	}
-    }
 }
