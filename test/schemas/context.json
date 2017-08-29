@@ -1,0 +1,173 @@
+{
+
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Schema for an xAPI Context Property",
+    "id":"http://localhost:8080/context-schema.json",
+
+    "type": "object",
+
+    "properties": {
+        "registration": { "$ref": "#/definitions/uuid" },
+        "instructor": { "$ref": "#/definitions/actor" },
+        "team": { "$ref": "#/definitions/group" },
+        "contextActivities": { "$ref": "#/definitions/contextActivities" },
+        "revision": { "type": "string" },
+        "platform": { "type": "string" },
+        "language": {
+            "type": "string",
+            "pattern": "^[a-z]{2,3}(?:-[A-Z]{2,3}(?:-[a-zA-Z]{4})?)?$"
+        },
+        "statement": { "$ref": "#/definitions/statementRef" },
+        "extensions": { "$ref": "#/definitions/extensions" }
+    },
+
+    "additionalProperties": false,
+
+    "definitions": {
+
+        "contextActivities": {
+            "type": "object",
+            "properties": {
+                "parent": {
+                    "oneOf": [
+                        {"$ref": "#/definitions/arrayOfActivities" },
+                        {"$ref": "#/definitions/activity" }
+                    ]
+                },
+                "grouping": {
+                    "oneOf": [
+                        {"$ref": "#/definitions/arrayOfActivities" },
+                        {"$ref": "#/definitions/activity" }
+                    ]
+                },
+                "category": {
+                    "oneOf": [
+                        {"$ref": "#/definitions/arrayOfActivities" },
+                        {"$ref": "#/definitions/activity" }
+                    ]
+                },
+                "other": {
+                    "oneOf": [
+                        {"$ref": "#/definitions/arrayOfActivities" },
+                        {"$ref": "#/definitions/activity" }
+                    ]
+                }
+            },
+            "additionalProperties": false
+        },
+        "arrayOfActivities": {
+            "type": "array",
+            "items": { "$ref": "#/definitions/activity" }
+        },
+        "uuid": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+        },
+
+        "actor": { "type": "object" },
+        "group": { "type": "object" },
+
+        "activity": {
+            "type": "object",
+
+            "additionalProperties": false,
+            "required": [ "id" ],
+            "properties": {
+                "objectType": {
+                    "type": "string",
+                    "pattern": "Activity"
+                },
+                "id": { "$ref": "#/definitions/iri" },
+                "definition": { "$ref": "#/definitions/activity-definition" }
+            }
+        },
+        "activity-definition": {
+            "type": "object",
+            "properties": {
+                "name": { "$ref": "#/definitions/lang-map" },
+                "description": { "$ref": "#/definitions/lang-map" },
+                "type": { "$ref": "#/definitions/iri" },
+                "moreInfo": { "$ref": "#/definitions/iri" },
+                "interactionType": {
+                    "enum": [
+                        "true-false",
+                        "choice",
+                        "fill-in",
+                        "long-fill-in",
+                        "matching",
+                        "performance",
+                        "sequencing",
+                        "likert",
+                        "numeric",
+                        "other"
+                    ]
+                },
+                "correctResponsesPattern": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                },
+                "choices": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/interactionComponent" }
+                },
+                "scale": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/interactionComponent" }
+                },
+                "source": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/interactionComponent" }
+                },
+                "target": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/interactionComponent" }
+                },
+                "steps": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/interactionComponent" }
+                },
+                "extensions": { "$ref": "#/definitions/extensions" }
+            },
+            "additionalProperties": false
+        },
+        "interactionComponent": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "string" },
+                "description": { "$ref": "#/definitions/lang-map" }
+            },
+            "required": [ "id" ],
+            "additionalProperties": false
+        },
+        "iri": {
+            "type": "string",
+            "pattern": "^[\\S]+:\\/?\\/?(?!\\/)[\\S]*$"
+        },
+        "lang-map": {
+            "type": "object",
+            "patternProperties": {
+                "^[a-z]{2,3}(?:-[A-Z]{2,3}(?:-[a-zA-Z]{4})?)?$": { "type": "string" }
+            },
+            "additionalProperties": false
+        },
+        "statementRef": {
+            "type": "object",
+            "properties": {
+                "objectType": {
+                    "type": "string",
+                    "pattern": "StatementRef"
+                },
+                "id": { "$ref": "#/definitions/uuid" }
+            },
+            "required": [ "objectType", "id" ],
+            "additionalProperties": false
+        },
+        "extensions": {
+            "type": "object",
+            "patternProperties": {
+                "^[\\S]+:\\/?\\/?(?!\\/)[\\S]*$": { "oneOf": [ {"type": "string"}, {"type":"number"}, {"type":"object"}, {"type":"array"}, {"type":"boolean"} ] }
+            },
+            "additionalProperties": false
+        }
+    }
+}

@@ -1,0 +1,47 @@
+{
+
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Schema for an xAPI Actor Property",
+    "id":"http://localhost:8080/actor-schema.json",
+
+    "type": "object",
+
+    "additionalProperties": false,
+
+    "properties": {
+        "objectType": { "$ref": "#/definitions/objectType" },
+        "name": { "$ref": "#/definitions/name" },
+        "member": { "$ref": "#/definitions/member" },
+        "mbox": { "$ref": "#/definitions/mbox" },
+        "mbox_sha1sum": { "$ref": "#/definitions/mbox_sha1sum" },
+        "openid": { "$ref": "#/definitions/openid" },
+        "account": { "$ref": "#/definitions/account" }
+    },
+
+    "definitions": {
+        "iri": {
+            "type": "string",
+            "pattern": "^[\\S]+:\\/?\\/?(?!\\/)[\\S]*$"
+        },
+        "objectType": { "type": "string" },
+        "name": { "type": "string" },
+        "member": { "type": "array" },
+        "mbox": {
+            "type": "string",
+            "pattern": "mailto:\\S+@\\S+\\.\\S+"
+        },
+        "mbox_sha1sum": {
+            "type": "string"
+        },
+        "openid": { "$ref": "#/definitions/iri" },
+        "account": {
+            "type": "object",
+            "properties": {
+                "homePage": { "$ref": "#/definitions/iri" },
+                "name": { "type": "string" }
+            },
+            "required": [ "homePage", "name" ]
+        }
+    }
+
+}

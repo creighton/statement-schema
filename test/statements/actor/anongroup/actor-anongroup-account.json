@@ -1,0 +1,15 @@
+{
+    "actor": {
+        "objectType": "Group",
+        "member": [
+            { "account":
+                {
+                    "homePage": "http://account.foo.com",
+                    "name": "this is my name"
+                }
+            }
+        ]
+    },
+    "verb": {"id":"http://tom.com/verb"},
+    "object": {"id":"http://tom.com/obj"}
+}

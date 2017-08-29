@@ -1,0 +1,16 @@
+{
+    "actor":{"mbox":"mailto:tom@example.com", "name":"andy", "objectType":"Agent"},
+    "verb":{"id":"http://tom.com/verb", "display":{"en":"hi"}},
+    "object": {"id":"http://tom.com/obj"},
+    "attachments": [
+        {
+            "usageType": "not a valid iri",
+            "display": { "not a valid lang key": "Test" },
+            "description": { "not a valid lang key": "A test" },
+            "contentType": "not a valid internet media type",
+            "length": 4.2,
+            "sha2": "672fa5fa6580",
+            "fileUrl": "not a valid irl"
+        }
+    ]
+}

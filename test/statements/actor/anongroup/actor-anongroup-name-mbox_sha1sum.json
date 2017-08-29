@@ -1,0 +1,9 @@
+{
+    "actor": {
+        "objectType": "Group",
+        "name": "tom",        
+        "member": [ { "mbox_sha1sum": "abcdef0123456789ABCDabcdef0123456789ABCD" } ]
+    },
+    "verb": {"id":"http://tom.com/verb"},
+    "object": {"id":"http://tom.com/obj"}
+}

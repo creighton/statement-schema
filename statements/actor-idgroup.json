@@ -1,9 +1,0 @@
-{
-    "actor":{
-        "objectType":"Group",
-        "openid": "http://tom.com/foo",
-        "member": [ { "mbox": "mailto:tom@tom.com" } ]
-    },
-    "verb":{"id":"http://tom.com/verb"},
-    "object": {"id":"http://tom.com/obj"}
-}

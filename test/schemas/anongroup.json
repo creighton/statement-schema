@@ -1,0 +1,25 @@
+{
+
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Schema for an xAPI Actor Property Anonymous Group",
+    "id":"http://localhost:8080/anongroup.json",
+
+    "type": "object",
+
+    "additionalProperties": false,
+
+    "required": ["objectType", "member"],
+
+    "properties": {
+        "objectType": { "$ref": "#/definitions/objectType" },
+        "name": { "$ref": "#/definitions/name" },
+        "member": { "$ref": "#/definitions/member" }
+    },
+
+    "definitions": {
+        "objectType": { "type": "string", "enum": ["Group"] },
+        "name": { "type": "string" },
+        "member": { "type": "array", "minItems": 1 }
+    }
+
+}

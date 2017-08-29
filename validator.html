@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>xAPI Statement JSON Schema Validator</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <!-- <link rel="stylesheet" href="/css/master.css"/> -->
+    </head>
+    <body>
+        <h1 class="text-center">xAPI Statement JSON Schema Validator</h1>
+        <div class="stmt container-fluid">
+            <form class="xapi" action="index.html" method="post">
+            <div class="row stmtId">
+                <div class="col-xs-2 text-center">
+                    <label for="id">Id</label>
+                </div>
+                <div class="col-xs-8">
+                    <input type="text" name="id" value="Recommended">
+                </div>
+                <div class="col-xs-2">
+                    <button class="btn btn-default" type="button" name="chkId">Check Id</button>
+                </div>
+
+            </div>
+                <div class="stmtActor">
+                    <label for="actor">Actor</label>
+                    <textarea type="textarea" name="actor" value="Required"></textarea>
+                    <button class="btn btn-primary" type="button" name="chkActor">Check Actor</button>
+                </div>
+                <div class="stmtVerb">
+                    <label for="verb">Verb</label>
+                    <textarea type="text" name="verb" value="Required"></textarea>
+                    <button class="btn btn-success" type="button" name="chkVerb">Check Verb</button>
+                </div>
+                <div class="stmtObject">
+                    <label for="object">Object</label>
+                    <textarea type="text" name="object" value="Required"></textarea>
+                    <button class="btn btn-info" type="button" name="chkObject">Check Object</button>
+                </div>
+                <div class="stmtResult">
+                    <label for="result">Result</label>
+                    <textarea type="text" name="result" value="Optional"></textarea>
+                    <button class="btn btn-warning" type="button" name="chkResult">Check Result</button>
+                </div>
+                <div class="stmtContext">
+                    <label for="context">Context</label>
+                    <textarea type="text" name="context" value="Optional"></textarea>
+                    <button class="btn btn-danger" type="button" name="chkContext">Check Context</button>
+                </div>
+                <div class="stmtTimestamp">
+                    <label for="timestamp">Timestamp</label>
+                    <input type="text" name="timestamp" value="Recommended">
+                    <button class="btn btn-link" type="button" name="chkTimestamp">Check Timestamp</button>
+                </div>
+                <div class="stmtStored">
+                    <label for="stored">Stored</label>
+                    <input type="text" name="stored" value="Not Recommended" disabled>
+                    <button class="btn btn-default" type="button" name="chkStored" disabled>Check Stored</button>
+                </div>
+                <div class="stmtAuthority">
+                    <label for="authority">Authority</label>
+                    <textarea type="text" name="authority" value="Not Recommended" disabled></textarea>
+                    <button class="btn btn-primary" type="button" name="chkAuthority" disabled>Check Authority</button>
+                </div>
+                <div class="stmtVersion">
+                    <label for="version">Version</label>
+                    <input type="text" name="version" value="Not Recommended" disabled>
+                    <button class="btn btn-warning" type="button" name="chkVersion" disabled>Check Version</button>
+                </div>
+                <div class="stmtAttchaments">
+                    <label for="attachments">Attachments</label>
+                    <textarea type="text" name="attachments" value="Optional"></textarea>
+                    <button class="btn btn-success" type="button" name="chkAttachments">Check Attachments</button>
+                </div>
+                <button class="btn btn-danger" type="button" name="stmtSubmit">Submit Whole Statement for Validation</button>
+            </form>
+        </div>
+    </body>
+</html>

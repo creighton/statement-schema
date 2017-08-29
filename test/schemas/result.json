@@ -1,0 +1,48 @@
+{
+
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Schema for an xAPI Result Property",
+    "id":"http://localhost:8080/result-schema.json",
+
+    "type": "object",
+
+    "additionalProperties": false,
+
+    "properties": {
+        "score": { "$ref": "#/definitions/score" },
+        "success": { "type": "boolean" },
+        "completion": { "type": "boolean" },
+        "response": { "type": "string" },
+        "duration": {
+            "type": "string",
+            "pattern": "^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$"
+        },
+        "extensions": { "$ref": "#/definitions/extensions" }
+    },
+
+    "definitions": {
+
+        "score": {
+            "type": "object",
+            "properties": {
+                "scaled": {
+                    "type": "number",
+                    "minimum": -1,
+                    "maximum": 1
+                },
+                "raw": { "type": "number" },
+                "min": { "type": "number" },
+                "max": { "type": "number" }
+            },
+            "additionalProperties": false
+        },
+        "extensions": {
+            "type": "object",
+            "patternProperties": {
+                "^[\\S]+:\\/?\\/?(?!\\/)[\\S]*$": { "oneOf": [ {"type": "string"}, {"type":"number"}, {"type":"object"}, {"type":"array"}, {"type":"boolean"} ] }
+            },
+            "additionalProperties": false
+        }
+
+    }
+}

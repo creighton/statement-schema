@@ -1,0 +1,10 @@
+{
+    "actor":{
+        "mbox": "mailto:tom@tom.com"
+    },
+    "verb":{
+    	"id":"not an IRI",
+		"display" : {"en-US" : "verb"}
+    },
+    "object": {"id":"http://tom.com/objective"}
+}

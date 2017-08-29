@@ -1,0 +1,21 @@
+{
+
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Schema for an xAPI StatementRef Object Property",
+    "id":"http://localhost:8080/object-statementref-schema.json",
+
+    "type": "object",
+
+    "additionalProperties": false,
+    "required": [ "id", "objectType" ],
+    "properties": {
+        "objectType": {
+            "type": "string",
+            "pattern": "StatementRef"
+        },
+        "id": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+        }
+    }
+}

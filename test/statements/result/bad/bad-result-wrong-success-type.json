@@ -1,0 +1,20 @@
+{
+    "actor":{"mbox":"mailto:tom@example.com"},
+    "verb":{"id":"http://tom.com/verb"},
+    "object": {"id":"http://tom.com/obj"},
+    "result": {
+        "score": {
+            "scaled": 0.45,
+            "raw": 45,
+            "min": 0,
+            "max": 100
+        },
+        "success": "true",
+        "completion": false,
+        "response": "done",
+        "duration": "P1YT6H45M15S",
+        "extensions": {
+            "http://tom.com/ext": "my extension"
+        }
+    }
+}

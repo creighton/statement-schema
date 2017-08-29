@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "JSON Schema for the base properties of an xAPI Statement",
+    "id":"http://localhost:8080/statements-schema.json",
+
+    "type": "object",
+
+    "required": ["actor", "verb", "object"],
+
+    "additionalProperties": false,
+
+    "properties": {
+        "id": { "type": "string" },
+        "actor": { "type": "object" },
+        "verb" : { "type": "object" },
+        "object": { "type": "object" },
+        "result": { "type": "object"},
+        "context": { "type": "object" },
+        "timestamp": { "type": "string" },
+        "stored": { "type": "string" },
+        "authority": { "type": "object" },
+        "version": { "type": "string" },
+        "attachments": { "type": "array" }
+    }
+}

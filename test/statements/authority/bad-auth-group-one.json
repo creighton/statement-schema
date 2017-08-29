@@ -1,0 +1,17 @@
+{
+    "id":"f5070c3a-cd39-4dc3-8dd2-4ad3b511c407",
+    "actor":{"mbox":"mailto:tom@example.com", "name":"andy", "objectType":"Agent"},
+    "verb":{"id":"http://tom.com/verb", "display":{"en":"hi"}},
+    "object": {"id":"http://tom.com/obj"},
+    "authority": {
+    	"objectType" : "Group",
+        "member": [
+    		{
+                "account": {
+        			"homePage":"http://example.com/xAPI/OAuth/Token",
+        		    "name":"oauth_consumer_x75db"
+            	}
+            }
+        ]
+    }
+}

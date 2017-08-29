@@ -1,0 +1,25 @@
+{
+
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Schema for an xAPI Authority Property",
+    "id":"http://localhost:8080/authority-schema.json",
+
+    "type": "object",
+
+    "additionalProperties": false,
+
+    "properties": {
+        "authority": { "type": "object" }
+    },
+
+    "definitions": {
+
+        "authority": {
+            "oneOf": [
+                { "$ref": "#/definitions/agent" },
+                { "$ref": "#/definitions/group" }
+            ]
+        }
+
+    }
+}

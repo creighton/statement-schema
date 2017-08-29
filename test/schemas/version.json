@@ -1,0 +1,12 @@
+{
+
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Schema for an xAPI Version Property",
+    "id":"http://localhost:8080/version-schema.json",
+
+    "type": "string",
+    "pattern": "^1\\.0\\.[0-9]+$",
+
+    "additionalProperties": false
+
+}
