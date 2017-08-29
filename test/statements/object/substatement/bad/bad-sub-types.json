@@ -1,0 +1,22 @@
+{
+    "actor": {
+        "objectType": "Agent",
+        "mbox":"mailto:test@example.com"
+    },
+    "verb" : {
+        "id":"http://example.com/planned",
+        "display":{
+            "en-US":"planned"
+        }
+    },
+    "object": {
+        "objectType": "SubStatement",
+        "actor": false,
+        "verb": false,
+        "object": false,
+        "context": false,
+        "result": false,
+        "timestamp": false,
+        "attachments": false
+    }
+}

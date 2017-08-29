@@ -1,0 +1,16 @@
+{
+    "actor":{"mbox":"mailto:tom@example.com", "name":"andy", "objectType":"Agent"},
+    "verb":{"id":"http://tom.com/verb", "display":{"en":"hi"}},
+    "object": {"id":"http://tom.com/obj"},
+    "attachments": [
+        {
+            "usageType": false,
+            "display": false,
+            "description": false,
+            "contentType": false,
+            "length": false,
+            "sha2": false,
+            "fileUrl": false
+        }
+    ]
+}
