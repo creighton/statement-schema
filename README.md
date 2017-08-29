@@ -1,11 +1,7 @@
 # statement-schema
 
-> IRI validation should be done via lib.. these don't really do much
-
 these are still valid concerns to be investigated and improved:
-- iri not complete
 - not validating lang codes
-- interaction activities aren't great
 - attachment contentType just does a pattern match
 
 From the command line this lets you specify a file which contains an xapi statement.  
@@ -39,13 +35,18 @@ This command will read all files in the statements folder and validate them all.
 ```
 Specify a folder name in `./test/statements/` to validate all statements in the specified folder.
 
+```
+> node validator.js various -v
+```
+The `-v` option turns on verbose reporting as opposed to the pass/fail default reporting.
+
 To use from another node.js program:
 *Note*: the `require-demo.js` script has many of these examples.
 - to load a statement as a json object:
 ```
 const stmt = require('<path to statement file>/<filename>');
 ```
-*Note*: the extension in not needed as part of the require command.  It will look for a `.json` extension and will load as a json object.
+*Note*: the extension is not needed as part of the require command.  It will look for a `.json` extension and will load as a json object.
 
 - to process a full statement:
 ```
@@ -69,6 +70,14 @@ property-validator(stmt.<property>, (err, data) => {
 const actor = require('./src/validateActor');
 actor(stmt.actor, (err, data) => {
     console.log(`Validating Actor:\nError: ${err}\nData ${data}`);
+    cb();
+});
+```
+*Note: context uses an additional property (object.objectType)*
+```
+const context = require('./src/validateContext');
+context(stmt.context, stmt.object.objectType, (err, data) => {
+    console.log(`Validating Context:\nError: ${err}\nData ${data}`);
     cb();
 });
 ```
@@ -101,3 +110,14 @@ function chkProp (prop, propname, cb) {
     console.log(`end check property - ${propname}`);
 }
 ```
+*Note:* Remember to account for context.
+
+## Some other scripts for demonstration purposes:
+
+### require-demo.js
+
+### retrieve-and-validate.js
+
+### SCORMProfileStmts.js
+
+### validator.html

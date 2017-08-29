@@ -19,7 +19,7 @@
             // Walk through checking each statement property
             function (cb) {
                 // console.log('Statement id is : ', stmt.id);
-                if (stmt.id) {
+                if (stmt.id || stmt.id === '') {
                     const vId = require('./validateId.js');
                     vId(stmt.id, (err, data) => {
                         cb(err, data);
@@ -80,7 +80,7 @@
             // next check for more in timestamp - call validateTimestamp
             function (cb) {
                 // console.log('Is there a timestamp?', stmt.timestamp);
-                if (stmt.timestamp) {
+                if (stmt.timestamp || stmt.timestamp === '') {
                     // console.log('there is a statement timestamp property');
                     const vTimestamp = require('./validateTimestamp.js');
                     vTimestamp(stmt.timestamp, (err, data) => {
@@ -93,7 +93,7 @@
             // next check for more in stored - call validateStored
             function (cb) {
                 // console.log('Is there a stored?', stmt.stored);
-                if (stmt.stored) {
+                if (stmt.stored || stmt.stored === '') {
                     // console.log('there is a statement stored property');
                     const vStored = require('./validateStored.js');
                     vStored(stmt.stored, (err, data) => {
@@ -106,7 +106,7 @@
             // next check for more in authority - call validateAuthority
             function (cb) {
                 // console.log('Is there an authority?', stmt.authority);
-                if (stmt.authority) {
+                if (stmt.authority || stmt.authority === {}) {
                     // console.log('there is a statement authority property');
                     const vAuthority = require('./validateAuthority.js');
                     vAuthority(stmt.authority, (err, data) => {
@@ -119,7 +119,7 @@
             // next check for more in version - call validateVersion
             function (cb) {
                 // console.log('Is there a version?', stmt.version);
-                if (stmt.version) {
+                if (stmt.version || stmt.version === '') {
                     // console.log('there is a statement verison property');
                     const vVersion = require('./validateVersion.js');
                     vVersion(stmt.version, (err, data) => {

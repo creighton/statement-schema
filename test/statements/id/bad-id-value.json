@@ -2,5 +2,5 @@
     "id": "",
     "actor":{"mbox":"mailto:tom@example.com", "name":"andy", "objectType":"Agent"},
     "verb":{"id":"http://tom.com/verb", "display":{"en":"hi"}},
-    "object": {"id":"http://tom.com/obj"},
+    "object": {"id":"http://tom.com/obj"}
 }
